@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block button_left %}
+    <a class="navbar-brand" href="{{ url_for('base') }}"><b>Mi Panel2</b></a>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                <a class="nav-link" href="/dashboard">
+                    <i class="fa fa-fw fa-dashboard"></i>
+                    <span class="nav-link-text">Mi panel</span>
+                </a>
+            </li>
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart temperature">
+                <a class="nav-link" href="/crear_incidencia">
+                    <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
+                    <span class="nav-link-text">Temperatura</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart temperature">
+                <a class="nav-link" href="/crear_incidencia">
+                    <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
+                    <span class="nav-link-text">Humedad</span>
+                </a>
+            </li>
+
+            <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Incidencias">
+                <a class="nav-link" href="/incidencias">
+                    <i class="fa fa-fw fa-table"></i>
+                    <span class="nav-link-text">Riego</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+{% endblock button_left %}

@@ -1,0 +1,98 @@
+{% extends 'base.html' %}
+
+{% block title %}<title>Riego</title> {% endblock title %}
+
+{% block content %}
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <h1>Riego</h1>
+                    <p>Aquí un botón para el riego</p>
+                    <div>
+                        <div class="container">
+                            <div class="col-md-12">
+                                <form class="form-incidencia" action="{{ url_for('handle_data') }}" method="post" >
+                                    <div id="incidencia-form" class="form-container" data-form-container>
+                                        <div class="row form-group col-md-4 -align-center">
+                                            <label class="col-form-label">Estado del riego</label>
+                                            <select name="irrigation_state" class="form-control" id="exampleSelect0" required>
+                                                <option selected disabled hidden style='display: none' value=''>ON/OFF</option>
+                                                <option>ON</option>
+                                                <option>OFF</option>
+                                            </select>
+                                        </div>
+                                        <div class="submit-row">
+                                            <input class="btn btn-block btn-block-incidencia submit-form" id="submit-incidencia" name="submit-incidencia" value="Enviar" type="submit">
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+
+{% endblock content %}
+
+
+
+
+{% block scripts %}
+    <!-- Bootstrap core JavaScript-->
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="../static/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
+    <script src="../static/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="../static/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <!-- Loading JQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Using Select2 (https://select2.org) -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.6-rc.0/js/select2.min.js"></script>
+    <script>
+        $('#txtArea').keyup(function () {
+            var max = 500;
+            var len = $(this).val().length;
+            if (len > max+1) {
+                var char = len - max;
+                $('#charNum').text('Ha superado el límite de 500 caracteres, le sobran ' + char + ' caracteres.');
+            } else if (len == max+1) {
+                $('#charNum').text('Ha superado el límite de 500 caracteres, le sobra 1 caracter.');
+            } else if (len == max) {
+                $('#charNum').text('Ha superado el límite de 500 caracteres.');
+            } else if (len == max-1) {
+                $('#charNum').text('Le queda 1 caracter.');
+            } else {
+                var char = max - len;
+                $('#charNum').text('Le quedan ' + char + ' caracteres.');
+            }
+        });
+    </script>
+    <script>
+        /* Para restringir la selección de la fecha al día actual */
+        var today = new Date();
+        var dd = today.getDate();
+        var mm = today.getMonth()+1; //January is 0!
+        var yyyy = today.getFullYear();
+        if(dd<10){
+            dd='0'+dd
+        }
+        if(mm<10){
+            mm='0'+mm
+        }
+        today = yyyy+'-'+mm+'-'+dd;
+        document.getElementById("incidencia-date-input").setAttribute("max", today);
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('.js-example-basic-multiple').select2();
+        });
+    </script>
+{% endblock scripts %}
