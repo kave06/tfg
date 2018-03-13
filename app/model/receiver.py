@@ -9,12 +9,14 @@ except ImportError:
     from modules.logger import create_log
 
 QUEUE = 'sensors_data'
+USERNAME = 'xxxx'
+PASSW = 'xxxx'
 
 logger = create_log('prototype')
 
 
 def connect_queue():
-    credentials = pika.PlainCredentials(username='kave', password='hola')
+    credentials = pika.PlainCredentials(username=USERNAME, password=PASSW)
     parameters = pika.ConnectionParameters(credentials=credentials)
     connection = pika.BlockingConnection(parameters=parameters)
     channel = connection.channel()
@@ -28,9 +30,12 @@ def connect_queue():
 def callback(ch, method, properties, body):
     ambient = json.loads(body.decode())
     cnx = connect_db()
-    logger.info(ambient)
-    logger.info('sensor: {}, temp: {}ºC, humi: {}%'
-                .format(ambient['sensor'],ambient['temperature'],ambient['humidity']))
+    # logger.info(ambient)
+    logger.info('sensor: {}, date: {} temp: {}ºC, humi: {}%'
+                .format(ambient['sensor'],
+                        ambient['date'],
+                        ambient['temperature'],
+                        ambient['humidity']))
     send_data(cnx, ambient)
 
 

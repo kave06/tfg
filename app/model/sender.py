@@ -8,11 +8,15 @@ except ImportError:
     from modules.logger import create_log
 
 logger = create_log('prototype')
+USERNAME = 'xxxx'
+PASSW = 'xxxx'
+HOST = 'xxxxxxxxxxxxxxx'
+PORT = 1234
 
 
 def connect_queue():
-    credentials = pika.PlainCredentials(username='kave', password='hola')
-    parameters = pika.ConnectionParameters(host='157.88.58.134', port=5578,
+    credentials = pika.PlainCredentials(username=USERNAME, password=PASSW)
+    parameters = pika.ConnectionParameters(host=HOST, port=PORT,
                                            credentials=credentials)
     connection = pika.BlockingConnection(parameters=parameters)
     return connection

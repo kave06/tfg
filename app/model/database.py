@@ -14,20 +14,18 @@ logger = create_log('prototype')
 
 
 def connect_db() -> connect:
-    # host = 'gui.uva.es'
-    # port = 5584
     host = 'localhost'
     port = 3306
 
-    user = 'kave'
-    passw = 'hola'
-    db_name = 'prototipo'
+    user = 'xxxx'
+    passw = 'xxxx'
+    db_name = 'xxxxxxxxx'
 
     cnx = ''
 
     try:
         cnx = connect(host=host, port=port, user=user, password=passw, db=db_name)
-        logger.info('Connect to DB: ' + db_name)
+        # logger.info('Connect to DB: ' + db_name)
     except MySQLError as err:
         Flag.connect_db = False
         logger.error(err)
@@ -37,7 +35,7 @@ def connect_db() -> connect:
 
 def send_data(cnx: connect, ambient: dict):
     if ambient['temperature'] != 100.0:
-        logger.info(ambient)
+        # logger.info(ambient)
 
         query = "INSERT INTO ambient_data " \
                 "VALUES ('{}', '{}', '{}', '{}')" \
