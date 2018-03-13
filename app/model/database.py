@@ -4,8 +4,13 @@ import configparser
 from pymysql import connect
 from datetime import datetime, timedelta
 
-from app.modules.flags import Flag
-from app.modules.logger import create_log
+try:
+    from app.modules.flags import Flag
+    from app.modules.logger import create_log
+except ImportError:
+    from modules.flags import Flag
+    from modules.logger import create_log
+
 
 logger = create_log('prototype')
 
@@ -23,10 +28,10 @@ def connect_db() -> connect:
     # passw = db_config['pass']
     # db_name = db_config['db_name']
 
-    host = 'gui.uva.es'
-    port = 5584
-    # host = 'localhost'
-    # port = 3306
+    # host = 'gui.uva.es'
+    # port = 5584
+    host = 'localhost'
+    port = 3306
 
     user = 'kave'
     passw = 'hola'
@@ -56,7 +61,7 @@ def send_data(cnx: connect, ambient: dict):
 
         query = "INSERT INTO ambient_data " \
                 "VALUES ('{}', '{}', '{}', '{}')" \
-            .format(ambient['sensor'], datetime.now(),
+            .format(ambient['sensor'], ambient['date'],
                     ambient['temperature'], ambient['humidity'])
         # .format(sensor, date_time, temperature, humidity)
 
