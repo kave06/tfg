@@ -29,6 +29,8 @@ def callback(ch, method, properties, body):
     ambient = json.loads(body.decode())
     cnx = connect_db()
     logger.info(ambient)
+    logger.info('sensor: {}, temp: {}ºC, humi: {}%'
+                .format(ambient['sensor'],ambient['temperature'],ambient['humidity']))
     send_data(cnx, ambient)
 
 
