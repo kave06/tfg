@@ -1,13 +1,15 @@
 import re
 import bluetooth
-# from configparser import ConfigParser
 from bluetooth import BluetoothSocket, RFCOMM, BluetoothError
-# from bluetooth import BluetoothSocket, RFCOMM
 from time import sleep
 from serial import Serial
 
-from app.modules.flags import Flag
-from app.modules.logger import create_log
+try:
+    from app.modules.flags import Flag
+    from app.modules.logger import create_log
+except ImportError:
+    from modules.flags import Flag
+    from modules.logger import create_log
 
 logger = create_log('prototype')
 
