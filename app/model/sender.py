@@ -1,15 +1,14 @@
 import pika
 import json
-from datetime import datetime, timedelta
+from datetime import datetime
 
 try:
     from app.modules.logger import create_log
 except ImportError:
     from modules.logger import create_log
 
-
-
 logger = create_log('prototype')
+
 
 def connect_queue():
     credentials = pika.PlainCredentials(username='kave', password='hola')
@@ -20,7 +19,6 @@ def connect_queue():
 
 
 def send_data_queue(connection, body):
-
     body['date'] = datetime.now()
     logger.info(body)
     channel = connection.channel()

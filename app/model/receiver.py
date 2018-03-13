@@ -12,8 +12,8 @@ QUEUE = 'sensors_data'
 
 logger = create_log('prototype')
 
-def connect_queue():
 
+def connect_queue():
     credentials = pika.PlainCredentials(username='kave', password='hola')
     parameters = pika.ConnectionParameters(credentials=credentials)
     connection = pika.BlockingConnection(parameters=parameters)
@@ -25,18 +25,14 @@ def connect_queue():
     return channel
 
 
-
 def callback(ch, method, properties, body):
-    # print(" [x] Received %r" % body)
-    print(" [x] Received %r" % json.loads(body.decode()))
     ambient = json.loads(body.decode())
-    print(type(ambient))
     cnx = connect_db()
-    send_data(cnx,ambient)
+    logger.info(ambient)
+    send_data(cnx, ambient)
 
 
 def main():
-
     channel = connect_queue()
     print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
