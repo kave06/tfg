@@ -39,7 +39,7 @@ def callback(ch, method, properties, body):
 
 def main():
     channel = connect_queue()
-    print(' [*] Waiting for messages. To exit press CTRL+C')
+    # print(' [*] Waiting for messages. To exit press CTRL+C')
     channel.start_consuming()
 
 

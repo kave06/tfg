@@ -7,12 +7,13 @@ try:
     from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
-    from model.config import *
+    from modules.config import *
 
 logger = create_log('prototype')
 
 
 def connect_queue():
+    connection = ''
     try:
         credentials = pika.PlainCredentials(username=rabbit_user, password=rabbit_pass)
         parameters = pika.ConnectionParameters(host=rabbit_host, port=rabbit_port,
@@ -24,6 +25,7 @@ def connect_queue():
     except Exception as err:
         # if connection.is_closed:
         logger.error(err)
+        return connection
 
 
 def send_data_queue(connection, body):
@@ -39,5 +41,4 @@ def send_data_queue(connection, body):
         connection.close()
     except Exception as err:
         logger.error(err)
-        connection.close()
 
