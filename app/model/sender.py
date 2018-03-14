@@ -13,11 +13,16 @@ logger = create_log('prototype')
 
 
 def connect_queue():
-    credentials = pika.PlainCredentials(username=rabbit_user, password=rabbit_pass)
-    parameters = pika.ConnectionParameters(host=rabbit_host, port=rabbit_port,
-                                           credentials=credentials)
-    connection = pika.BlockingConnection(parameters=parameters)
-    return connection
+    try:
+        credentials = pika.PlainCredentials(username=rabbit_user, password=rabbit_pass)
+        parameters = pika.ConnectionParameters(host=rabbit_host, port=rabbit_port,
+                                               blocked_connection_timeout=300,
+                                               heartbeat_interval=600,
+                                               credentials=credentials)
+        connection = pika.BlockingConnection(parameters=parameters)
+        return connection
+    except Exception as err:
+        logger.error(err)
 
 
 def send_data_queue(connection, body):
