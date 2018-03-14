@@ -22,16 +22,22 @@ def connect_queue():
         connection = pika.BlockingConnection(parameters=parameters)
         return connection
     except Exception as err:
+        # if connection.is_closed:
         logger.error(err)
 
 
 def send_data_queue(connection, body):
+
     body['date'] = datetime.now()
     logger.info(body)
-    channel = connection.channel()
-    channel.queue_declare(queue=rabbit_queue)
-    channel.basic_publish(exchange='', routing_key=rabbit_queue,
-                          body=json.dumps(body, sort_keys=True, default=str))
-    connection.close()
 
-    logger.info(body)
+    try:
+        channel = connection.channel()
+        channel.queue_declare(queue=rabbit_queue)
+        channel.basic_publish(exchange='', routing_key=rabbit_queue,
+                              body=json.dumps(body, sort_keys=True, default=str))
+        connection.close()
+    except Exception as err:
+        logger.error(err)
+        connection.close()
+
