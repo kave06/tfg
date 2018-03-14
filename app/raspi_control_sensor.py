@@ -6,16 +6,18 @@ try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth
     from app.modules.flags import Flag
     from app.model.sender import connect_queue, send_data_queue
+    from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
     from model.database import connect_db
     from model.nano import connect_bluetooth, read_nano_bluetooth
     from modules.flags import Flag
     from model.sender import connect_queue, send_data_queue
+    from modules.config import *
 
-db_addr1 = '98:D3:33:81:07:B3'
-db_addr2 = '98:D3:33:81:07:E8'
-port1 = 1
+db_addr1 = bluetooth_module1
+db_addr2 = bluetooth_module2
+port1 = bluetooth_port1
 
 logger = create_log('prototype')
 

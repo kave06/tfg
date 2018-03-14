@@ -10,7 +10,7 @@ from app.model.nano import send_signal
 
 # config = ConfigParser()
 # config.sections()
-# config.read('config.ini')
+# config.read('config.py')
 # config.sections()
 # serial_config = config['serial']
 

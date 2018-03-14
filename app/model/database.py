@@ -6,25 +6,21 @@ from datetime import datetime, timedelta
 try:
     from app.modules.flags import Flag
     from app.modules.logger import create_log
+    from app.modules.config import *
 except ImportError:
     from modules.flags import Flag
     from modules.logger import create_log
+    from modules.config import *
 
 logger = create_log('prototype')
 
 
 def connect_db() -> connect:
-    host = 'localhost'
-    port = 3306
-
-    user = 'xxxx'
-    passw = 'xxxx'
-    db_name = 'xxxxxxxxx'
-
     cnx = ''
 
     try:
-        cnx = connect(host=host, port=port, user=user, password=passw, db=db_name)
+        cnx = connect(host=mysql_host, port=mysql_port,
+                      user=mysql_user, password=mysql_pass, db=mysql_db_name)
         # logger.info('Connect to DB: ' + db_name)
     except MySQLError as err:
         Flag.connect_db = False

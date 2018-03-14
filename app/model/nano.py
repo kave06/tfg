@@ -7,14 +7,13 @@ from serial import Serial
 try:
     from app.modules.flags import Flag
     from app.modules.logger import create_log
+    from app.modules.config import *
 except ImportError:
     from modules.flags import Flag
     from modules.logger import create_log
+    from modules.config import *
 
 logger = create_log('prototype')
-
-PORT = '/dev/ttyUSB0'
-BD = 9600
 
 
 def connect_bluetooth(db_addr, port) -> BluetoothSocket:
@@ -26,9 +25,9 @@ def connect_bluetooth(db_addr, port) -> BluetoothSocket:
     except BluetoothError as err:
         logger.error(err)
         logger.info('error in device: {}'.format(db_addr))
-        if db_addr == '98:D3:33:81:07:B3':
+        if db_addr == bluetooth_module1:
             Flag.sock_bluetooth1 = False
-        elif db_addr == '98:D3:33:81:07:E8':
+        elif db_addr == bluetooth_module2:
             Flag.sock_bluetooth2 = False
 
         err = str(err).replace('(', '')
@@ -58,7 +57,7 @@ def connect_serial(port, baud) -> Serial:
 
 
 def send_signal(signal: bytes):
-    arduino = connect_serial(PORT, BD)
+    arduino = connect_serial(serial_port, serial_bd)
 
     sleep(1)
     logger.info(signal)
