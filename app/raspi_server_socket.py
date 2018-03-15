@@ -1,10 +1,6 @@
 import socketserver
 from serial import Serial
-from time import sleep
 
-# from socket import socket
-# import socket
-# from configparser import ConfigParser
 try:
     from app.modules.logger import create_log
     from app.model.nano import send_signal
@@ -12,22 +8,12 @@ except ImportError:
     from modules.logger import create_log
     from model.nano import send_signal
 
-# from modules.logger import create_log
-# from model.nano import send_signal
-
-# config = ConfigParser()
-# config.sections()
-# config.read('config.py')
-# config.sections()
-# serial_config = config['serial']
-
-# PORT = serial_config['port']
-# BD = int(serial_config['bd'])
+APP_DIR = os.path.dirname(os.path.realpath(__file__))
+logger_name = APP_DIR + '/logs/socket'
+logger = create_log(logger_name)
 
 SERIAL_PORT = '/dev/ttyUSB0'
 BD = 9600
-
-logger = create_log('socket.log')
 
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
@@ -49,7 +35,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         self.data = self.request.recv(1024).strip()
         # logger.info(self.data)
 
-        logger.info('{} send {}'.format(self.client_address[0],self.data))
+        logger.info('{} send {}'.format(self.client_address[0], self.data))
         # print("{} wrote:".format(self.client_address[0]))
         # print(self.data)
 

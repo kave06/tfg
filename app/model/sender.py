@@ -29,7 +29,6 @@ def connect_queue():
 
 
 def send_data_queue(connection, body):
-
     body['date'] = datetime.now()
     logger.info(body)
 
@@ -41,4 +40,3 @@ def send_data_queue(connection, body):
         connection.close()
     except Exception as err:
         logger.error(err)
-

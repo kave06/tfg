@@ -1,5 +1,6 @@
 import pika
 import json
+import os
 
 try:
     from app.model.database import connect_db, send_data
@@ -10,8 +11,11 @@ except ImportError:
     from modules.logger import create_log
     from modules.config import *
 
-logger = create_log('prototype')
+# APP_DIR = os.path.dirname(os.path.realpath(__file__))
+# logger_name = APP_DIR + '/logs/prototype'
+# logger = create_log(logger_name)
 
+logger = create_log('prototype')
 
 def connect_queue():
     credentials = pika.PlainCredentials(username=rabbit_user, password=rabbit_pass)

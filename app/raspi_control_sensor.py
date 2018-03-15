@@ -1,4 +1,5 @@
 from time import sleep
+import os
 
 try:
     from app.modules.logger import create_log
@@ -19,7 +20,9 @@ db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
 port1 = bluetooth_port1
 
-logger = create_log('prototype')
+APP_DIR = os.path.dirname(os.path.realpath(__file__))
+logger_name = APP_DIR + '/logs/prototype'
+logger = create_log(logger_name)
 
 
 def main():

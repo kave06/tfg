@@ -13,8 +13,7 @@ bootstrap = Bootstrap(app)
 # moment = Moment(app)
 
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
-# logger_name = APP_DIR + '/prototipo.log'
-logger_name = APP_DIR + '/prototype_view'
+logger_name = APP_DIR + '/logs/prototype_view'
 logger = create_log(logger_name)
 
 

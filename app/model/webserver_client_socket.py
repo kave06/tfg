@@ -1,5 +1,6 @@
 import socket
 import sys
+import os
 
 sys.path.append('../modules')
 try:
@@ -9,8 +10,11 @@ except ImportError:
 
 HOST, PORT = '89.128.192.144', 1100
 
-logger = create_log('prototype_view')
+# APP_DIR = os.path.dirname(os.path.realpath(__file__))
+# logger_name = APP_DIR + '/logs/prototype'
+# logger = create_log(logger_name)
 
+logger = create_log('prototype')
 
 def led_on_off(state: str):
     # data = " ".join(sys.argv[1:])
