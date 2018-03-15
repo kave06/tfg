@@ -14,7 +14,7 @@ bootstrap = Bootstrap(app)
 
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
 # logger_name = APP_DIR + '/prototipo.log'
-logger_name = APP_DIR + '/prototype'
+logger_name = APP_DIR + '/prototype_view'
 logger = create_log(logger_name)
 
 
@@ -60,7 +60,7 @@ def humidity():
 def handle_data():
     state = request.form['irrigation_state']
     logger.info('state is: {}'.format(state))
-    logger.info(state)
+    # logger.info(state)
     led_on_off(state)
     return render_template('irrigation.html')
 

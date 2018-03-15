@@ -2,7 +2,7 @@ import re
 import bluetooth
 from bluetooth import BluetoothSocket, RFCOMM, BluetoothError
 from time import sleep
-from serial import Serial
+from serial import Serial, SerialException
 
 try:
     from app.modules.flags import Flag
@@ -49,9 +49,9 @@ def connect_serial(port, baud) -> Serial:
     serial_cnx = ''
     try:
         serial_cnx = Serial(port, baud)
-        logger.info('connect to serial')
-    except:
-        logger.error('Error')
+        # logger.debug('connect to serial')
+    except SerialException as err:
+        logger.error(err)
 
     return serial_cnx
 
@@ -59,27 +59,23 @@ def connect_serial(port, baud) -> Serial:
 def send_signal(signal: bytes):
     arduino = connect_serial(serial_port, serial_bd)
 
-    sleep(1)
-    logger.info(signal)
+    sleep(0.1)
+    # logger.debug(signal)
     signal2 = signal.decode()
-    logger.info(signal2)
-    logger.info(signal2 == 'ON')
+    # logger.debug(signal2)
     if signal2 == 'ON':
         try:
             arduino.write('1'.encode())
-            logger.info('Led is ON')
             arduino.close()
-        except:
-            # logger.error(errors)
-            logger.info('errors')
+        except SerialException as err:
+            logger.error(err)
     elif signal2 == 'OFF':
         try:
             arduino.write('0'.encode())
-            logger.info('Led is OFF')
-        except:
-            # logger.error(errors)
-            logger.info('errors')
             arduino.close()
+        except SerialException as err:
+            logger.error(err)
+    logger.info('Led is {}'.format(signal2))
 
 
 def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:

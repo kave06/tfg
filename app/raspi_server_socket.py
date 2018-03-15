@@ -42,15 +42,16 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     """
 
     def handle(self):
-        logger.info('Escuchando')
+        logger.info('Listening...')
         # self.request.sendall(self.data)
 
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
-        logger.info(self.data)
+        # logger.info(self.data)
 
-        print("{} wrote:".format(self.client_address[0]))
-        print(self.data)
+        logger.info('{} send {}'.format(self.client_address[0],self.data))
+        # print("{} wrote:".format(self.client_address[0]))
+        # print(self.data)
 
         send_signal(self.data)
 
@@ -60,12 +61,9 @@ if __name__ == "__main__":
 
     # Create the server, binding to localhost on port 9999
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
-    logger.info('socket establecido')
+    logger.info('Socket is open')
 
     arduino = Serial(SERIAL_PORT, BD)
-    # arduino.write('1'.encode())
-    # sleep(1)
-    # arduino.write('0'.encode())
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C
