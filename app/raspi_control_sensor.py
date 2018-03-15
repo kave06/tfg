@@ -3,14 +3,14 @@ import os
 
 try:
     from app.modules.logger import create_log
-    from app.model.database import connect_db
+    # from app.model.database import connect_db
     from app.model.nano import connect_bluetooth, read_nano_bluetooth
     from app.modules.flags import Flag
     from app.model.sender import connect_queue, send_data_queue
     from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
-    from model.database import connect_db
+    # from model.database import connect_db
     from model.nano import connect_bluetooth, read_nano_bluetooth
     from modules.flags import Flag
     from model.sender import connect_queue, send_data_queue

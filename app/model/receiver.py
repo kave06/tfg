@@ -1,6 +1,20 @@
 import pika
 import json
-import os
+import sys, os
+
+# sys.path.append('../modules')
+# sys.path.append('../model')
+
+# print(sys.path)
+# print('----------------------------------')
+APP_DIR = os.path.dirname(os.path.realpath(__file__))
+# print(APP_DIR)
+path_modules = APP_DIR + '/../modules'
+path_model = APP_DIR + '/../model'
+sys.path.append(path_model)
+sys.path.append(path_modules)
+# print('----------------------------------')
+# print(sys.path)
 
 try:
     from app.model.database import connect_db, send_data

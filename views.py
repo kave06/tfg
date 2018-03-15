@@ -13,7 +13,7 @@ bootstrap = Bootstrap(app)
 # moment = Moment(app)
 
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
-logger_name = APP_DIR + '/logs/prototype_view'
+logger_name = APP_DIR + '/app/logs/prototype_view'
 logger = create_log(logger_name)
 
 
@@ -28,10 +28,10 @@ def temperature():
     data_list2 = ambient_days(1, 'sensor2_per_hour')
     list_temp1 = data_list1[0]
     list_temp2 = data_list2[0]
-    logger.info(list_temp1)
-    logger.info(list_temp2)
+    # logger.info(list_temp1)
+    # logger.info(list_temp2)
     list_hour1 = data_list1[2]
-    logger.info(list_hour1)
+    # logger.info(list_hour1)
     list_hour2 = data_list2[2]
     # logger.debug(list_hour2)
     return render_template('temperature.html', list_temp1=list_temp1, list_hour1=list_hour1,
@@ -44,10 +44,10 @@ def humidity():
     data_list2 = ambient_days(1, 'sensor2_per_hour')
     list_humi1 = data_list1[1]
     list_humi2 = data_list2[1]
-    logger.info(list_humi1)
-    logger.info(list_humi2)
+    # logger.info(list_humi1)
+    # logger.info(list_humi2)
     list_hour1 = data_list1[2]
-    logger.info(list_hour1)
+    # logger.info(list_hour1)
     list_hour2 = data_list2[2]
     # logger.debug(list_hour2)
 

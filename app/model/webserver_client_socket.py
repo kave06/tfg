@@ -3,6 +3,7 @@ import sys
 import os
 
 sys.path.append('../modules')
+
 try:
     from app.modules.logger import create_log
 except ImportError:

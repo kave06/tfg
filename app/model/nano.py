@@ -75,7 +75,7 @@ def send_signal(signal: bytes):
             arduino.close()
         except SerialException as err:
             logger.error(err)
-    logger.info('Led is {}'.format(signal2))
+    # logger.info('Led is {}'.format(signal2))
 
 
 def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:

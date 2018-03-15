@@ -1,5 +1,6 @@
 import socketserver
 from serial import Serial
+import os
 
 try:
     from app.modules.logger import create_log
@@ -28,14 +29,13 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     """
 
     def handle(self):
-        logger.info('Listening...')
         # self.request.sendall(self.data)
 
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
         # logger.info(self.data)
 
-        logger.info('{} send {}'.format(self.client_address[0], self.data))
+        logger.info('{} send {}'.format(self.client_address[0], self.data.decode()))
         # print("{} wrote:".format(self.client_address[0]))
         # print(self.data)
 
@@ -47,9 +47,10 @@ if __name__ == "__main__":
 
     # Create the server, binding to localhost on port 9999
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
-    logger.info('Socket is open')
+    # logger.info('Socket is open')
 
     arduino = Serial(SERIAL_PORT, BD)
+    logger.info('Listening...')
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C
