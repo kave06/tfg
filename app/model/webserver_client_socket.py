@@ -1,6 +1,15 @@
 import socket
+import sys
+
+sys.path.append('../modules')
+try:
+    from app.modules.logger import create_log
+except ImportError:
+    from logger import create_log
 
 HOST, PORT = '89.128.192.144', 1100
+
+logger = create_log('prototype_view')
 
 
 def led_on_off(state: str):
@@ -15,8 +24,7 @@ def led_on_off(state: str):
         # Connect to server and send data
         sock.connect((HOST, PORT))
         sock.sendall(bytes(data))
-
-        # Receive data from the server and shut down
-        # received = str(sock.recv(1024), "utf-8")
+    except OSError as err:
+        logger.error(err)
     finally:
         sock.close()

@@ -2,12 +2,10 @@ import os
 from flask import Flask, render_template, request
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
-# from flask_moment import Moment
 
 from app.model.database import ambient_days
 from app.model.webserver_client_socket import led_on_off
 from app.modules.logger import create_log
-# from app.model.varias import get_data_from, parse_data
 
 app = Flask(__name__)
 manager = Manager(app)
@@ -19,19 +17,10 @@ logger_name = APP_DIR + '/prototipo.log'
 logger = create_log(logger_name)
 
 
-# @app.route('/')
-# def hello_world():
-#     return 'Hello World!'
-
-
-# @app.route('/')
-# def base():
-#     return render_template('base.html')
-
-
 @app.route('/button')
 def button():
     return render_template('base_left_buttons.html')
+
 
 @app.route('/temperature')
 def temperature():
@@ -40,12 +29,14 @@ def temperature():
     list_temp1 = data_list1[0]
     list_temp2 = data_list2[0]
     logger.info(list_temp1)
+    logger.info(list_temp2)
     list_hour1 = data_list1[2]
     logger.info(list_hour1)
     list_hour2 = data_list2[2]
-    logger.info(list_hour2)
+    # logger.debug(list_hour2)
     return render_template('temperature.html', list_temp1=list_temp1, list_hour1=list_hour1,
                            list_temp2=list_temp2, list_hour2=list_hour2)
+
 
 @app.route('/humidity')
 def humidity():
@@ -54,13 +45,15 @@ def humidity():
     list_humi1 = data_list1[1]
     list_humi2 = data_list2[1]
     logger.info(list_humi1)
+    logger.info(list_humi2)
     list_hour1 = data_list1[2]
     logger.info(list_hour1)
     list_hour2 = data_list2[2]
-    logger.info(list_hour2)
+    # logger.debug(list_hour2)
 
     return render_template('humidity.html', list_humi1=list_humi1, list_hour1=list_hour1,
                            list_humi2=list_humi2, list_hour2=list_hour2)
+
 
 @app.route('/handle_data', methods=['POST'])
 def handle_data():
@@ -70,21 +63,11 @@ def handle_data():
     led_on_off(state)
     return render_template('irrigation.html')
 
+
 @app.route('/irrigation')
 def irrigation():
     return render_template('irrigation.html')
 
-@app.route('/prueba')
-def prueba():
-    return render_template('prueba.html')
-
-@app.route('/blanco')
-def blanco():
-    return render_template('blanco.html')
-
-@app.route('/riego')
-def riego():
-    return render_template('riego.html')
 
 # @app.route('/ambient/days/<int:days>')
 # def ambient_days_views(days):
@@ -106,6 +89,7 @@ def dashboard():
     logger.info(list_hour2)
     return render_template('temperature.html', list_temp1=list_temp1, list_hour1=list_hour1,
                            list_temp2=list_temp2, list_hour2=list_hour2)
+
 
 if __name__ == '__main__':
     # app.run()

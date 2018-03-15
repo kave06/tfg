@@ -2,15 +2,17 @@ from __future__ import print_function
 from pymysql import MySQLError
 from pymysql import connect
 from datetime import datetime, timedelta
+import sys
 
+sys.path.append('../modules')
 try:
-    from app.modules.flags import Flag
     from app.modules.logger import create_log
+    from app.modules.flags import Flag
     from app.modules.config import *
 except ImportError:
-    from modules.flags import Flag
-    from modules.logger import create_log
-    from modules.config import *
+    from logger import create_log
+    from flags import Flag
+    from config import *
 
 logger = create_log('prototype')
 
@@ -101,7 +103,7 @@ def ambient_days(days, table) -> list:
 
 def query_select(query):
     result_set = ''
-    logger.info(query)
+    # logger.debug(query)
     cnx = connect_db()
 
     try:
@@ -110,7 +112,7 @@ def query_select(query):
         # result_set = cursor.fetchmany(size=1)
         result_set = cursor.fetchall()
         cursor.close()
-        logger.info('result_set: {}'.format(result_set))
+        # logger.debug('result_set: {}'.format(result_set))
     except Exception as err:
         logger.error(err)
 

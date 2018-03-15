@@ -1,10 +1,17 @@
 import socketserver
+from serial import Serial
+from time import sleep
+
 # from socket import socket
 # import socket
 # from configparser import ConfigParser
+try:
+    from app.modules.logger import create_log
+    from app.model.nano import send_signal
+except ImportError:
+    from modules.logger import create_log
+    from model.nano import send_signal
 
-from app.modules.logger import create_log
-from app.model.nano import send_signal
 # from modules.logger import create_log
 # from model.nano import send_signal
 
@@ -17,7 +24,7 @@ from app.model.nano import send_signal
 # PORT = serial_config['port']
 # BD = int(serial_config['bd'])
 
-PORT = '/dev/ttyUSB0'
+SERIAL_PORT = '/dev/ttyUSB0'
 BD = 9600
 
 logger = create_log('socket.log')
@@ -54,6 +61,11 @@ if __name__ == "__main__":
     # Create the server, binding to localhost on port 9999
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
     logger.info('socket establecido')
+
+    arduino = Serial(SERIAL_PORT, BD)
+    # arduino.write('1'.encode())
+    # sleep(1)
+    # arduino.write('0'.encode())
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C
