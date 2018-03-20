@@ -33,9 +33,9 @@ def main():
 
     while True:
 
-        if Flag.connect_db == False:
-            Flag.connect_db = True
-        elif Flag.sock_bluetooth1 == False:
+        # if Flag.connect_db == False:
+        #     Flag.connect_db = True
+        if Flag.sock_bluetooth1 == False:
             Flag.sock_bluetooth1 = True
             sleep(0.1)
             sock1 = connect_bluetooth(db_addr1, port1)
@@ -51,7 +51,7 @@ def main():
             sleep(0.1)
             sock2 = connect_bluetooth(db_addr2, port1)
 
-        while Flag.connect_db and Flag.inner_while:
+        while Flag.inner_while:
 
             ambient1 = read_nano_bluetooth(sock1, 1)
             connection_queue = connect_queue()
