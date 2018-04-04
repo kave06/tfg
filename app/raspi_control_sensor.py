@@ -4,9 +4,9 @@ import os
 try:
     from app.modules.logger import create_log
     # from app.model.database import connect_db
-    from app.model.nano import connect_bluetooth, read_nano_bluetooth
+    from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from app.modules.flags import Flag
-    from app.model.sender import connect_queue, send_data_queue
+    from app.model.sender import connect_queue, send_queue_ambient
     from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
@@ -30,6 +30,7 @@ def main():
     sock1 = connect_bluetooth(db_addr1, port1)
     sleep(0.1)
     sock2 = connect_bluetooth(db_addr2, port1)
+    ser = connect_serial(serial_port, serial_bd)
 
     while True:
 
@@ -51,16 +52,22 @@ def main():
             sleep(0.1)
             sock2 = connect_bluetooth(db_addr2, port1)
 
-        while Flag.inner_while:
+        if Flag.serial == False:
+            Flag.serial = True
+            ser = connect_serial(serial_port, serial_bd)
 
+        while Flag.inner_while:
             ambient1 = read_nano_bluetooth(sock1, 1)
-            connection_queue = connect_queue()
-            send_data_queue(connection_queue, ambient1)
+            connection_queue_ambient = connect_queue()
+            send_queue_ambient(connection_queue_ambient, ambient1)
             sleep(0.1)
 
             ambient2 = read_nano_bluetooth(sock2, 2)
-            connection_queue = connect_queue()
-            send_data_queue(connection_queue, ambient2)
+            # connection_queue_ambient = connect_queue()
+            send_queue_ambient(connection_queue_ambient, ambient2)
+
+            state_irrigation = read_serial_state(ser)
+            #TODO develop queue and send state
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):
                 Flag.inner_while = False
