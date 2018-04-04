@@ -29,14 +29,17 @@ def connect_queue() -> pika.BlockingConnection:
         return connection
 
 
-def send_queue_ambient(connection:pika.BlockingConnection, body):
-    body['date'] = datetime.now()
+def send_queue_ambient(connection:pika.BlockingConnection,queue, body):
+    try:
+        body['date'] = datetime.now()
+    except:
+        one = 1
     logger.info(body)
 
     try:
         channel = connection.channel()
-        channel.queue_declare(queue=rabbit_queue_ambient)
-        channel.basic_publish(exchange='', routing_key=rabbit_queue_ambient,
+        channel.queue_declare(queue=queue)
+        channel.basic_publish(exchange='', routing_key=queue,
                               body=json.dumps(body, sort_keys=True, default=str))
         connection.close()
     except exceptions as err:

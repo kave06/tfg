@@ -6,7 +6,7 @@ try:
     # from app.model.database import connect_db
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from app.modules.flags import Flag
-    from app.model.sender import connect_queue, send_queue_ambient, send_queue_relay
+    from app.model.sender import connect_queue, send_queue_ambient
     from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
@@ -59,17 +59,17 @@ def main():
         while Flag.inner_while:
             ambient1 = read_nano_bluetooth(sock1, 1)
             connection_queue_ambient = connect_queue()
-            send_queue_ambient(connection_queue_ambient, ambient1)
+            send_queue_ambient(connection_queue_ambient, rabbit_queue_ambient, ambient1)
             sleep(0.1)
 
             ambient2 = read_nano_bluetooth(sock2, 2)
             connection_queue_ambient = connect_queue()
-            send_queue_ambient(connection_queue_ambient, ambient2)
+            send_queue_ambient(connection_queue_ambient,rabbit_queue_ambient, ambient2)
 
             state_relay = read_serial_state(ser)
             #TODO develop queue and send state
             cnx_queue_relay = connect_queue()
-            send_queue_relay(cnx_queue_relay, state_relay)
+            send_queue_ambient(cnx_queue_relay, rabbit_queue_relay_state, state_relay)
 
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):
