@@ -15,9 +15,11 @@ logger = create_log(logger_name)
 
 
 def main():
-    channel = connect_queue(rabbit_queue_ambient,callback_ambient())
+    channel_ambient = connect_queue(rabbit_queue_ambient,callback_ambient())
+    channel_relay_state = connect_queue(rabbit_queue_relay_state, callback_relay_state())
     # print(' [*] Waiting for messages. To exit press CTRL+C')
-    channel.start_consuming()
+    channel_ambient.start_consuming()
+    channel_relay_state.start_consuming()
 
 
 if __name__ == '__main__':

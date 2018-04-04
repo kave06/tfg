@@ -29,9 +29,11 @@ except ImportError:
 # logger_name = APP_DIR + '/logs/prototype'
 # logger = create_log(logger_name)
 
-logger = create_log('prototype')
+logger_name = APP_DIR + '/logs/queues'
+logger = create_log(logger_name)
 
 STACK_STATE = []
+
 
 def connect_queue(queue, callback):
     credentials = pika.PlainCredentials(username=rabbit_user, password=rabbit_pass)
@@ -57,13 +59,12 @@ def callback_ambient(ch, method, properties, body):
     cnx = connect_db()
     send_data(cnx, ambient)
 
+
 def callback_relay_state(ch, method, properties, body):
     state = json.loads(body.decode())
-    print(state)
+    logger.info(state)
     STACK_STATE.append(state)
-    print(STACK_STATE)
-
-
+    logger.info(STACK_STATE)
 
 
 def main():
@@ -74,5 +75,5 @@ def main():
     # channel_relay_state.start_consuming()
 
 
-if __name__ == '__main__':
-    main()
+# if __name__ == '__main__':
+#     main()
