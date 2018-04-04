@@ -29,8 +29,8 @@ except ImportError:
 # logger_name = APP_DIR + '/logs/prototype'
 # logger = create_log(logger_name)
 
-logger_name = APP_DIR + '/logs/queues'
-logger = create_log(logger_name)
+# logger_name = APP_DIR + '/logs/queues'
+logger = create_log('queues')
 
 STACK_STATE = []
 
@@ -40,8 +40,8 @@ def connect_queue(queue, callback):
     parameters = pika.ConnectionParameters(credentials=credentials)
     connection = pika.BlockingConnection(parameters=parameters)
     channel = connection.channel()
-    channel.queue_declare(queue=rabbit_queue_ambient)
-    channel.basic_consume(callback_ambient(),
+    channel.queue_declare(queue=queue)
+    channel.basic_consume(callback,
                           queue=rabbit_queue_ambient,
                           no_ack=True)
     return channel
@@ -63,16 +63,19 @@ def callback_ambient(ch, method, properties, body):
 def callback_relay_state(ch, method, properties, body):
     state = json.loads(body.decode())
     logger.info(state)
+    print('hola')
+    print(state)
     STACK_STATE.append(state)
     logger.info(STACK_STATE)
+    print(STACK_STATE)
 
 
-def main():
-    channel_ambient = connect_queue(rabbit_queue_ambient, callback_ambient())
-    # channel_relay_state = connect_queue(rabbit_queue_relay_state, callback_relay_state())
-    # print(' [*] Waiting for messages. To exit press CTRL+C')
-    channel_ambient.start_consuming()
-    # channel_relay_state.start_consuming()
+# def main():
+#     channel_ambient = connect_queue(rabbit_queue_ambient, callback_ambient())
+#     # channel_relay_state = connect_queue(rabbit_queue_relay_state, callback_relay_state())
+#     # print(' [*] Waiting for messages. To exit press CTRL+C')
+#     channel_ambient.start_consuming()
+#     # channel_relay_state.start_consuming()
 
 
 # if __name__ == '__main__':
