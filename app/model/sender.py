@@ -6,9 +6,11 @@ from pika import exceptions
 try:
     from app.modules.logger import create_log
     from app.modules.config import *
+    from app.modules.flags import *
 except ImportError:
     from modules.logger import create_log
     from modules.config import *
+    from modules.flags import *
 
 logger = create_log('prototype')
 
@@ -23,9 +25,10 @@ def connect_queue() -> pika.BlockingConnection:
                                                credentials=credentials)
         connection = pika.BlockingConnection(parameters=parameters)
         return connection
-    except exceptions as err:
+    except pika.exceptions as err:
         # if connection.is_closed:
         logger.error(err)
+        Flag.rabbit_cnx_relay_state = False
         return connection
 
 
@@ -34,7 +37,7 @@ def send_queue_ambient(connection:pika.BlockingConnection,queue, body):
         body['date'] = datetime.now()
     except:
         one = 1
-    logger.info(body)
+    # logger.info(body)
 
     try:
         channel = connection.channel()

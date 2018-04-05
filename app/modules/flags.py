@@ -7,4 +7,4 @@ class Flag(object):
     sock_bluetooth1 = True
     sock_bluetooth2 = True
     inner_while = True
-    inner_while_relay_state = True
+    rabbit_cnx_relay_state = True
