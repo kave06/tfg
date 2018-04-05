@@ -29,7 +29,7 @@ def connect_queue() -> pika.BlockingConnection:
         # if connection.is_closed:
         logger.error(err)
         Flag.rabbit_cnx_relay_state = False
-        return connection
+    return connection
 
 
 def send_queue_ambient(connection:pika.BlockingConnection,queue, body):
@@ -45,19 +45,20 @@ def send_queue_ambient(connection:pika.BlockingConnection,queue, body):
         channel.basic_publish(exchange='', routing_key=queue,
                               body=json.dumps(body, sort_keys=True, default=str))
         connection.close()
-    except exceptions as err:
+    except pika.exceptions as err:
         logger.error(err)
 
 
-def send_queue_relay(connection:pika.BlockingConnection, state):
-    logger.info(state)
+def send_queue_relay(connection:pika.BlockingConnection, queue,  state):
+    # logger.info(state)
 
     try:
         channel = connection.channel()
-        channel.queue_declare(queue=rabbit_queue_relay_state)
+        channel.queue_declare(queue=queue)
         channel.basic_publish(exchange='', routing_key=rabbit_queue_relay_state,
                               body=json.dumps(state, default=str))
-        connection.close()
+        # connection.close()
+        # logger.debug(state)
 
     except exceptions as err:
         logger.error(err)

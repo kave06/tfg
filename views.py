@@ -6,6 +6,7 @@ from flask_bootstrap import Bootstrap
 from app.model.database import ambient_days
 from app.model.webserver_client_socket import led_on_off
 from app.modules.logger import create_log
+from app.model.receiver import RELAY_STATE
 
 app = Flask(__name__)
 manager = Manager(app)
@@ -66,7 +67,7 @@ def handle_data():
 
 @app.route('/irrigation')
 def irrigation():
-    return render_template('irrigation.html')
+    return render_template('irrigation.html', relay_state=RELAY_STATE)
 
 
 # @app.route('/ambient/days/<int:days>')
