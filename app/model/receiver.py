@@ -36,9 +36,9 @@ def connect_queue():
     parameters = pika.ConnectionParameters(credentials=credentials)
     connection = pika.BlockingConnection(parameters=parameters)
     channel = connection.channel()
-    channel.queue_declare(queue=rabbit_queue)
+    channel.queue_declare(queue=rabbit_queue_ambient)
     channel.basic_consume(callback,
-                          queue=rabbit_queue,
+                          queue=rabbit_queue_ambient,
                           no_ack=True)
     return channel
 

@@ -34,8 +34,8 @@ def send_data_queue(connection, body):
 
     try:
         channel = connection.channel()
-        channel.queue_declare(queue=rabbit_queue)
-        channel.basic_publish(exchange='', routing_key=rabbit_queue,
+        channel.queue_declare(queue=rabbit_queue_ambient)
+        channel.basic_publish(exchange='', routing_key=rabbit_queue_ambient,
                               body=json.dumps(body, sort_keys=True, default=str))
         connection.close()
     except Exception as err:
