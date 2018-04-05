@@ -49,7 +49,7 @@ def connect_serial(port, baud) -> Serial:
     serial_cnx = ''
     try:
         serial_cnx = Serial(port, baud)
-        # logger.debug('connect to serial')
+        logger.info('connect to serial to port: {}'.format(port))
     except SerialException as err:
         logger.error(err)
         Flag.serial = False

@@ -67,6 +67,7 @@ def main():
             send_queue_ambient(connection_queue_ambient,rabbit_queue_ambient, ambient2)
 
             state_relay = read_serial_state(ser)
+            logger.debug(state_relay)
             #TODO develop queue and send state
             cnx_queue_relay = connect_queue()
             send_queue_ambient(cnx_queue_relay, rabbit_queue_relay_state, state_relay)
