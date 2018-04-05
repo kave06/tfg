@@ -5,15 +5,15 @@ try:
     from app.modules.logger import create_log
     # from app.model.database import connect_db
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
-    from app.modules.flags import Flag
     from app.model.sender import connect_queue, send_queue_ambient
+    from app.modules.flags import Flag
     from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
     # from model.database import connect_db
     from model.nano import connect_bluetooth, read_nano_bluetooth
+    from model.sender import connect_queue, send_queue_ambient
     from modules.flags import Flag
-    from model.sender import connect_queue, send_data_queue
     from modules.config import *
 
 db_addr1 = bluetooth_module1
