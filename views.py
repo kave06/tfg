@@ -1,4 +1,5 @@
 import os
+from threading import Thread
 from flask import Flask, render_template, request
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
@@ -24,10 +25,11 @@ logger_name = APP_DIR + '/app/logs/prototype_view'
 logger = create_log(logger_name)
 
 # print(RELAY_STATE)
-start_consumer()
+# print('--------------------------------------------------')
+# start_consumer()
+# print('--------------------------------------------------')
 # sleep(5)
 # print(RELAY_STATE)
-print('-')
 
 @app.route('/button')
 def button():
@@ -73,11 +75,13 @@ def handle_data():
     logger.info('state is: {}'.format(state))
     # logger.info(state)
     led_on_off(state)
-    return render_template('irrigation.html')
+    print(RELAY_STATE)
+    return render_template('irrigation.html',relay_state=RELAY_STATE)
 
 
 @app.route('/irrigation')
 def irrigation():
+    print(RELAY_STATE)
     return render_template('irrigation.html', relay_state=RELAY_STATE)
 
 
@@ -105,4 +109,7 @@ def dashboard():
 
 if __name__ == '__main__':
     # app.run()
+    t = Thread(target=start_consumer)
+    t.start()
+    # t1 = Thread(target=manager.run())
     manager.run()

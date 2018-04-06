@@ -26,7 +26,7 @@ logger = create_log(logger_name)
 
 
 def main():
-    relay_state()
+    # relay_state()
     sleep(0.1)
     sock1 = connect_bluetooth(db_addr1, port1)
     sleep(0.1)
