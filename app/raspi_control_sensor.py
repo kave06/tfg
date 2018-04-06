@@ -3,7 +3,8 @@ import os
 
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
-    from app.model.sender import connect_queue, send_queue_ambient
+    from app.model.rabbitMQ import connect_queue_sender, send_queue_ambient
+    from app.model.sender import connect_queue_sender, send_queue_ambient
     # from app.model.relay_state import relay_state
     from app.modules.logger import create_log
     from app.modules.flags import Flag
@@ -53,13 +54,13 @@ def main():
 
         while Flag.inner_while:
             ambient1 = read_nano_bluetooth(sock1, 1)
-            connection_queue_ambient = connect_queue()
-            send_queue_ambient(connection_queue_ambient, rabbit_queue_ambient, ambient1)
+            cnx = connect_queue_sender()
+            send_queue_ambient(cnx, ambient1)
             sleep(0.1)
 
             ambient2 = read_nano_bluetooth(sock2, 2)
-            connection_queue_ambient = connect_queue()
-            send_queue_ambient(connection_queue_ambient, rabbit_queue_ambient, ambient2)
+            cnx = connect_queue_sender()
+            send_queue_ambient(cnx, ambient2)
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):
                 Flag.inner_while = False
