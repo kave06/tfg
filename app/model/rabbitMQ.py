@@ -43,7 +43,7 @@ def connect_queue_receiver(queue, callback):
     connection = pika.BlockingConnection(parameters=parameters)
     channel = connection.channel()
     channel.queue_declare(queue=queue)
-    channel.basic_consume(callback,
+    channel.basic_consume(callback_relay_state,
                           queue=queue,
                           no_ack=True)
     return channel
@@ -93,6 +93,7 @@ def callback_ambient(ch, method, properties, body):
 
 def callback_relay_state(ch, method, properties, body):
     RELAY_STATE = json.loads(body.decode())
+    print(RELAY_STATE)
     # logger.info(state)
     # print('hola')
     # print(state)

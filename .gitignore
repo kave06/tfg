@@ -6,4 +6,5 @@ app/test.py
 app/web-server_client_socket_old.py
 app/config.ini
 app/modules/config.py
+app/basura/
 
