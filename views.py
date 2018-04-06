@@ -6,7 +6,13 @@ from flask_bootstrap import Bootstrap
 from app.model.database import ambient_days
 from app.model.webserver_client_socket import led_on_off
 from app.modules.logger import create_log
-from app.model.receiver import RELAY_STATE
+
+
+from app.model.rabbitMQ import connect_queue_receiver, callback_ambient,\
+    callback_relay_state, start_consumer, RELAY_STATE
+from app.modules.config import *
+from time import sleep
+
 
 app = Flask(__name__)
 manager = Manager(app)
@@ -17,6 +23,11 @@ APP_DIR = os.path.dirname(os.path.realpath(__file__))
 logger_name = APP_DIR + '/app/logs/prototype_view'
 logger = create_log(logger_name)
 
+# print(RELAY_STATE)
+start_consumer()
+# sleep(5)
+# print(RELAY_STATE)
+print('-')
 
 @app.route('/button')
 def button():

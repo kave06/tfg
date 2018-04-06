@@ -2,18 +2,15 @@ from time import sleep
 import os
 
 try:
-    from app.model.nano import connect_bluetooth, read_nano_bluetooth, \
-        connect_serial, read_serial_state
+    from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from app.model.rabbitMQ import connect_queue_sender, send_queue_ambient
-    from app.model.sender import connect_queue_sender, send_queue_ambient
     from app.model.relay_state import relay_state
     from app.modules.logger import create_log
     from app.modules.flags import Flag
     from app.modules.config import *
 except ImportError:
-    from model.nano import connect_bluetooth, read_nano_bluetooth, \
-        connect_serial, read_serial_state
-    from model.sender import connect_queue, send_queue_ambient
+    from model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
+    from model.rabbitMQ import connect_queue_sender, send_queue_ambient
     from model.relay_state import relay_state
     from modules.logger import create_log
     from modules.flags import Flag
