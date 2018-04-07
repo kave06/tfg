@@ -14,7 +14,7 @@ except ImportError:
     from modules.config import *
     from modules.flags import *
 
-logger = create_log('queues')
+logger = create_log('prototype')
 
 STACK_STATE = []
 RELAY_STATE = 'empty'
@@ -96,12 +96,13 @@ def callback_ambient(ch, method, properties, body):
 
 def callback_relay_state(ch, method, properties, body):
     global RELAY_STATE
-    RELAY_STATE = json.loads(body.decode())
+    state = json.loads(body.decode())
+    RELAY_STATE = state
+    STACK_STATE.append(state)
     # print(RELAY_STATE)
     # logger.info(state)
     # print('hola')
     # print(state)
-    # STACK_STATE.append(state)
     # logger.info(STACK_STATE)
     # print(STACK_STATE)
 

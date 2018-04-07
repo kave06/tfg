@@ -1,5 +1,6 @@
 from time import sleep
 import os
+from threading import Thread
 
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
@@ -26,6 +27,8 @@ logger = create_log(logger_name)
 
 
 def main():
+    t1 = Thread(target=relay_state)
+    t1.start()
     # relay_state()
     sleep(0.1)
     sock1 = connect_bluetooth(db_addr1, port1)
