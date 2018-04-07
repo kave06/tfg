@@ -161,7 +161,7 @@ def read_serial_state(ser: Serial):
 
 
 
-# def main():
+# def count_state():
 #     # arduino = connect_serial(PORT,BD)
 #     # sleep(1)
 #     # arduino.write('1'.encode())
@@ -176,4 +176,4 @@ def read_serial_state(ser: Serial):
 #
 #
 # if __name__ == '__main__':
-#     main()
+#     count_state()

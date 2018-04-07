@@ -44,7 +44,7 @@ def connect_queue_receiver(queue, callback):
     connection = pika.BlockingConnection(parameters=parameters)
     channel = connection.channel()
     channel.queue_declare(queue=queue)
-    channel.basic_consume(callback_relay_state,
+    channel.basic_consume(callback,
                           queue=queue,
                           no_ack=True)
     return channel
@@ -78,6 +78,7 @@ def send_queue_relay(connection: pika.BlockingConnection, state):
 
     except Exception as err:
         logger.error(err)
+        Flag.rabbit_cnx_relay_state = False
 
 
 # receiver
@@ -94,12 +95,14 @@ def callback_ambient(ch, method, properties, body):
     send_data(cnx, ambient)
 
 
+# receiver
 def callback_relay_state(ch, method, properties, body):
     state = json.loads(body.decode())
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
 
-
 def start_consumer():
+    channel_ambient = connect_queue_receiver(rabbit_queue_ambient, callback_ambient)
     channel_relay_state = connect_queue_receiver(rabbit_queue_relay_state, callback_relay_state)
+    channel_ambient.start_consuming()
     channel_relay_state.start_consuming()

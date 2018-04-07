@@ -31,12 +31,21 @@ def relay_state():
             send_queue_relay(cnx, state)
             sleep(1)
 
+        if ser.is_open:
+            cnx.close()
+        else:
+            ser.close()
+
+        # try:
+        #     ser.close()
+        # except Exception as err:
+        #     logger.error(err)
         Flag.serial = True
         Flag.rabbit_cnx_relay_state = True
 
-# def main():
+# def count_state():
 #     relay_state()
 #
 #
 # if __name__ == '__main__':
-#    main()
+#    count_state()

@@ -11,6 +11,8 @@ from app.modules.logger import create_log
 from app.model.rabbitMQ import start_consumer
 from app.modules.flags import Var
 
+from app.test_server_consumer import count_state
+
 from time import sleep
 
 
@@ -108,5 +110,7 @@ if __name__ == '__main__':
     # app.run()
     t = Thread(target=start_consumer)
     t.start()
-    # t1 = Thread(target=manager.run())
+    t1 = Thread(target=count_state)
+    t1.start()
+
     manager.run()
