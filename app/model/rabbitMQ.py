@@ -95,16 +95,9 @@ def callback_ambient(ch, method, properties, body):
 
 
 def callback_relay_state(ch, method, properties, body):
-    global RELAY_STATE
     state = json.loads(body.decode())
-    RELAY_STATE = state
-    STACK_STATE.append(state)
-    # print(RELAY_STATE)
-    # logger.info(state)
-    # print('hola')
-    # print(state)
-    # logger.info(STACK_STATE)
-    # print(STACK_STATE)
+    Var.RELAY_STATE = state
+    Var.STACK_STATE.append(state)
 
 
 def start_consumer():

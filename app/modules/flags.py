@@ -8,3 +8,8 @@ class Flag(object):
     sock_bluetooth2 = True
     inner_while = True
     rabbit_cnx_relay_state = True
+
+
+class Var(object):
+    STACK_STATE = []
+    RELAY_STATE = 'empty'

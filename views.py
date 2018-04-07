@@ -8,10 +8,9 @@ from app.model.database import ambient_days
 from app.model.webserver_client_socket import led_on_off
 from app.modules.logger import create_log
 
+from app.model.rabbitMQ import start_consumer
+from app.modules.flags import Var
 
-from app.model.rabbitMQ import connect_queue_receiver, callback_ambient,\
-    callback_relay_state, start_consumer, RELAY_STATE
-from app.modules.config import *
 from time import sleep
 
 
@@ -75,14 +74,12 @@ def handle_data():
     logger.info('state is: {}'.format(state))
     # logger.info(state)
     led_on_off(state)
-    print(RELAY_STATE)
-    return render_template('irrigation.html',relay_state=RELAY_STATE)
+    return render_template('irrigation.html',relay_state=Var.RELAY_STATE)
 
 
 @app.route('/irrigation')
 def irrigation():
-    print(RELAY_STATE)
-    return render_template('irrigation.html', relay_state=RELAY_STATE)
+    return render_template('irrigation.html', relay_state=Var.RELAY_STATE)
 
 
 # @app.route('/ambient/days/<int:days>')
