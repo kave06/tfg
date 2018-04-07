@@ -13,3 +13,7 @@ class Flag(object):
 class Var(object):
     STACK_STATE = []
     RELAY_STATE = 'empty'
+
+
+    def get_relay_state(self):
+        return self.RELAY_STATE

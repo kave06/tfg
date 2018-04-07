@@ -623,8 +623,8 @@ var Carousel = function () {
     };
 
     _proto.nextWhenVisible = function nextWhenVisible() {
-      // Don't call next when the page isn't visible
-      // or the carousel or its parent isn't visible
+      // Don't1 call next when the page isn't1 visible
+      // or the carousel or its parent isn't1 visible
       if (!document.hidden && $(this._element).is(':visible') && $(this._element).css('visibility') !== 'hidden') {
         this.next();
       }
@@ -2035,7 +2035,7 @@ var Modal = function () {
       var transition = Util.supportsTransitionEnd() && $(this._element).hasClass(ClassName.FADE);
 
       if (!this._element.parentNode || this._element.parentNode.nodeType !== Node.ELEMENT_NODE) {
-        // don't move modals dom position
+        // don't1 move modals dom position
         document.body.appendChild(this._element);
       }
 

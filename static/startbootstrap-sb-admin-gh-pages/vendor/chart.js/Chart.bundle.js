@@ -1694,7 +1694,7 @@ function isArray(input) {
 }
 
 function isObject(input) {
-    // IE8 will treat undefined and null as object if it wasn't for
+    // IE8 will treat undefined and null as object if it wasn't1 for
     // input != null
     return input != null && Object.prototype.toString.call(input) === '[object Object]';
 }
@@ -2048,7 +2048,7 @@ function mergeConfigs(parentConfig, childConfig) {
         if (hasOwnProp(parentConfig, prop) &&
                 !hasOwnProp(childConfig, prop) &&
                 isObject(parentConfig[prop])) {
-            // make sure changes to properties don't modify parent config
+            // make sure changes to properties don't1 modify parent config
             res[prop] = extend({}, res[prop]);
         }
     }
@@ -2506,7 +2506,7 @@ addParseToken(['M', 'MM'], function (input, array) {
 
 addParseToken(['MMM', 'MMMM'], function (input, array, config, token) {
     var month = config._locale.monthsParse(input, token, config._strict);
-    // if we didn't find a month name, mark the date as invalid.
+    // if we didn't1 find a month name, mark the date as invalid.
     if (month != null) {
         array[MONTH] = month;
     } else {
@@ -2595,7 +2595,7 @@ function localeMonthsParse (monthName, format, strict) {
     // Sorting makes sure if one month (or abbr) is a prefix of another
     // see sorting in computeMonthsParse
     for (i = 0; i < 12; i++) {
-        // make the regex if we don't have it already
+        // make the regex if we don't1 have it already
         mom = createUTC([2000, i]);
         if (strict && !this._longMonthsParse[i]) {
             this._longMonthsParse[i] = new RegExp('^' + this.months(mom, '').replace('.', '') + '$', 'i');
@@ -2705,7 +2705,7 @@ function computeMonthsParse () {
     var shortPieces = [], longPieces = [], mixedPieces = [],
         i, mom;
     for (i = 0; i < 12; i++) {
-        // make the regex if we don't have it already
+        // make the regex if we don't1 have it already
         mom = createUTC([2000, i]);
         shortPieces.push(this.monthsShort(mom, ''));
         longPieces.push(this.months(mom, ''));
@@ -2798,7 +2798,7 @@ function getIsLeapYear () {
 }
 
 function createDate (y, m, d, h, M, s, ms) {
-    // can't just apply() to create a date:
+    // can't1 just apply() to create a date:
     // https://stackoverflow.com/q/181348
     var date = new Date(y, m, d, h, M, s, ms);
 
@@ -2987,7 +2987,7 @@ addRegexToken('dddd',   function (isStrict, locale) {
 
 addWeekParseToken(['dd', 'ddd', 'dddd'], function (input, week, config, token) {
     var weekday = config._locale.weekdaysParse(input, token, config._strict);
-    // if we didn't get a weekday name, mark the date as invalid
+    // if we didn't1 get a weekday name, mark the date as invalid
     if (weekday != null) {
         week.d = weekday;
     } else {
@@ -3126,7 +3126,7 @@ function localeWeekdaysParse (weekdayName, format, strict) {
     }
 
     for (i = 0; i < 7; i++) {
-        // make the regex if we don't have it already
+        // make the regex if we don't1 have it already
 
         mom = createUTC([2000, 1]).day(i);
         if (strict && !this._fullWeekdaysParse[i]) {
@@ -3260,7 +3260,7 @@ function computeWeekdaysParse () {
     var minPieces = [], shortPieces = [], longPieces = [], mixedPieces = [],
         i, mom, minp, shortp, longp;
     for (i = 0; i < 7; i++) {
-        // make the regex if we don't have it already
+        // make the regex if we don't1 have it already
         mom = createUTC([2000, 1]).day(i);
         minp = this.weekdaysMin(mom, '');
         shortp = this.weekdaysShort(mom, '');
@@ -3560,7 +3560,7 @@ function defineLocale (name, config) {
 
         // backwards compat for now: also set the locale
         // make sure we set the locale AFTER all child locales have been
-        // created, so we won't end up with the child locale set.
+        // created, so we won't1 end up with the child locale set.
         getSetGlobalLocale(name);
 
 
@@ -3910,7 +3910,7 @@ function configFromArray (config) {
     // * if no year, month, day of month are given, default to today
     // * if day of month is given, default month and year
     // * if month is given, default only year
-    // * if year is given, don't default anything
+    // * if year is given, don't1 default anything
     for (i = 0; i < 3 && config._a[i] == null; ++i) {
         config._a[i] = input[i] = currentDate[i];
     }
@@ -4039,7 +4039,7 @@ function configFromStringAndFormat(config) {
             string = string.slice(string.indexOf(parsedInput) + parsedInput.length);
             totalParsedInputLength += parsedInput.length;
         }
-        // don't parse if it's not a known token
+        // don't1 parse if it's not a known token
         if (formatTokenFunctions[token]) {
             if (parsedInput) {
                 getParsingFlags(config).empty = false;
@@ -4479,7 +4479,7 @@ hooks.updateOffset = function () {};
 
 // keepLocalTime = true means only change the timezone, without
 // affecting the local hour. So 5:31:26 +0300 --[utcOffset(2, true)]-->
-// 5:31:26 +0200 It is possible that 5:31:26 doesn't exist with offset
+// 5:31:26 +0200 It is possible that 5:31:26 doesn't1 exist with offset
 // +0200, so we adjust the time as needed, to be valid.
 //
 // Keeping the time actually adds/subtracts (one hour)
@@ -6747,7 +6747,7 @@ defaults._set('bubble', {
 	tooltips: {
 		callbacks: {
 			title: function() {
-				// Title doesn't make sense for scatter since we format the data as a point
+				// Title doesn't1 make sense for scatter since we format the data as a point
 				return '';
 			},
 			label: function(item, data) {
@@ -7062,7 +7062,7 @@ module.exports = function(Chart) {
 			var cutoutPercentage = opts.cutoutPercentage;
 			var circumference = opts.circumference;
 
-			// If the chart's circumference isn't a full circle, calculate minSize as a ratio of the width/height of the arc
+			// If the chart's circumference isn't1 a full circle, calculate minSize as a ratio of the width/height of the arc
 			if (circumference < Math.PI * 2.0) {
 				var startAngle = opts.rotation % (Math.PI * 2.0);
 				startAngle += Math.PI * 2.0 * (startAngle >= Math.PI ? -1 : startAngle < -Math.PI ? 1 : 0);
@@ -7959,7 +7959,7 @@ defaults._set('scatter', {
 	tooltips: {
 		callbacks: {
 			title: function() {
-				return '';     // doesn't make sense for scatter since data are formatted as a point
+				return '';     // doesn't1 make sense for scatter since data are formatted as a point
 			},
 			label: function(item) {
 				return '(' + item.xLabel + ', ' + item.yLabel + ')';
@@ -8267,7 +8267,7 @@ module.exports = function(Chart) {
 				// the chart initialization but after setting basic chart / controller properties that
 				// can help to figure out that the chart is not valid (e.g chart.canvas !== null);
 				// https://github.com/chartjs/Chart.js/issues/2807
-				console.error("Failed to create chart: can't acquire context from the given item");
+				console.error("Failed to create chart: can't1 acquire context from the given item");
 				return;
 			}
 
@@ -9080,7 +9080,7 @@ module.exports = function(Chart) {
 
 	/**
 	 * Removes the given array event listener and cleanup extra attached properties (such as
-	 * the _chartjs stub and overridden methods) if array doesn't have any more listeners.
+	 * the _chartjs stub and overridden methods) if array doesn't1 have any more listeners.
 	 */
 	function unlistenArrayEvents(array, listener) {
 		var stub = array._chartjs;
@@ -9389,7 +9389,7 @@ function interpolate(start, view, model, ease) {
 		target = model[key];
 
 		// if a value is added to the model after pivot() has been called, the view
-		// doesn't contain it, so let's initialize the view to the target value.
+		// doesn't1 contain it, so let's initialize the view to the target value.
 		if (!view.hasOwnProperty(key)) {
 			view[key] = target;
 		}
@@ -10256,7 +10256,7 @@ function indexMode(chart, e, options) {
 			var meta = chart.getDatasetMeta(datasetIndex);
 			var element = meta.data[items[0]._index];
 
-			// don't count items that are skipped (null data)
+			// don't1 count items that are skipped (null data)
 			if (element && !element._view.skip) {
 				elements.push(element);
 			}
@@ -10418,7 +10418,7 @@ module.exports = {
 				}
 			});
 
-			// If we want to trigger on an intersect and we don't have any items
+			// If we want to trigger on an intersect and we don't1 have any items
 			// that intersect the position, return nothing
 			if (options.intersect && !intersectsItem) {
 				items = [];
@@ -10449,7 +10449,7 @@ module.exports = {
 				}
 			});
 
-			// If we want to trigger on an intersect and we don't have any items
+			// If we want to trigger on an intersect and we don't1 have any items
 			// that intersect the position, return nothing
 			if (options.intersect && !intersectsItem) {
 				items = [];
@@ -10765,7 +10765,7 @@ module.exports = function(Chart) {
 							bottom: 0
 						};
 
-						// Don't use min size here because of label rotation. When the labels are rotated, their rotation highly depends
+						// Don't1 use min size here because of label rotation. When the labels are rotated, their rotation highly depends
 						// on the margin. Sometimes they need to increase in size slightly
 						box.update(box.fullWidth ? chartWidth : maxChartAreaWidth, chartHeight / 2, scaleMargin);
 					} else {
@@ -11490,7 +11490,7 @@ module.exports = function(Chart) {
 			var me = this;
 			var i, ilen, labels, label, ticks, tick;
 
-			// Update Lifecycle - Probably don't want to ever extend or overwrite this function ;)
+			// Update Lifecycle - Probably don't1 want to ever extend or overwrite this function ;)
 			me.beforeUpdate();
 
 			// Absorb the master measurements
@@ -11517,7 +11517,7 @@ module.exports = function(Chart) {
 			// Ticks - `this.ticks` is now DEPRECATED!
 			// Internal ticks are now stored as objects in the PRIVATE `this._ticks` member
 			// and must not be accessed directly from outside this class. `this.ticks` being
-			// around for long time and not marked as private, we can't change its structure
+			// around for long time and not marked as private, we can't1 change its structure
 			// without unexpected breaking changes. If you need to access the scale ticks,
 			// use scale.getTicks() instead.
 
@@ -11740,7 +11740,7 @@ module.exports = function(Chart) {
 				}
 			}
 
-			// Don't bother fitting the ticks if we are not showing them
+			// Don't1 bother fitting the ticks if we are not showing them
 			if (tickOpts.display && display) {
 				var largestTextWidth = helpers.longestText(me.ctx, tickFont.font, labels, me.longestTextCache);
 				var tallestLabelHeightInLines = helpers.numberOfLabelLines(labels);
@@ -12435,7 +12435,7 @@ module.exports = {
 		 * @return {String} string representation of the tickValue parameter
 		 */
 		linear: function(tickValue, index, ticks) {
-			// If we have lots of ticks, don't use the ones
+			// If we have lots of ticks, don't1 use the ones
 			var delta = ticks.length > 3 ? ticks[2] - ticks[1] : ticks[1] - ticks[0];
 
 			// If we have a number like 2.5 as the delta, figure out how many decimal places we need
@@ -13319,7 +13319,7 @@ module.exports = function(Chart) {
 			// Remember Last Actives
 			changed = !helpers.arrayEquals(me._active, me._lastActive);
 
-			// If tooltip didn't change, do not handle the target event
+			// If tooltip didn't1 change, do not handle the target event
 			if (!changed) {
 				return false;
 			}
@@ -13812,7 +13812,7 @@ module.exports = Element.extend({
 			borderSkipped = vm.borderSkipped || 'left';
 		}
 
-		// Canvas doesn't allow us to stroke inside the width so we can
+		// Canvas doesn't1 allow us to stroke inside the width so we can
 		// adjust the sizes to fit if we're setting a stroke on the line
 		if (borderWidth) {
 			// borderWidth shold be less than bar width and bar height.
@@ -15232,7 +15232,7 @@ module.exports = {
 		});
 
 		// The canvas render size might have been changed (and thus the state stack discarded),
-		// we can't use save() and restore() to restore the initial state. So make sure that at
+		// we can't1 use save() and restore() to restore the initial state. So make sure that at
 		// least the canvas context is reset to the default state by setting the canvas width.
 		// https://www.w3.org/TR/2011/WD-html5-20110525/the-canvas-element.html
 		canvas.width = canvas.width;
@@ -15818,7 +15818,7 @@ module.exports = function(Chart) {
 		update: function(maxWidth, maxHeight, margins) {
 			var me = this;
 
-			// Update Lifecycle - Probably don't want to ever extend or overwrite this function ;)
+			// Update Lifecycle - Probably don't1 want to ever extend or overwrite this function ;)
 			me.beforeUpdate();
 
 			// Absorb the master measurements
@@ -16308,7 +16308,7 @@ module.exports = function(Chart) {
 		update: function(maxWidth, maxHeight, margins) {
 			var me = this;
 
-			// Update Lifecycle - Probably don't want to ever extend or overwrite this function ;)
+			// Update Lifecycle - Probably don't1 want to ever extend or overwrite this function ;)
 			me.beforeUpdate();
 
 			// Absorb the master measurements
@@ -17056,7 +17056,7 @@ module.exports = function(Chart) {
 							if (opts.relativePoints) {
 								values[index] = 100;
 							} else {
-								// Don't need to split positive and negative since the log scale can't handle a 0 crossing
+								// Don't1 need to split positive and negative since the log scale can't1 handle a 0 crossing
 								values[index] += value;
 							}
 						});
@@ -17707,7 +17707,7 @@ module.exports = function(Chart) {
 				var tickLabelFont = helpers.fontString(tickFontSize, tickFontStyle, tickFontFamily);
 
 				helpers.each(me.ticks, function(label, index) {
-					// Don't draw a centre value (if it is minimum)
+					// Don't1 draw a centre value (if it is minimum)
 					if (index > 0 || tickOpts.reverse) {
 						var yCenterOffset = me.getDistanceFromCenterForValue(me.ticksAsNumbers[index]);
 
@@ -18188,7 +18188,7 @@ module.exports = function(Chart) {
 			/**
 			 * Ticks generation input values:
 			 * - 'auto': generates "optimal" ticks based on scale size and time options.
-			 * - 'data': generates ticks from data (including labels from data {t|x|y} objects).
+			 * - 'data': generates ticks from data (including labels from data {t1|x|y} objects).
 			 * - 'labels': generates ticks from user given `data.labels` values ONLY.
 			 * @see https://github.com/chartjs/Chart.js/pull/4507
 			 * @since 2.7.0
@@ -18225,7 +18225,7 @@ module.exports = function(Chart) {
 		},
 
 		/**
-		 * Allows data to be referenced via 't' attribute
+		 * Allows data to be referenced via 't1' attribute
 		 */
 		getRightValue: function(rawValue) {
 			if (rawValue && rawValue.t !== undefined) {

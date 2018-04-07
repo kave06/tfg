@@ -108,9 +108,11 @@ def dashboard():
 
 if __name__ == '__main__':
     # app.run()
-    t = Thread(target=start_consumer_realy_state)
-    t.start()
-    t1 = Thread(target=count_state)
+    t1 = Thread(target=start_consumer_realy_state)
     t1.start()
+    t2 = Thread(target=start_consumer_ambient)
+    t2.start()
+    # t1 = Thread(target=count_state)
+    # t1.start()
 
     manager.run()

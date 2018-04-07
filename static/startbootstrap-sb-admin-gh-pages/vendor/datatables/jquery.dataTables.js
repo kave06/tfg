@@ -328,7 +328,7 @@
 		 * The exact opposite of 'opening' a row, this function will close any rows which
 		 * are currently 'open'.
 		 *  @param {node} nTr the table row to 'close'
-		 *  @returns {int} 0 on success, or 1 if failed (can't find the row)
+		 *  @returns {int} 0 on success, or 1 if failed (can't1 find the row)
 		 *  @dtopt API
 		 *  @deprecated Since v1.10
 		 *
@@ -423,13 +423,13 @@
 		 *    $(document).ready(function() {
 		 *      var oTable = $('#example').dataTable();
 		 *
-		 *      // Re-draw the table - you wouldn't want to do it here, but it's an example :-)
+		 *      // Re-draw the table - you wouldn't1 want to do it here, but it's an example :-)
 		 *      oTable.fnDraw();
 		 *    } );
 		 */
 		this.fnDraw = function( complete )
 		{
-			// Note that this isn't an exact match to the old call to _fnDraw - it takes
+			// Note that this isn't1 an exact match to the old call to _fnDraw - it takes
 			// into account the new data, but can hold position.
 			this.api( true ).draw( complete );
 		};
@@ -931,7 +931,7 @@
 				}
 			
 				/* If the element we are initialising has the same ID as a table which was previously
-				 * initialised, but the table nodes don't match (from before) then we destroy the old
+				 * initialised, but the table nodes don't1 match (from before) then we destroy the old
 				 * instance by simply deleting it. This is under the assumption that the table has been
 				 * destroyed by other methods. Anyone using non-id selectors will need to do this manually
 				 */
@@ -1315,7 +1315,7 @@
 	
 	/*
 	 * It is useful to have variables which are scoped locally so only the
-	 * DataTables functions can access them and they don't leak into global space.
+	 * DataTables functions can access them and they don't1 leak into global space.
 	 * At the same time these functions are often useful over multiple files in the
 	 * core and API, so we list, or at least document, all variables which are used
 	 * by DataTables as private variables here. This also ensures that there is no
@@ -1558,7 +1558,7 @@
 		}
 	
 		// A faster unique method is to use object keys to identify used values,
-		// but this doesn't work with arrays or objects, which we must also
+		// but this doesn't1 work with arrays or objects, which we must also
 		// consider. See jsperf.com/compare-array-unique-versions/4 for more
 		// information.
 		var
@@ -1686,7 +1686,7 @@
 	 *  @param {object} user The object to convert from camel case to Hungarian.
 	 *  @param {boolean} force When set to `true`, properties which already have a
 	 *    Hungarian value in the `user` object will be overwritten. Otherwise they
-	 *    won't be.
+	 *    won't1 be.
 	 *  @memberof DataTable#oApi
 	 */
 	function _fnCamelToHungarian ( src, user, force )
@@ -1722,7 +1722,7 @@
 	
 	
 	/**
-	 * Language compatibility - when certain options are given, and others aren't, we
+	 * Language compatibility - when certain options are given, and others aren't1, we
 	 * need to duplicate the values over, in order to provide backwards compatibility
 	 * with older language files.
 	 *  @param {object} oSettings dataTables settings object
@@ -1843,9 +1843,9 @@
 	 */
 	function _fnBrowserDetect( settings )
 	{
-		// We don't need to do this every time DataTables is constructed, the values
+		// We don't1 need to do this every time DataTables is constructed, the values
 		// calculated are specific to the browser and OS configuration which we
-		// don't expect to change between initialisations
+		// don't1 expect to change between initialisations
 		if ( ! DataTable.__browser ) {
 			var browser = {};
 			DataTable.__browser = browser;
@@ -1904,7 +1904,7 @@
 			// scrollbar on the left, rather than the right.
 			browser.bScrollbarLeft = Math.round( inner.offset().left ) !== 1;
 	
-			// IE8- don't provide height and width for getBoundingClientRect
+			// IE8- don't1 provide height and width for getBoundingClientRect
 			browser.bBounding = n[0].getBoundingClientRect().width ? true : false;
 	
 			n.remove();
@@ -1916,7 +1916,7 @@
 	
 	
 	/**
-	 * Array.prototype reduce[Right] method, used for browsers which don't support
+	 * Array.prototype reduce[Right] method, used for browsers which don't1 support
 	 * JS 1.6. Done this way to reduce code size, since we iterate either way
 	 *  @param {object} settings dataTables settings object
 	 *  @memberof DataTable#oApi
@@ -1993,7 +1993,7 @@
 		var oClasses = oSettings.oClasses;
 		var th = $(oCol.nTh);
 	
-		// Try to get width information from the DOM. We can't get it from CSS
+		// Try to get width information from the DOM. We can't1 get it from CSS
 		// as we'd need to parse the CSS stylesheet. `width` option can override
 		if ( ! oCol.sWidthOrig ) {
 			// Width attribute
@@ -2083,7 +2083,7 @@
 		if ( !oSettings.oFeatures.bSort )
 		{
 			oCol.bSortable = false;
-			th.addClass( oClasses.sSortableNone ); // Have to add class here as order event isn't called
+			th.addClass( oClasses.sSortableNone ); // Have to add class here as order event isn't1 called
 		}
 	
 		/* Check that the class assignment is correct for sorting */
@@ -2252,7 +2252,7 @@
 	
 						detectedType = types[j]( cache[k], settings );
 	
-						// If null, then this type can't apply to this column, so
+						// If null, then this type can't1 apply to this column, so
 						// rather than testing all cells, break out. There is an
 						// exception for the last type which is `html`. We need to
 						// scan all rows since it is possible to mix string and HTML
@@ -2323,7 +2323,7 @@
 				{
 					if ( typeof aTargets[j] === 'number' && aTargets[j] >= 0 )
 					{
-						/* Add columns that we don't yet know about */
+						/* Add columns that we don't1 yet know about */
 						while( columns.length <= aTargets[j] )
 						{
 							_fnAddColumn( oSettings );
@@ -2693,7 +2693,7 @@
 		if ( $.isPlainObject( mSource ) )
 		{
 			/* Unlike get, only the underscore (global) option is used for for
-			 * setting data since we don't know the type here. This is why an object
+			 * setting data since we don't1 know the type here. This is why an object
 			 * option is not documented for `mData` (which is read/write), but it is
 			 * for `mRender` which is read only.
 			 */
@@ -2748,7 +2748,7 @@
 						else
 						{
 							// We've been asked to save data to an array, but it
-							// isn't array data to be saved. Best that can be done
+							// isn't1 array data to be saved. Best that can be done
 							// is to just save the value.
 							data[ a[i] ] = val;
 						}
@@ -2764,7 +2764,7 @@
 						data = data[ a[i] ]( val );
 					}
 	
-					// If the nested object doesn't currently exist - since we are
+					// If the nested object doesn't1 currently exist - since we are
 					// trying to set the value - create it
 					if ( data[ a[i] ] === null || data[ a[i] ] === undefined )
 					{
@@ -2782,7 +2782,7 @@
 				else
 				{
 					// If array notation is used, we just want to strip it and use the property name
-					// and assign the value. If it isn't used, then we get the result we want anyway
+					// and assign the value. If it isn't1 used, then we get the result we want anyway
 					data[ aLast.replace(__reArray, '') ] = val;
 				}
 			};
@@ -3263,7 +3263,7 @@
 	 * the instantaneous column visibility, to construct the new layout. The grid is
 	 * traversed over cell at a time in a rows x columns grid fashion, although each
 	 * cell insert can cover multiple elements in the grid - which is tracks using the
-	 * aApplied array. Cell inserts in the grid will only occur where there isn't
+	 * aApplied array. Cell inserts in the grid will only occur where there isn't1
 	 * already a cell in that position.
 	 *  @param {object} oSettings dataTables settings object
 	 *  @param array {objects} aoSource Layout array from _fnDetectHeader
@@ -3866,7 +3866,7 @@
 				newData :
 				$.extend( true, data, newData );
 	
-			// Remove the data property as we've resolved it already and don't want
+			// Remove the data property as we've resolved it already and don't1 want
 			// jQuery to do it again (it is restored at the end of the function)
 			delete ajax.data;
 		}
@@ -4320,7 +4320,7 @@
 				}
 			}
 	
-			// So the array reference doesn't break set the results into the
+			// So the array reference doesn't1 break set the results into the
 			// existing array
 			displayRows.length = 0;
 			$.merge( displayRows, rows );
@@ -4826,7 +4826,7 @@
 			settings.oLanguage.sLengthMenu.replace( '_MENU_', select[0].outerHTML )
 		);
 	
-		// Can't use `select` variable as user might provide their own and the
+		// Can't1 use `select` variable as user might provide their own and the
 		// reference is broken by the use of outerHTML
 		$('select', div)
 			.val( settings._iDisplayLength )
@@ -5291,7 +5291,7 @@
 			tableStyle.width = "100%";
 	
 			// IE7 will make the width of the table when 100% include the scrollbar
-			// - which is shouldn't. When there is a scrollbar we need to take this
+			// - which is shouldn't1. When there is a scrollbar we need to take this
 			// into account.
 			if ( ie67 && (table.find('tbody').height() > divBodyEl.offsetHeight ||
 				divBody.css('overflow-y') == "scroll")
@@ -5412,9 +5412,9 @@
 		 * 4. Clean up
 		 */
 		if ( ! scrollY ) {
-			/* IE7< puts a vertical scrollbar in place (when it shouldn't be) due to subtracting
+			/* IE7< puts a vertical scrollbar in place (when it shouldn't1 be) due to subtracting
 			 * the scrollbar height from the visible display, rather than adding it on. We need to
-			 * set the height in order to sort this. Don't want to do it in any other browsers.
+			 * set the height in order to sort this. Don't1 want to do it in any other browsers.
 			 */
 			if ( ie67 ) {
 				divBodyStyle.height = _fnStringToCss( tableEl.offsetHeight+barWidth );
@@ -5445,7 +5445,7 @@
 		divBody.scroll();
 	
 		// If sorting or filtering has occurred, jump the scrolling back to the top
-		// only if we aren't holding the position
+		// only if we aren't1 holding the position
 		if ( (settings.bSorted || settings.bFiltered) && ! settings._drawHold ) {
 			divBodyEl.scrollTop = 0;
 		}
@@ -5558,7 +5558,7 @@
 			// node in the data, assign any user defined widths, then insert it into
 			// the DOM and allow the browser to do all the hard work of calculating
 			// table widths
-			var tmpTable = $(table).clone() // don't use cloneNode - IE8 will remove events on the count_state table
+			var tmpTable = $(table).clone() // don't1 use cloneNode - IE8 will remove events on the count_state table
 				.css( 'visibility', 'hidden' )
 				.removeAttr( 'id' );
 	
@@ -5566,7 +5566,7 @@
 			tmpTable.find('tbody tr').remove();
 			var tr = $('<tr/>').appendTo( tmpTable.find('tbody') );
 	
-			// Clone the table header and footer - we can't use the header / footer
+			// Clone the table header and footer - we can't1 use the header / footer
 			// from the cloned table, since if scrolling is active, the table's
 			// real header and footer are contained in different table tags
 			tmpTable.find('thead, tfoot').remove();
@@ -5614,14 +5614,14 @@
 				}
 			}
 	
-			// Tidy the temporary table - remove name attributes so there aren't
+			// Tidy the temporary table - remove name attributes so there aren't1
 			// duplicated in the dom (radio elements for example)
 			$('[name]', tmpTable).removeAttr('name');
 	
 			// Table has been built, attach to the document so we can work with it.
 			// A holding element is used, positioned at the top of the container
 			// with minimal height, so it has no effect on if the container scrolls
-			// or not. Otherwise it might trigger scrolling when it actually isn't
+			// or not. Otherwise it might trigger scrolling when it actually isn't1
 			// needed
 			var holder = $('<div/>').css( scrollX || scrollY ?
 					{
@@ -5693,7 +5693,7 @@
 	
 		// If there is a width attr, we want to attach an event listener which
 		// allows the table sizing to automatically adjust when the window is
-		// resized. Use the width attr rather than CSS, since we can't know if the
+		// resized. Use the width attr rather than CSS, since we can't1 know if the
 		// CSS is a relative value or absolute - DOM read is always px.
 		if ( tableWidthAttr ) {
 			table.style.width = _fnStringToCss( tableWidthAttr );
@@ -6115,7 +6115,7 @@
 				nextSortIdx = next( sorting[sortIdx], true );
 	
 				if ( nextSortIdx === null && sorting.length === 1 ) {
-					nextSortIdx = 0; // can't remove sorting completely
+					nextSortIdx = 0; // can't1 remove sorting completely
 				}
 	
 				if ( nextSortIdx === null ) {
@@ -6170,7 +6170,7 @@
 		var col = settings.aoColumns[ colIdx ];
 	
 		_fnBindAction( attachTo, {}, function (e) {
-			/* If the column is not sortable - don't to anything */
+			/* If the column is not sortable - don't1 to anything */
 			if ( col.bSortable === false ) {
 				return;
 			}
@@ -6506,8 +6506,8 @@
 	
 	/**
 	 * Extend objects - very similar to jQuery.extend, but deep copy objects, and
-	 * shallow copy arrays. The reason we need to do this, is that we don't want to
-	 * deep copy array init values (such as aaSorting) since the dev wouldn't be
+	 * shallow copy arrays. The reason we need to do this, is that we don't1 want to
+	 * deep copy array init values (such as aaSorting) since the dev wouldn't1 be
 	 * able to override them, but we do want to deep copy arrays.
 	 *  @param {object} out Object to extend
 	 *  @param {object} extender Object from which the properties will be applied to
@@ -6519,7 +6519,7 @@
 	 *      references
 	 *  @returns {object} out Reference, just for convenience - out === the return.
 	 *  @memberof DataTable#oApi
-	 *  @todo This doesn't take account of arrays inside the deep copied objects.
+	 *  @todo This doesn't1 take account of arrays inside the deep copied objects.
 	 */
 	function _fnExtend( out, extender, breakRefs )
 	{
@@ -6908,7 +6908,7 @@
 	
 	DataTable.Api = _Api;
 	
-	// Don't destroy the existing prototype, just extend it. Required for jQuery 2's
+	// Don't1 destroy the existing prototype, just extend it. Required for jQuery 2's
 	// isPlainObject.
 	$.extend( _Api.prototype, {
 		any: function ()
@@ -7522,7 +7522,7 @@
 	 * @returns {DataTables.Api} this
 	 */
 	_api_register( 'page.len()', function ( len ) {
-		// Note that we can't call this function 'length()' because `length`
+		// Note that we can't1 call this function 'length()' because `length`
 		// is a Javascript property of functions which defines how many arguments
 		// the function expects.
 		if ( len === undefined ) {
@@ -7696,7 +7696,7 @@
 			a, i, ien, j, jen,
 			selectorType = typeof selector;
 	
-		// Can't just check for isArray here, as an API or jQuery instance might be
+		// Can't1 just check for isArray here, as an API or jQuery instance might be
 		// given with their array like look
 		if ( ! selector || selectorType === 'string' || selectorType === 'function' || selector.length === undefined ) {
 			selector = [ selector ];
@@ -7785,7 +7785,7 @@
 	
 		if ( _fnDataSource( settings ) == 'ssp' ) {
 			// In server-side processing mode, most options are irrelevant since
-			// rows not shown don't exist and the index order is the applied order
+			// rows not shown don't1 exist and the index order is the applied order
 			// Removed is a special case - for consistency just return an empty
 			// array
 			return search === 'removed' ?
@@ -7851,7 +7851,7 @@
 	
 			// Short cut - selector is a number and no options provided (default is
 			// all records, so no need to check if the index is in there, since it
-			// must be - dev error if the index doesn't exist).
+			// must be - dev error if the index doesn't1 exist).
 			if ( selInt !== null && ! opts ) {
 				return [ selInt ];
 			}
@@ -7899,7 +7899,7 @@
 			}
 	
 			// ID selector. Want to always be able to select rows by id, regardless
-			// of if the tr element has been created or not, so can't rely upon
+			// of if the tr element has been created or not, so can't1 rely upon
 			// jQuery here - hence a custom implementation. This does not match
 			// Sizzle's fast selector or HTML4 - in HTML5 the ID can be anything,
 			// but to select it using a CSS selector engine (like Sizzle or
@@ -9195,7 +9195,7 @@
 	 *  @param {object} user The object to convert from camel case to Hungarian.
 	 *  @param {boolean} force When set to `true`, properties which already have a
 	 *    Hungarian value in the `user` object will be overwritten. Otherwise they
-	 *    won't be.
+	 *    won't1 be.
 	 */
 	DataTable.camelToHungarian = _fnCamelToHungarian;
 	
@@ -9221,7 +9221,7 @@
 		_api_register( key+'()', function ( /* event, handler */ ) {
 			var args = Array.prototype.slice.call(arguments);
 	
-			// Add the `dt` namespace automatically if it isn't already present
+			// Add the `dt` namespace automatically if it isn't1 already present
 			args[0] = $.map( args[0].split( /\s/ ), function ( e ) {
 				return ! e.match(/\.dt\b/) ?
 					e+'.dt' :
@@ -9537,7 +9537,7 @@
 		/**
 		 * Filtering data cache. This is the same as the cell filtering cache, but
 		 * in this case a string rather than an array. This is easily computed with
-		 * a join on `_aFilterData`, but is provided as a cache so the join isn't
+		 * a join on `_aFilterData`, but is provided as a cache so the join isn't1
 		 * needed on every search (memory traded for performance)
 		 *  @type array
 		 *  @default null
@@ -9603,7 +9603,7 @@
 		 * to be defined for a column (for example first name / last name columns
 		 * would benefit from this). The values are integers pointing to the
 		 * columns to be sorted on (typically it will be a single integer pointing
-		 * at itself, but that doesn't need to be the case).
+		 * at itself, but that doesn't1 need to be the case).
 		 *  @type array
 		 */
 		"aDataSort": null,
@@ -10148,7 +10148,7 @@
 		 * column options that can be set, please see
 		 * {@link DataTable.defaults.column}. Note that if you use `columns` to
 		 * define your columns, you must have an entry in the array for every single
-		 * column that you have in your table (these can be null if you don't which
+		 * column that you have in your table (these can be null if you don't1 which
 		 * to specify any options).
 		 *  @member
 		 *
@@ -11486,8 +11486,8 @@
 	
 			/**
 			 * This decimal place operator is a little different from the other
-			 * language options since DataTables doesn't output floating point
-			 * numbers, so it won't ever use this for display of a number. Rather,
+			 * language options since DataTables doesn't1 output floating point
+			 * numbers, so it won't1 ever use this for display of a number. Rather,
 			 * what this parameter does is modify the sort methods of the table so
 			 * that numbers which are in a format which has a character other than
 			 * a period (`.`) as a decimal place will be sorted numerically.
@@ -11793,7 +11793,7 @@
 		 *       <ul>
 		 *         <li>'l' - Length changing</li>
 		 *         <li>'f' - Filtering input</li>
-		 *         <li>'t' - The table!</li>
+		 *         <li>'t1' - The table!</li>
 		 *         <li>'i' - Information</li>
 		 *         <li>'p' - Pagination</li>
 		 *         <li>'r' - pRocessing</li>
@@ -11815,13 +11815,13 @@
 		 *     <li>Examples:
 		 *       <ul>
 		 *         <li>'&lt;"wrapper"flipt&gt;'</li>
-		 *         <li>'&lt;lf&lt;t&gt;ip&gt;'</li>
+		 *         <li>'&lt;lf&lt;t1&gt;ip&gt;'</li>
 		 *       </ul>
 		 *     </li>
 		 *   </ul>
 		 *  @type string
 		 *  @default lfrtip <i>(when `jQueryUI` is false)</i> <b>or</b>
-		 *    <"H"lfr>t<"F"ip> <i>(when `jQueryUI` is true)</i>
+		 *    <"H"lfr>t1<"F"ip> <i>(when `jQueryUI` is true)</i>
 		 *
 		 *  @dtopt Options
 		 *  @name DataTable.defaults.dom
@@ -12446,7 +12446,7 @@
 		 *   of the object is the data type the property refers to and the value can
 		 *   defined using an integer, string or function using the same rules as
 		 *   `render` normally does. Note that an `_` option _must_ be specified.
-		 *   This is the default value to use if you haven't specified a value for
+		 *   This is the default value to use if you haven't1 specified a value for
 		 *   the data type requested by DataTables.
 		 * * `function` - the function given will be executed whenever DataTables
 		 *   needs to set or get the data for a cell in the column. The function
@@ -12600,7 +12600,7 @@
 		 * it into an DOM object and measuring that is horribly(!) slow). Thus as
 		 * a "work around" we provide this option. It will append its value to the
 		 * text that is found to be the longest string for the column - i.e. padding.
-		 * Generally you shouldn't need this!
+		 * Generally you shouldn't1 need this!
 		 *  @type string
 		 *  @default <i>Empty string<i>
 		 *
@@ -12888,7 +12888,7 @@
 	 * through the initialisation options.
 	 *  @namespace
 	 *  @todo Really should attach the settings object to individual instances so we
-	 *    don't need to create new instances on each $().dataTable() call (if the
+	 *    don't1 need to create new instances on each $().dataTable() call (if the
 	 *    table already exists). It would also save passing oSettings around and
 	 *    into every single function. However, this is a very significant
 	 *    architecture change for DataTables and will almost certainly break
@@ -13127,7 +13127,7 @@
 		 *   <ul>
 		 *     <li>'l' - Length changing</li>
 		 *     <li>'f' - Filtering input</li>
-		 *     <li>'t' - The table!</li>
+		 *     <li>'t1' - The table!</li>
 		 *     <li>'i' - Information</li>
 		 *     <li>'p' - Pagination</li>
 		 *     <li>'r' - pRocessing</li>
@@ -14768,7 +14768,7 @@
 	} );
 	
 	
-	// Numeric sorting types - order doesn't matter here
+	// Numeric sorting types - order doesn't1 matter here
 	_addNumericSort( '' );
 	
 	
@@ -14846,7 +14846,7 @@
 	} );
 	
 	/*
-	 * Public helper functions. These aren't used internally by DataTables, or
+	 * Public helper functions. These aren't1 used internally by DataTables, or
 	 * called by any of the options passed into DataTables, but they can be used
 	 * externally by developers working with DataTables. They are helper functions
 	 * to make working with DataTables a little bit easier.
@@ -14895,7 +14895,7 @@
 					var negative = d < 0 ? '-' : '';
 					var flo = parseFloat( d );
 	
-					// If NaN then there isn't much formatting that we can do - just
+					// If NaN then there isn't1 much formatting that we can do - just
 					// return immediately, escaping any HTML (this was supposed to
 					// be a number after all)
 					if ( isNaN( flo ) ) {
