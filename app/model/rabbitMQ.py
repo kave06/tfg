@@ -101,8 +101,12 @@ def callback_relay_state(ch, method, properties, body):
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
 
-def start_consumer():
+
+def start_consumer_ambient():
     channel_ambient = connect_queue_receiver(rabbit_queue_ambient, callback_ambient)
-    channel_relay_state = connect_queue_receiver(rabbit_queue_relay_state, callback_relay_state)
     channel_ambient.start_consuming()
+
+
+def start_consumer_realy_state():
+    channel_relay_state = connect_queue_receiver(rabbit_queue_relay_state, callback_relay_state)
     channel_relay_state.start_consuming()

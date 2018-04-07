@@ -19,7 +19,7 @@ HOST, PORT = '89.128.192.144', 1100
 
 # APP_DIR = os.path.dirname(os.path.realpath(__file__))
 # logger_name = APP_DIR + '/app/logs/socket'
-logger = create_log('socket')
+logger = create_log('prototype')
 
 def led_on_off(state: str):
     # data = " ".join(sys.argv[1:])

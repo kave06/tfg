@@ -8,7 +8,7 @@ from app.model.database import ambient_days
 from app.model.webserver_client_socket import led_on_off
 from app.modules.logger import create_log
 
-from app.model.rabbitMQ import start_consumer
+from app.model.rabbitMQ import start_consumer_ambient, start_consumer_realy_state
 from app.modules.flags import Var
 
 from app.test_server_consumer import count_state
@@ -108,7 +108,7 @@ def dashboard():
 
 if __name__ == '__main__':
     # app.run()
-    t = Thread(target=start_consumer)
+    t = Thread(target=start_consumer_realy_state)
     t.start()
     t1 = Thread(target=count_state)
     t1.start()
