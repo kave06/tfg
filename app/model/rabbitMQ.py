@@ -1,3 +1,4 @@
+import os
 import pika
 import json
 from datetime import datetime
@@ -16,9 +17,15 @@ except ImportError:
 
 logger = create_log('prototype')
 
-STACK_STATE = []
-RELAY_STATE = 'empty'
+# STACK_STATE = []
+# RELAY_STATE = 'empty'
 
+APP_DIR = os.path.dirname(os.path.realpath(__file__))
+path = APP_DIR + '/../logs'
+file_ambient = path + 'ambient'
+file_relay_state = path + 'relay_state'
+file_ambient = open(file_ambient,'w')
+file_relay_state = open(file_relay_state, 'w')
 
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''
@@ -94,12 +101,15 @@ def callback_ambient(ch, method, properties, body):
     cnx = connect_db()
     send_data(cnx, ambient)
 
+    file_ambient.write( datetime.now() + ambient)
+
 
 # receiver
 def callback_relay_state(ch, method, properties, body):
     state = json.loads(body.decode())
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
+    file_relay_state.write( datetime.now() + Var.RELAY_STATE)
 
 
 def start_consumer_ambient():
