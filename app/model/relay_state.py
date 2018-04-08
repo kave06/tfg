@@ -1,5 +1,6 @@
-from time import sleep
 import os
+from time import sleep
+from datetime import datetime
 
 try:
     from app.model.nano import connect_serial, read_serial_state
@@ -20,6 +21,10 @@ logger = create_log('prototype')
 
 
 def relay_state():
+    APP_DIR = os.path.dirname(os.path.realpath(__file__))
+    path = APP_DIR + '/../logs/'
+    file_relay_state = path + 'relay_state'
+    f = open(file_relay_state,'w')
     while True:
 
         ser = connect_serial(serial_port, serial_bd)
@@ -29,6 +34,11 @@ def relay_state():
             state = read_serial_state(ser)
             # logger.debug(state)
             send_queue_relay(cnx, state)
+            try:
+                f.write('{} -- {}\n'.format( datetime.now(), state))
+                f.flush()
+            except Exception as err:
+                logger.error(err)
             sleep(1)
 
         try:

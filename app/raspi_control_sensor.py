@@ -1,6 +1,7 @@
 from time import sleep
 import os
 from threading import Thread
+from datetime import datetime
 
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
@@ -27,6 +28,10 @@ logger = create_log(logger_name)
 
 
 def main():
+    APP_DIR = os.path.dirname(os.path.realpath(__file__))
+    path = APP_DIR + '/../logs/'
+    file_ambient = path + 'ambient'
+
     t1 = Thread(target=relay_state)
     t1.start()
     # relay_state()
@@ -57,11 +62,19 @@ def main():
             ambient1 = read_nano_bluetooth(sock1, 1)
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient1)
+            time1 = datetime.now()
             sleep(0.1)
 
             ambient2 = read_nano_bluetooth(sock2, 2)
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient2)
+            try:
+                file_ambient = open(file_ambient, 'w')
+                file_ambient.write('{} {}\n'.format(time1, ambient1))
+                file_ambient.write('{} {}\n'.format(datetime.now(), ambient1))
+                file_ambient.close()
+            except Exception as err:
+                logger.error(err)
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):
                 Flag.inner_while = False
