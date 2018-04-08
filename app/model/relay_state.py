@@ -31,10 +31,11 @@ def relay_state():
             send_queue_relay(cnx, state)
             sleep(1)
 
-        if ser.is_open:
+        try:
             cnx.close()
-        else:
             ser.close()
+        except Exception as err:
+            logger.error(err)
 
         # try:
         #     ser.close()

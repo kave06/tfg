@@ -1,6 +1,6 @@
 import os
 from threading import Thread
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, jsonify
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
 
@@ -34,7 +34,7 @@ logger = create_log(logger_name)
 
 @app.route('/button')
 def button():
-    return render_template('base_left_buttons.html')
+    return render_template('app/basura/base_left_buttons.html')
 
 
 @app.route('/temperature')
@@ -105,6 +105,21 @@ def dashboard():
     return render_template('temperature.html', list_temp1=list_temp1, list_hour1=list_hour1,
                            list_temp2=list_temp2, list_hour2=list_hour2)
 
+@app.route('/_add_numbers')
+def add_numbers():
+    a = request.args.get('a', 0, type=int)
+    b = request.args.get('b', 0, type=int)
+    return jsonify(result= a + b)
+
+
+@app.route('/add')
+def index():
+    return render_template('index.html')
+
+
+@app.route('/suma')
+def blank():
+    return render_template('index2.html')
 
 if __name__ == '__main__':
     # app.run()

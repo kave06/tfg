@@ -26,7 +26,11 @@
                                             <input class="btn btn-block btn-block-incidencia submit-form" id="submit-incidencia" name="submit-incidencia" value="Enviar" type="submit">
                                         </div>
                                         <div>
-                                            <h4>Estado del riego: {{ relay_state }}</h4>
+                                            <h4>Estado del riego:
+                                                <span id="relay_state">....</span>
+                                                <p><a href=# id="calculate">calculate server side</a>
+{#                                                {{ relay_state }}#}
+                                            </h4>
                                         </div>
                                     </div>
                                 </form>
