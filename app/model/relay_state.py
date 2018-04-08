@@ -8,12 +8,14 @@ try:
     from app.modules.logger import create_log
     from app.modules.flags import Flag
     from app.modules.config import *
+    from app.modules.manage_file import write_file
 except ImportError:
     from model.nano import connect_serial, read_serial_state
     from model.rabbitMQ import connect_queue_sender, send_queue_relay
     from modules.logger import create_log
     from modules.flags import Flag
     from modules.config import *
+    from modules.manage_file import write_file
 
 # APP_DIR = os.path.dirname(os.path.realpath(__file__))
 # logger_name = APP_DIR + '/logs/relay_state'
@@ -21,10 +23,9 @@ logger = create_log('prototype')
 
 
 def relay_state():
-    APP_DIR = os.path.dirname(os.path.realpath(__file__))
-    path = APP_DIR + '/../logs/'
-    file_relay_state = path + 'relay_state'
-    f = open(file_relay_state,'w')
+    path = os.getcwd()
+    file = path + '/../logs/relay_state'
+    print(file)
     while True:
 
         ser = connect_serial(serial_port, serial_bd)
@@ -34,11 +35,7 @@ def relay_state():
             state = read_serial_state(ser)
             # logger.debug(state)
             send_queue_relay(cnx, state)
-            try:
-                f.write('{} -- {}\n'.format( datetime.now(), state))
-                f.flush()
-            except Exception as err:
-                logger.error(err)
+            write_file(file, state)
             sleep(1)
 
         try:

@@ -22,7 +22,8 @@ db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
 port1 = bluetooth_port1
 
-APP_DIR = os.path.dirname(os.path.realpath(__file__))
+# APP_DIR = os.path.dirname(os.path.realpath(__file__))
+APP_DIR = os.getcwd()
 logger_name = APP_DIR + '/logs/prototype'
 logger = create_log(logger_name)
 
