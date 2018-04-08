@@ -130,7 +130,7 @@ def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:
             ambient['temperature'] = list_values[2]
             ambient['humidity'] = list_values[3]
             data1 = ''
-            # logger.debug('return ambient: {}'.format(ambient))
+            logger.debug('return ambient: {}'.format(ambient))
             return ambient
 
 

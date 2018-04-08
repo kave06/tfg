@@ -15,7 +15,6 @@ from app.test_server_consumer import count_state
 
 from time import sleep
 
-
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
@@ -24,6 +23,7 @@ bootstrap = Bootstrap(app)
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
 logger_name = APP_DIR + '/app/logs/prototype_view'
 logger = create_log(logger_name)
+
 
 # print(RELAY_STATE)
 # print('--------------------------------------------------')
@@ -76,7 +76,7 @@ def handle_data():
     logger.info('state is: {}'.format(state))
     # logger.info(state)
     led_on_off(state)
-    return render_template('irrigation.html',relay_state=Var.RELAY_STATE)
+    return render_template('irrigation.html', relay_state=Var.RELAY_STATE)
 
 
 @app.route('/irrigation')
@@ -105,21 +105,28 @@ def dashboard():
     return render_template('temperature.html', list_temp1=list_temp1, list_hour1=list_hour1,
                            list_temp2=list_temp2, list_hour2=list_hour2)
 
+
 @app.route('/_add_numbers')
 def add_numbers():
     a = request.args.get('a', 0, type=int)
     b = request.args.get('b', 0, type=int)
-    return jsonify(result= a + b)
+    return jsonify(result=a + b)
+
+
+@app.route('/relay_state')
+def relay_state():
+    return jsonify(relay_state=Var.RELAY_STATE)
+
+
+# @app.route('/add')
+# def index():
+#     return render_template('index.html')
 
 
 @app.route('/add')
 def index():
     return render_template('index.html')
 
-
-@app.route('/suma')
-def blank():
-    return render_template('index2.html')
 
 if __name__ == '__main__':
     # app.run()

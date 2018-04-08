@@ -25,14 +25,14 @@ def relay_state():
         ser = connect_serial(serial_port, serial_bd)
         cnx = connect_queue_sender()
 
-        while Flag.serial and Flag.rabbit_cnx_relay_state:
+        while Flag.serial and cnx.is_open:
             state = read_serial_state(ser)
             # logger.debug(state)
             send_queue_relay(cnx, state)
             sleep(1)
 
         try:
-            cnx.close()
+            # cnx.close()
             ser.close()
         except Exception as err:
             logger.error(err)
@@ -42,7 +42,10 @@ def relay_state():
         # except Exception as err:
         #     logger.error(err)
         Flag.serial = True
-        Flag.rabbit_cnx_relay_state = True
+        # Flag.rabbit_cnx_relay_state = True
+
+
+
 
 # def count_state():
 #     relay_state()

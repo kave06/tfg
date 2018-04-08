@@ -22,10 +22,7 @@ logger = create_log('prototype')
 
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
 path = APP_DIR + '/../logs/'
-file_ambient = path + 'ambient'
 file_relay_state = path + 'relay_state'
-file_ambient = open(file_ambient,'w')
-file_ambient.write('hola')
 file_relay_state = open(file_relay_state, 'w')
 file_relay_state.write('hola')
 
@@ -42,7 +39,7 @@ def connect_queue_sender() -> pika.BlockingConnection:
     except Exception as err:
         # if connection.is_closed:
         logger.error(err)
-        Flag.rabbit_cnx_relay_state = False
+        # Flag.rabbit_cnx_relay_state = False
 
     return connection
 
@@ -92,6 +89,10 @@ def send_queue_relay(connection: pika.BlockingConnection, state):
 
 # receiver
 def callback_ambient(ch, method, properties, body):
+    APP_DIR = os.path.dirname(os.path.realpath(__file__))
+    path = APP_DIR + '/../logs/'
+    file_ambient = path + 'ambient'
+
     ambient = json.loads(body.decode())
 
     logger.info('sensor: {}, date: {} temp: {}ºC, humi: {}%'
@@ -104,7 +105,10 @@ def callback_ambient(ch, method, properties, body):
     send_data(cnx, ambient)
 
     # file_ambient.write('{} -- {}'.format( datetime.now(), ambient))
+    file_ambient = open(file_ambient,'w')
     file_ambient.write('{} {}\n'.format( datetime.now(), ambient))
+    # file_ambient.flush()
+    file_ambient.close()
 
 
 # receiver
@@ -113,6 +117,7 @@ def callback_relay_state(ch, method, properties, body):
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
     file_relay_state.write('{} -- {}\n'.format( datetime.now(), Var.RELAY_STATE))
+    file_relay_state.flush()
 
 
 def start_consumer_ambient():
