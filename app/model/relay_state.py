@@ -16,7 +16,7 @@ except ImportError:
 
 # APP_DIR = os.path.dirname(os.path.realpath(__file__))
 # logger_name = APP_DIR + '/logs/relay_state'
-logger = create_log('producer')
+logger = create_log('prototype')
 
 
 def relay_state():
