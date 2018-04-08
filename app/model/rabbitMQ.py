@@ -17,14 +17,16 @@ except ImportError:
 
 logger = create_log('prototype')
 
+
 # STACK_STATE = []
 # RELAY_STATE = 'empty'
 
-APP_DIR = os.path.dirname(os.path.realpath(__file__))
-path = APP_DIR + '/../logs/'
-file_relay_state = path + 'relay_state'
-file_relay_state = open(file_relay_state, 'w')
-file_relay_state.write('hola')
+# APP_DIR = os.path.dirname(os.path.realpath(__file__))
+# APP_DIR = os.getcwd()
+# path = APP_DIR + '/../logs/'
+# file_relay_state = path + 'relay_state'
+# file_relay_state = open(file_relay_state, 'w')
+# file_relay_state.write('hola')
 
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''
@@ -89,10 +91,6 @@ def send_queue_relay(connection: pika.BlockingConnection, state):
 
 # receiver
 def callback_ambient(ch, method, properties, body):
-    APP_DIR = os.path.dirname(os.path.realpath(__file__))
-    path = APP_DIR + '/../logs/'
-    file_ambient = path + 'ambient'
-
     ambient = json.loads(body.decode())
 
     logger.info('sensor: {}, date: {} temp: {}ºC, humi: {}%'
@@ -104,20 +102,12 @@ def callback_ambient(ch, method, properties, body):
     cnx = connect_db()
     send_data(cnx, ambient)
 
-    # file_ambient.write('{} -- {}'.format( datetime.now(), ambient))
-    file_ambient = open(file_ambient,'w')
-    file_ambient.write('{} {}\n'.format( datetime.now(), ambient))
-    # file_ambient.flush()
-    file_ambient.close()
-
 
 # receiver
 def callback_relay_state(ch, method, properties, body):
     state = json.loads(body.decode())
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
-    file_relay_state.write('{} -- {}\n'.format( datetime.now(), Var.RELAY_STATE))
-    file_relay_state.flush()
 
 
 def start_consumer_ambient():

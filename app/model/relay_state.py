@@ -24,7 +24,7 @@ logger = create_log('prototype')
 
 def relay_state():
     path = os.getcwd()
-    file = path + '/../logs/relay_state'
+    file = path + '/logs/relay_state'
     print(file)
     while True:
 
