@@ -7,7 +7,7 @@
     <script src="{{ url_for('static', filename='js/relay_state.js') }}"></script>
     <script type="text/javascript">
         var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
-        var $VARIABLE = {{ request.script_root|tojson|safe }};
+        {#var $VARIABLE = {{ request.script_root|tojson|safe }};#}
     </script>
 
 {% endblock scripts %}
@@ -33,15 +33,18 @@
                                                 <option>ON</option>
                                                 <option>OFF</option>
                                             </select>
-                                            <div class="submit-row">
-                                                <input class="btn btn-block btn-block-incidencia submit-form"
-                                                       id="submit-incidencia" name="submit-incidencia" value="Enviar"
-                                                       type="submit">
-                                            </div>
-                                            <div>
-                                                <h4>Estado del riego: <span id="state">?</span>
-                                                    <p><a href=# id="relay_state">state from server</a>
-                                                </h4>
+                                            <div class="row">
+                                                <div class="container">
+                                                    <input class="btn btn-block btn-block-incidencia submit-form"
+                                                           id="submit-incidencia" name="submit-incidencia"
+                                                           value="Enviar"
+                                                           type="submit">
+                                                </div>
+                                                <div class="container">
+                                                    <h5>Estado del riego: <span id="state">?</span>
+                                                        <p><a href=# id="relay_state">state from server</a>
+                                                    </h5>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
