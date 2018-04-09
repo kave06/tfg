@@ -120,6 +120,8 @@ def dashboard():
 
 @app.route('/relay_state')
 def relay_state():
+    logger.info(Var.RELAY_STATE)
+    print(Var.RELAY_STATE)
     return jsonify(state=Var.RELAY_STATE)
 
 
