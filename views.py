@@ -107,17 +107,20 @@ def dashboard():
                            list_temp2=list_temp2, list_hour2=list_hour2)
 
 
-@app.route('/_add_numbers')
-def add_numbers():
-    a = request.args.get('a', 0, type=int)
-    b = request.args.get('b', 0, type=int)
-    return jsonify(result=a + b)
+# @app.route('/_add_numbers')
+# def add_numbers():
+#     a = request.args.get('a', 0, type=int)
+#     b = request.args.get('b', 0, type=int)
+#     print('kilo de kk')
+#     print(Var.RELAY_STATE)
+#     state = Var.RELAY_STATE
+#     # return jsonify(result=a + b)
+#     return jsonify(result=state)
 
 
 @app.route('/relay_state')
 def relay_state():
-    print(Var.RELAY_STATE)
-    return jsonify(relay_state=Var.RELAY_STATE)
+    return jsonify(state=Var.RELAY_STATE)
 
 
 # @app.route('/add')
@@ -125,9 +128,9 @@ def relay_state():
 #     return render_template('index.html')
 
 
-@app.route('/add')
-def index():
-    return render_template('index.html')
+# @app.route('/add')
+# def index():
+#     return render_template('index.html')
 
 
 if __name__ == '__main__':
