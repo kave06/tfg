@@ -35,7 +35,7 @@ def relay_state():
             state = read_serial_state(ser)
             # logger.debug(state)
             send_queue_relay(cnx, state)
-            write_file(file, state)
+            write_file(file, '{} {}'.format(datetime.now(), state))
             sleep(1)
 
         try:

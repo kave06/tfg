@@ -9,11 +9,13 @@ try:
     from app.modules.logger import create_log
     from app.modules.config import *
     from app.modules.flags import *
+    from app.modules.manage_file import write_file
 except ImportError:
     from model.database import connect_db, send_data
     from modules.logger import create_log
     from modules.config import *
     from modules.flags import *
+    from modules.manage_file import write_file
 
 logger = create_log('prototype')
 
@@ -91,6 +93,9 @@ def send_queue_relay(connection: pika.BlockingConnection, state):
 
 # receiver
 def callback_ambient(ch, method, properties, body):
+    path = os.getcwd()
+    file = path + '/logs/ambient'
+
     ambient = json.loads(body.decode())
 
     logger.info('sensor: {}, date: {} temp: {}ºC, humi: {}%'
@@ -101,13 +106,18 @@ def callback_ambient(ch, method, properties, body):
 
     cnx = connect_db()
     send_data(cnx, ambient)
+    write_file(file, '{} {}'.format(datetime.now(),ambient))
 
 
 # receiver
 def callback_relay_state(ch, method, properties, body):
+    path = os.getcwd()
+    file = path + '/logs/relay_state'
+
     state = json.loads(body.decode())
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
+    write_file(file, '{} {}'.format(datetime.now(),state))
 
 
 def start_consumer_ambient():
