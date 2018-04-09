@@ -4,15 +4,17 @@ from pymysql import connect
 from datetime import datetime, timedelta
 import sys
 
+# comentar no funciona
 sys.path.append('../modules')
+
 try:
     from app.modules.logger import create_log
     from app.modules.flags import Flag
     from app.modules.config import *
 except ImportError:
-    from logger import create_log
-    from flags import Flag
-    from config import *
+    from modules.logger import create_log
+    from modules.flags import Flag
+    from modules.config import *
 
 logger = create_log('prototype')
 

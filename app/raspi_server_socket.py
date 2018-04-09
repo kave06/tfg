@@ -10,7 +10,7 @@ except ImportError:
     from model.nano import send_signal
 
 APP_DIR = os.path.dirname(os.path.realpath(__file__))
-logger_name = APP_DIR + '/logs/socket'
+logger_name = APP_DIR + '/logs/prototype'
 logger = create_log(logger_name)
 
 SERIAL_PORT = '/dev/ttyUSB0'

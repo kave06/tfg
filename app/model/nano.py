@@ -49,9 +49,10 @@ def connect_serial(port, baud) -> Serial:
     serial_cnx = ''
     try:
         serial_cnx = Serial(port, baud)
-        # logger.debug('connect to serial')
+        logger.info('connect to serial to port: {}'.format(port))
     except SerialException as err:
         logger.error(err)
+        Flag.serial = False
 
     return serial_cnx
 
@@ -129,10 +130,38 @@ def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:
             ambient['temperature'] = list_values[2]
             ambient['humidity'] = list_values[3]
             data1 = ''
-            # logger.debug('return ambient: {}'.format(ambient))
+            logger.debug('return ambient: {}'.format(ambient))
             return ambient
 
-# def main():
+
+def read_serial_state(ser: Serial):
+    state = ''
+
+    try:
+        state = ser.read_all()
+        state = state.decode('utf-8')
+
+        if (re.search('ON', state)):
+            p = re.search('ON', state)
+            state = p.group()
+            return state
+
+        if (re.search('OFF', state)):
+            p = re.search('OFF', state)
+            state = p.group()
+            return state
+
+    except SerialException as err:
+        logger.error(err)
+
+    return state
+
+
+
+
+
+
+# def count_state():
 #     # arduino = connect_serial(PORT,BD)
 #     # sleep(1)
 #     # arduino.write('1'.encode())
@@ -147,4 +176,4 @@ def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:
 #
 #
 # if __name__ == '__main__':
-#     main()
+#     count_state()
