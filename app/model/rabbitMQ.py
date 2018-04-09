@@ -112,7 +112,7 @@ def callback_ambient(ch, method, properties, body):
 # receiver
 def callback_relay_state(ch, method, properties, body):
     path = os.getcwd()
-    file = path + '/logs/relay_state'
+    file = path + '/app/logs/relay_state'
 
     state = json.loads(body.decode())
     Var.RELAY_STATE = state

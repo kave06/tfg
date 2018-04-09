@@ -116,6 +116,7 @@ def add_numbers():
 
 @app.route('/relay_state')
 def relay_state():
+    print(Var.RELAY_STATE)
     return jsonify(relay_state=Var.RELAY_STATE)
 
 
