@@ -26,7 +26,7 @@ def relay_state_change__():
             try:
                 # Connect to server and send data
                 sock.connect((HOST, PORT))
-                sock.sendall(bytes(state))
+                sock.sendall(bytes(state.encode()))
             except OSError as err:
                 logger.error(err)
             finally:

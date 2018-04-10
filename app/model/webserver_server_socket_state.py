@@ -29,20 +29,21 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     """
 
     def handle(self):
-        print('handle')
         # self.request.sendall(self.data)
 
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
-        logger.debug(self.data)
-        Var.STACK_STATE.append(self.data)
-        Var.RELAY_STATE = self.data
+        # logger.debug(self.data)
+        Var.STACK_STATE.append(self.data.decode())
+        Var.RELAY_STATE = self.data.decode()
         logger.debug('RELAY_STATE = {}'.format(Var.RELAY_STATE))
 
         # logger.info('{} send {}'.format(self.client_address[0], self.data.decode()))
 
 
 if __name__ == "__main__":
+
+
     HOST, PORT = "", 1101
 
     # Create the server, binding to localhost on port 9999

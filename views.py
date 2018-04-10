@@ -1,5 +1,7 @@
 import os
 from threading import Thread
+import socketserver
+
 from flask import Flask, render_template, request, jsonify
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
@@ -10,6 +12,7 @@ from app.modules.logger import create_log
 
 from app.model.rabbitMQ import start_consumer_ambient, start_consumer_realy_state
 from app.modules.flags import Var
+from app.model.webserver_server_socket_state import MyTCPHandler
 
 from app.test_server_consumer import count_state
 
@@ -137,11 +140,15 @@ def relay_state():
 
 if __name__ == '__main__':
     # app.run()
-    t1 = Thread(target=start_consumer_realy_state)
+   
+    # socket for relay state
+    HOST, PORT = "", 1101
+
+    server = socketserver.TCPServer((HOST, PORT), RequestHandlerClass=MyTCPHandler)
+    t1 = Thread(server.serve_forever())
     t1.start()
+
     t2 = Thread(target=start_consumer_ambient)
     t2.start()
-    # t1 = Thread(target=count_state)
-    # t1.start()
 
     manager.run()
