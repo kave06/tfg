@@ -19,7 +19,7 @@ bootstrap = Bootstrap(app)
 # moment = Moment(app)
 
 APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/app/logs/prototype_view'
+logger_name = APP_DIR + '/app/logs/prototype'
 logger = create_log(logger_name)
 
 
@@ -99,8 +99,7 @@ def dashboard():
 
 @app.route('/relay_state')
 def relay_state():
-    logger.info(Var.RELAY_STATE)
-    print(Var.RELAY_STATE)
+    # logger.info(Var.RELAY_STATE)
     return jsonify(state=Var.RELAY_STATE)
 
 

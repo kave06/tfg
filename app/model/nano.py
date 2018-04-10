@@ -1,3 +1,4 @@
+import os
 import re
 import bluetooth
 from bluetooth import BluetoothSocket, RFCOMM, BluetoothError
@@ -13,7 +14,9 @@ except ImportError:
     from modules.logger import create_log
     from modules.config import *
 
-logger = create_log('prototype')
+APP_DIR = os.getcwd()
+logger_name = APP_DIR + '/../logs/prototype'
+logger = create_log(logger_name)
 
 
 def connect_bluetooth(db_addr, port) -> BluetoothSocket:

@@ -1,8 +1,8 @@
 # from __future__ import print_function
+import os
 from pymysql import MySQLError
 from pymysql import connect
 from datetime import datetime, timedelta
-
 
 try:
     from app.modules.logger import create_log
@@ -13,7 +13,9 @@ except ImportError:
     from modules.flags import Flag
     from modules.config import *
 
-logger = create_log('prototype')
+APP_DIR = os.getcwd()
+logger_name = APP_DIR + '/../logs/prototype'
+logger = create_log(logger_name)
 
 
 def connect_db() -> connect:

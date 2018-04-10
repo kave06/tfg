@@ -1,5 +1,5 @@
+import os
 import socket
-import sys
 
 try:
     from app.modules.logger import create_log
@@ -10,7 +10,9 @@ except ImportError:
 
 HOST, PORT = raspi_ip, raspi_socket_port_on_off
 
-logger = create_log('prototype')
+APP_DIR = os.getcwd()
+logger_name = APP_DIR + '/../logs/prototype'
+logger = create_log(logger_name)
 
 
 def relay_on_off(state: str):
