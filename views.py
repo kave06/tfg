@@ -1,40 +1,27 @@
 import os
 from threading import Thread
-import socketserver
 
 from flask import Flask, render_template, request, jsonify
 from flask_script import Manager
 from flask_bootstrap import Bootstrap
 
 from app.model.database import ambient_days
-from app.model.webserver_client_socket_on_off import led_on_off
+from app.model.webserver_client_socket_on_off import relay_on_off
 from app.modules.logger import create_log
 
-from app.model.rabbitMQ import start_consumer_ambient, start_consumer_realy_state
+from app.model.rabbitMQ import start_consumer_ambient
 from app.modules.flags import Var
-from app.model.webserver_server_socket_state import MyTCPHandler
-
-from app.test_server_consumer import count_state
-
-from time import sleep
+from app.model.webserver_server_socket_state import launch_socket_relay_state
 
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
 # moment = Moment(app)
 
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
 APP_DIR = os.getcwd()
 logger_name = APP_DIR + '/app/logs/prototype_view'
 logger = create_log(logger_name)
 
-
-# print(RELAY_STATE)
-# print('--------------------------------------------------')
-# start_consumer()
-# print('--------------------------------------------------')
-# sleep(5)
-# print(RELAY_STATE)
 
 @app.route('/button')
 def button():
@@ -79,7 +66,7 @@ def handle_data():
     state = request.form['irrigation_state']
     logger.info('state is: {}'.format(state))
     # logger.info(state)
-    led_on_off(state)
+    relay_on_off(state)
     return render_template('irrigation.html', relay_state=Var.RELAY_STATE)
 
 
@@ -110,17 +97,6 @@ def dashboard():
                            list_temp2=list_temp2, list_hour2=list_hour2)
 
 
-# @app.route('/_add_numbers')
-# def add_numbers():
-#     a = request.args.get('a', 0, type=int)
-#     b = request.args.get('b', 0, type=int)
-#     print('kilo de kk')
-#     print(Var.RELAY_STATE)
-#     state = Var.RELAY_STATE
-#     # return jsonify(result=a + b)
-#     return jsonify(result=state)
-
-
 @app.route('/relay_state')
 def relay_state():
     logger.info(Var.RELAY_STATE)
@@ -128,24 +104,10 @@ def relay_state():
     return jsonify(state=Var.RELAY_STATE)
 
 
-# @app.route('/add')
-# def index():
-#     return render_template('index.html')
-
-
-# @app.route('/add')
-# def index():
-#     return render_template('index.html')
-
-
 if __name__ == '__main__':
     # app.run()
-   
-    # socket for relay state
-    HOST, PORT = "", 1101
 
-    server = socketserver.TCPServer((HOST, PORT), RequestHandlerClass=MyTCPHandler)
-    t1 = Thread(server.serve_forever())
+    t1 = Thread(target=launch_socket_relay_state)
     t1.start()
 
     t2 = Thread(target=start_consumer_ambient)

@@ -2,7 +2,6 @@ import os
 import pika
 import json
 from datetime import datetime
-from pika import exceptions
 
 try:
     from app.model.database import connect_db, send_data
@@ -20,16 +19,6 @@ except ImportError:
 logger = create_log('prototype')
 
 
-# STACK_STATE = []
-# RELAY_STATE = 'empty'
-
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
-# APP_DIR = os.getcwd()
-# path = APP_DIR + '/../logs/'
-# file_relay_state = path + 'relay_state'
-# file_relay_state = open(file_relay_state, 'w')
-# file_relay_state.write('hola')
-
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''
     try:
@@ -43,7 +32,6 @@ def connect_queue_sender() -> pika.BlockingConnection:
     except Exception as err:
         # if connection.is_closed:
         logger.error(err)
-        # Flag.rabbit_cnx_relay_state = False
 
     return connection
 
@@ -106,7 +94,7 @@ def callback_ambient(ch, method, properties, body):
 
     cnx = connect_db()
     send_data(cnx, ambient)
-    write_file(file, '{} {}'.format(datetime.now(),ambient))
+    # write_file(file, '{} {}'.format(datetime.now(),ambient))
 
 
 # receiver
@@ -117,7 +105,7 @@ def callback_relay_state(ch, method, properties, body):
     state = json.loads(body.decode())
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
-    write_file(file, '{} {}'.format(datetime.now(),state))
+    # write_file(file, '{} {}'.format(datetime.now(),state))
 
 
 def start_consumer_ambient():

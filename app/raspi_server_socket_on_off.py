@@ -5,16 +5,15 @@ import os
 try:
     from app.modules.logger import create_log
     from app.model.nano import send_signal
+    from app.modules.config import *
 except ImportError:
     from modules.logger import create_log
     from model.nano import send_signal
+    from modules.config import *
 
-APP_DIR = os.path.dirname(os.path.realpath(__file__))
+APP_DIR = os.getcwd()
 logger_name = APP_DIR + '/logs/prototype'
 logger = create_log(logger_name)
-
-SERIAL_PORT = '/dev/ttyUSB0'
-BD = 9600
 
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
@@ -43,13 +42,13 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
 
 
 if __name__ == "__main__":
-    HOST, PORT = "", 1100
+    HOST, PORT = "", raspi_socket_port_on_off
 
     # Create the server, binding to localhost on port 9999
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
     # logger.info('Socket is open')
 
-    arduino = Serial(SERIAL_PORT, BD)
+    arduino = Serial(serial_port, serial_bd)
     logger.info('Listening...')
 
     # Activate the server; this will keep running until you

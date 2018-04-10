@@ -17,12 +17,10 @@ except ImportError:
     from modules.config import *
     from modules.manage_file import write_file
 
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
-# logger_name = APP_DIR + '/logs/relay_state'
 logger = create_log('prototype')
 
 
-def relay_state():
+def relay_state_______():
     path = os.getcwd()
     file = path + '/logs/relay_state'
     print(file)
@@ -44,19 +42,4 @@ def relay_state():
         except Exception as err:
             logger.error(err)
 
-        # try:
-        #     ser.close()
-        # except Exception as err:
-        #     logger.error(err)
         Flag.serial = True
-        # Flag.rabbit_cnx_relay_state = True
-
-
-
-
-# def count_state():
-#     relay_state()
-#
-#
-# if __name__ == '__main__':
-#    count_state()

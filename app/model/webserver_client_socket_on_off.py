@@ -1,29 +1,19 @@
 import socket
 import sys
-import os
-
-sys.path.append('../modules')
 
 try:
     from app.modules.logger import create_log
+    from app.modules.config import *
 except ImportError:
-    from logger import create_log
+    from modules.logger import create_log
+    from modules.config import *
 
-HOST, PORT = '89.128.192.144', 1100
+HOST, PORT = raspi_ip, raspi_socket_port_on_off
 
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
-# logger_name = APP_DIR + '/logs/prototype'
-# logger = create_log(logger_name)
-
-# logger = create_log('prototype')
-
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
-# logger_name = APP_DIR + '/app/logs/socket'
 logger = create_log('prototype')
 
-def led_on_off(state: str):
-    # data = " ".join(sys.argv[1:])
-    # data = 'ON'.encode()
+
+def relay_on_off(state: str):
     data = state.encode()
 
     # Create a socket (SOCK_STREAM means a TCP socket)

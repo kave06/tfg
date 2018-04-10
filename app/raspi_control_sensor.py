@@ -6,7 +6,8 @@ from datetime import datetime
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from app.model.rabbitMQ import connect_queue_sender, send_queue_ambient
-    from app.model.relay_state import relay_state
+    from app.model.raspi_relay_state import relay_state_______
+    from app.model.raspi_client_socket_state import relay_state
     from app.modules.logger import create_log
     from app.modules.flags import Flag
     from app.modules.config import *
@@ -24,18 +25,14 @@ db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
 port1 = bluetooth_port1
 
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
 APP_DIR = os.getcwd()
 logger_name = APP_DIR + '/logs/prototype'
 logger = create_log(logger_name)
 
 
 def main():
-    # APP_DIR = os.path.dirname(os.path.realpath(__file__))
-    # path = APP_DIR + '/../logs/'
-    # file_ambient = path + 'ambient'
-    path = os.getcwd()
-    file = path + '/logs/ambient'
+    # path = os.getcwd()
+    # file = path + '/logs/ambient'
 
     t1 = Thread(target=relay_state)
     t1.start()
@@ -67,13 +64,13 @@ def main():
             ambient1 = read_nano_bluetooth(sock1, 1)
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient1)
-            write_file(file, '{} {}\n'.format(datetime.now(), ambient1))
+            # write_file(file, '{} {}\n'.format(datetime.now(), ambient1))
             sleep(0.1)
 
             ambient2 = read_nano_bluetooth(sock2, 2)
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient2)
-            write_file(file, '{} {}\n'.format(datetime.now(), ambient2))
+            # write_file(file, '{} {}\n'.format(datetime.now(), ambient2))
 
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):

@@ -4,19 +4,17 @@ import os
 try:
     from app.modules.logger import create_log
     from app.modules.flags import Var
+    from app.modules.config import *
 
 except ImportError:
     from modules.logger import create_log
     from modules.flags import Var
+    from modules.config import *
 
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
 APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/logs/prototype'
+logger_name = APP_DIR + '/app/logs/prototype'
 print(logger_name)
 logger = create_log(logger_name)
-
-# SERIAL_PORT = '/dev/ttyUSB0'
-# BD = 9600
 
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
@@ -36,20 +34,16 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
         # logger.debug(self.data)
         Var.STACK_STATE.append(self.data.decode())
         Var.RELAY_STATE = self.data.decode()
-        logger.debug('RELAY_STATE = {}'.format(Var.RELAY_STATE))
+        # logger.debug('RELAY_STATE = {}'.format(Var.RELAY_STATE))
 
         # logger.info('{} send {}'.format(self.client_address[0], self.data.decode()))
 
 
-if __name__ == "__main__":
-
-
-    HOST, PORT = "", 1101
+def launch_socket_relay_state():
+    HOST, PORT = "", webserver_socket_port_relay_state_in
 
     # Create the server, binding to localhost on port 9999
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
-
-    # logger.info('Listening...')
 
     # Activate the server; this will keep running until you
     # interrupt the program with Ctrl-C

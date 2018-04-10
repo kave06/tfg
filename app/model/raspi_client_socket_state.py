@@ -11,10 +11,10 @@ except ImportError:
     from modules.config import *
 
 logger = create_log('prototype')
-HOST, PORT = 'gui.uva.es', 5576
+HOST, PORT = webserver_ip, webserver_socket_port_relay_state_out
 
 
-def relay_state_change__():
+def relay_state():
     while True:
         ser = connect_serial(serial_port, serial_bd)
         while ser.is_open:

@@ -1,11 +1,8 @@
-from __future__ import print_function
+# from __future__ import print_function
 from pymysql import MySQLError
 from pymysql import connect
 from datetime import datetime, timedelta
-import sys
 
-# comentar no funciona
-sys.path.append('../modules')
 
 try:
     from app.modules.logger import create_log
