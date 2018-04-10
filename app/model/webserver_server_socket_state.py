@@ -13,11 +13,11 @@ except ImportError:
 
 APP_DIR = os.getcwd()
 logger_name = APP_DIR + '/app/logs/prototype'
-print(logger_name)
-logger = create_log(logger_name)
-APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/../logs/prototype'
-logger = create_log(logger_name)
+try:
+    logger = create_log(logger_name)
+except:
+    logger_name = APP_DIR + '/logs/prototype'
+    logger = create_log(logger_name)
 
 
 class MyTCPHandler(socketserver.BaseRequestHandler):

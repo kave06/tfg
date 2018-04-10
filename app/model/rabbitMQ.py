@@ -17,8 +17,12 @@ except ImportError:
     from modules.manage_file import write_file
 
 APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/../logs/prototype'
-logger = create_log(logger_name)
+logger_name = APP_DIR + '/app/logs/prototype'
+try:
+    logger = create_log(logger_name)
+except:
+    logger_name = APP_DIR + '/logs/prototype'
+    logger = create_log(logger_name)
 
 
 def connect_queue_sender() -> pika.BlockingConnection:

@@ -14,8 +14,12 @@ except ImportError:
     from modules.config import *
 
 APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/../logs/prototype'
-logger = create_log(logger_name)
+logger_name = APP_DIR + '/app/logs/prototype'
+try:
+    logger = create_log(logger_name)
+except:
+    logger_name = APP_DIR + '/logs/prototype'
+    logger = create_log(logger_name)
 
 
 def connect_db() -> connect:

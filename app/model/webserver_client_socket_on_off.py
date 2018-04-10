@@ -11,8 +11,12 @@ except ImportError:
 HOST, PORT = raspi_ip, raspi_socket_port_on_off
 
 APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/../logs/prototype'
-logger = create_log(logger_name)
+logger_name = APP_DIR + '/app/logs/prototype'
+try:
+    logger = create_log(logger_name)
+except:
+    logger_name = APP_DIR + '/logs/prototype'
+    logger = create_log(logger_name)
 
 
 def relay_on_off(state: str):
