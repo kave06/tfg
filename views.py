@@ -5,7 +5,7 @@ from flask_script import Manager
 from flask_bootstrap import Bootstrap
 
 from app.model.database import ambient_days
-from app.model.webserver_client_socket import led_on_off
+from app.model.webserver_client_socket_on_off import led_on_off
 from app.modules.logger import create_log
 
 from app.model.rabbitMQ import start_consumer_ambient, start_consumer_realy_state
