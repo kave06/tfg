@@ -1,15 +1,13 @@
 import socketserver
-from serial import Serial
 import os
 
 try:
     from app.modules.logger import create_log
-    from app.model.nano import send_signal
     from app.modules.flags import Var
 
 except ImportError:
     from modules.logger import create_log
-    from model.nano import send_signal
+    from modules.flags import Var
 
 # APP_DIR = os.path.dirname(os.path.realpath(__file__))
 APP_DIR = os.getcwd()
@@ -31,6 +29,7 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     """
 
     def handle(self):
+        print('handle')
         # self.request.sendall(self.data)
 
         # self.request is the TCP socket connected to the client
