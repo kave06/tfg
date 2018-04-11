@@ -31,11 +31,23 @@ HOST, PORT = raspi_ip, raspi_socket_port_on_off
 # except:
 #     logger = create_log('logs/' + name_logger)
 
-APP_DIR = os.getcwd()
+# APP_DIR = os.getcwd()
+# # try:
+# #     logger = create_log(APP_DIR + 'app/logs/' + name_logger)
+# # except:
+# #     logger = create_log(APP_DIR + 'logs/' + name_logger)
+# try:
+#     name = APP_DIR + 'app/logs/' + name_logger
+#     logger = create_log(name)
+# except:
+#     name = APP_DIR + 'logs/' + name_logger
+#     logger = create_log(name)
+
 try:
-    logger = create_log(APP_DIR + '/app/logs/' + name_logger)
+    logger = create_log(webserver_logger)
 except:
-    logger = create_log(APP_DIR + '/logs/' + name_logger)
+    logger = create_log(raspi_logger)
+
 def relay_on_off(state: str):
     data = state.encode()
 

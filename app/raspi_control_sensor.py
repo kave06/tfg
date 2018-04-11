@@ -29,9 +29,13 @@ port1 = bluetooth_port1
 # logger = create_log(logger_name)
 
 
-APP_DIR = os.getcwd()
-logger = create_log(APP_DIR + 'logs/' + name_logger)
+# APP_DIR = os.getcwd()
+# logger = create_log(APP_DIR + 'logs/' + name_logger)
 
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
 def main():
     # path = os.getcwd()

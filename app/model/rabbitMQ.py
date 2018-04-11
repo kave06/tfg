@@ -8,13 +8,13 @@ try:
     from app.modules.logger import create_log
     from app.modules.config import *
     from app.modules.flags import *
-    from app.modules.manage_file import write_file
+    # from app.modules.manage_file import write_file
 except ImportError:
     from model.database import connect_db, send_data
     from modules.logger import create_log
     from modules.config import *
     from modules.flags import *
-    from modules.manage_file import write_file
+    # from modules.manage_file import write_file
 
 # logger_name = APP_DIR + '/app/logs/prototype'
 
@@ -31,12 +31,18 @@ except ImportError:
 # except:
 #     logger = create_log('logs/prototype')
 
-APP_DIR = os.getcwd()
-
+# APP_DIR = os.getcwd()
+#
+# try:
+#     name = APP_DIR + '/app/logs/' + name_logger
+#     logger = create_log(name)
+# except:
+#     name = APP_DIR + '/logs/' + name_logger
+#     logger = create_log(name)
 try:
-    logger = create_log(APP_DIR + '/app/logs/' + name_logger)
+    logger = create_log(webserver_logger)
 except:
-    logger = create_log(APP_DIR + '/logs/' + name_logger)
+    logger = create_log(raspi_logger)
 
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''

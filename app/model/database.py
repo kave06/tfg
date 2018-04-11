@@ -22,11 +22,16 @@ except ImportError:
 # except:
 #     logger = create_log('logs/' + name_logger)
 
-APP_DIR = os.getcwd()
+# try:
+#     logger = create_log(APP_DIR + 'app/logs/' + name_logger)
+# except:
+#     logger = create_log(APP_DIR + 'logs/' + name_logger)
+
 try:
-    logger = create_log(APP_DIR + '/app/logs/' + name_logger)
+    logger = create_log(webserver_logger)
 except:
-    logger = create_log(APP_DIR + '/logs/' + name_logger)
+    logger = create_log(raspi_logger)
+
 
 def connect_db() -> connect:
     cnx = ''

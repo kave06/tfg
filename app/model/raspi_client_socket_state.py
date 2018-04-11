@@ -27,15 +27,25 @@ HOST, PORT = webserver_ip, webserver_socket_port_relay_state_out
 #     logger = create_log('logs/prototype')
 
 APP_DIR = os.getcwd()
-try:
-    logger = create_log(APP_DIR + '/app/logs/' + name_logger)
-except:
-    logger = create_log(APP_DIR + '/logs/' + name_logger)
+# try:
+#     logger = create_log(APP_DIR + 'app/logs/' + name_logger)
+# except:
+#     logger = create_log(APP_DIR + 'logs/' + name_logger)
 
+# try:
+#     name = APP_DIR + 'app/logs/' + name_logger
+#     logger = create_log(name)
+# except:
+#     name = APP_DIR + 'logs/' + name_logger
+#     logger = create_log(name)
 # try:
 #     logger = create_log('app/logs/' + name_logger)
 # except:
 #     logger = create_log('logs/' + name_logger)
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
 def relay_state():
     while True:
