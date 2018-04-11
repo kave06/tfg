@@ -1,42 +1,34 @@
 from time import sleep
-import os
 from threading import Thread
-from datetime import datetime
 
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from app.model.rabbitMQ import connect_queue_sender, send_queue_ambient
-    from app.model.relay_state import relay_state
+    from app.model.raspi_client_socket_state import relay_state
     from app.modules.logger import create_log
     from app.modules.flags import Flag
     from app.modules.config import *
-    from app.modules.manage_file import write_file
+    # from app.modules.manage_file import write_file
 except ImportError:
     from model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from model.rabbitMQ import connect_queue_sender, send_queue_ambient
-    from model.relay_state import relay_state
+    from model.raspi_client_socket_state import relay_state
     from modules.logger import create_log
     from modules.flags import Flag
     from modules.config import *
-    from modules.manage_file import write_file
+    # from modules.manage_file import write_file
 
 db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
 port1 = bluetooth_port1
 
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
-APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/logs/prototype'
-logger = create_log(logger_name)
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
 
 def main():
-    # APP_DIR = os.path.dirname(os.path.realpath(__file__))
-    # path = APP_DIR + '/../logs/'
-    # file_ambient = path + 'ambient'
-    path = os.getcwd()
-    file = path + '/logs/ambient'
-
     t1 = Thread(target=relay_state)
     t1.start()
     # relay_state()
@@ -67,14 +59,13 @@ def main():
             ambient1 = read_nano_bluetooth(sock1, 1)
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient1)
-            write_file(file, '{} {}\n'.format(datetime.now(), ambient1))
+            # write_file(file, '{} {}\n'.format(datetime.now(), ambient1))
             sleep(0.1)
 
             ambient2 = read_nano_bluetooth(sock2, 2)
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient2)
-            write_file(file, '{} {}\n'.format(datetime.now(), ambient2))
-
+            # write_file(file, '{} {}\n'.format(datetime.now(), ambient2))
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):
                 Flag.inner_while = False

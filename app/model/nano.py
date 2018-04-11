@@ -13,7 +13,10 @@ except ImportError:
     from modules.logger import create_log
     from modules.config import *
 
-logger = create_log('prototype')
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
 
 def connect_bluetooth(db_addr, port) -> BluetoothSocket:
@@ -155,25 +158,3 @@ def read_serial_state(ser: Serial):
         logger.error(err)
 
     return state
-
-
-
-
-
-
-# def count_state():
-#     # arduino = connect_serial(PORT,BD)
-#     # sleep(1)
-#     # arduino.write('1'.encode())
-#     # sleep(2 )
-#     # arduino.write('0'.encode())
-#     while True:
-#         arduino = connect_serial(PORT, BD)
-#         send_signal('ON'.encode(), arduino)
-#         sleep(2)
-#         arduino = connect_serial(PORT, BD)
-#         send_signal('OFF'.encode(), arduino)
-#
-#
-# if __name__ == '__main__':
-#     count_state()

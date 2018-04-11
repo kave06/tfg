@@ -2,6 +2,15 @@
 
 {% block title %}<title>Riego</title> {% endblock title %}
 
+{% block scripts %}
+    {{ super() }}
+    <script src="{{ url_for('static', filename='js/relay_state.js') }}"></script>
+    <script type="text/javascript">
+        var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+    </script>
+
+{% endblock scripts %}
+
 {% block content %}
     <div class="content-wrapper">
         <div class="container-fluid">
@@ -12,26 +21,30 @@
                     <div>
                         <div class="container">
                             <div class="col-md-12">
-                                <form class="form-incidencia" action="{{ url_for('handle_data') }}" method="post" >
+                                <form class="form-incidencia" action="{{ url_for('handle_data') }}" method="post">
                                     <div id="incidencia-form" class="form-container" data-form-container>
-                                        <div class="row form-group col-md-4 -align-center">
+                                        <div class="row form-group col-md-5 -align-center">
                                             <label class="col-form-label">Estado del riego</label>
-                                            <select name="irrigation_state" class="form-control" id="exampleSelect0" required>
-                                                <option selected disabled hidden style='display: none' value=''>ON/OFF</option>
+                                            <select name="irrigation_state" class="form-control" id="exampleSelect0"
+                                                    required>
+                                                <option selected disabled hidden style='display: none' value=''>ON/OFF
+                                                </option>
                                                 <option>ON</option>
                                                 <option>OFF</option>
                                             </select>
-                                        </div>
-                                        <div class="submit-row">
-                                            <input class="btn btn-block btn-block-incidencia submit-form"
-                                                   id="submit-incidencia" name="submit-incidencia" value="Enviar" type="submit">
-                                        </div>
-                                        <div>
-                                            <h4>Estado del riego:
-                                                <span id="relay_state">....</span>
-                                                <p><a href=# id="relay_state">Relay state</a>
-{#                                                {{ relay_state }}#}
-                                            </h4>
+                                            <div class="row">
+                                                <div class="container">
+                                                    <input class="btn btn-block btn-block-incidencia submit-form"
+                                                           id="submit-incidencia" name="submit-incidencia"
+                                                           value="Enviar"
+                                                           type="submit">
+                                                </div>
+                                                <div class="container">
+                                                    <h5>Estado del riego: <span id="state">?</span>
+                                                        <p><a href=# id="relay_state">state from server</a>
+                                                    </h5>
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
                                 </form>
@@ -41,7 +54,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 
 
@@ -50,11 +62,4 @@
 
 
 
-{% block scripts %}
-    {{ super() }}
-{#    <script>#}
-{#        $(document).ready(function() {#}
-{#            $('.js-example-basic-multiple').select2();#}
-{#        });#}
-{#    </script>#}
-{% endblock scripts %}
+

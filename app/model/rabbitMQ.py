@@ -2,33 +2,25 @@ import os
 import pika
 import json
 from datetime import datetime
-from pika import exceptions
 
 try:
     from app.model.database import connect_db, send_data
     from app.modules.logger import create_log
     from app.modules.config import *
     from app.modules.flags import *
-    from app.modules.manage_file import write_file
+    # from app.modules.manage_file import write_file
 except ImportError:
     from model.database import connect_db, send_data
     from modules.logger import create_log
     from modules.config import *
     from modules.flags import *
-    from modules.manage_file import write_file
+    # from modules.manage_file import write_file
 
-logger = create_log('prototype')
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
-
-# STACK_STATE = []
-# RELAY_STATE = 'empty'
-
-# APP_DIR = os.path.dirname(os.path.realpath(__file__))
-# APP_DIR = os.getcwd()
-# path = APP_DIR + '/../logs/'
-# file_relay_state = path + 'relay_state'
-# file_relay_state = open(file_relay_state, 'w')
-# file_relay_state.write('hola')
 
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''
@@ -43,7 +35,6 @@ def connect_queue_sender() -> pika.BlockingConnection:
     except Exception as err:
         # if connection.is_closed:
         logger.error(err)
-        # Flag.rabbit_cnx_relay_state = False
 
     return connection
 
@@ -106,18 +97,18 @@ def callback_ambient(ch, method, properties, body):
 
     cnx = connect_db()
     send_data(cnx, ambient)
-    write_file(file, '{} {}'.format(datetime.now(),ambient))
+    # write_file(file, '{} {}'.format(datetime.now(),ambient))
 
 
 # receiver
 def callback_relay_state(ch, method, properties, body):
     path = os.getcwd()
-    file = path + '/logs/relay_state'
+    file = path + '/app/logs/relay_state'
 
     state = json.loads(body.decode())
     Var.RELAY_STATE = state
     Var.STACK_STATE.append(state)
-    write_file(file, '{} {}'.format(datetime.now(),state))
+    # write_file(file, '{} {}'.format(datetime.now(),state))
 
 
 def start_consumer_ambient():
