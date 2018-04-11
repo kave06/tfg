@@ -15,7 +15,9 @@ except ImportError:
 # logger_name = APP_DIR + '/logs/prototype'
 # logger = create_log(logger_name)
 
-logger = create_log('logs/' + name_logger)
+# logger = create_log('logs/' + name_logger)
+APP_DIR = os.getcwd()
+logger = create_log(APP_DIR + 'logs/' + name_logger)
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     """

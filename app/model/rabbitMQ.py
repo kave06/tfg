@@ -16,7 +16,6 @@ except ImportError:
     from modules.flags import *
     from modules.manage_file import write_file
 
-# APP_DIR = os.getcwd()
 # logger_name = APP_DIR + '/app/logs/prototype'
 
 # logger_name = '/home/kave/1tfg/prototipo/tfg/app/logs/prototype'
@@ -32,10 +31,12 @@ except ImportError:
 # except:
 #     logger = create_log('logs/prototype')
 
+APP_DIR = os.getcwd()
+
 try:
-    logger = create_log('app/logs/' + name_logger)
+    logger = create_log(APP_DIR + '/app/logs/' + name_logger)
 except:
-    logger = create_log('logs/' + name_logger)
+    logger = create_log(APP_DIR + '/logs/' + name_logger)
 
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''

@@ -25,12 +25,12 @@ db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
 port1 = bluetooth_port1
 
-# APP_DIR = os.getcwd()
 # logger_name = APP_DIR + '/logs/prototype'
 # logger = create_log(logger_name)
 
 
-logger = create_log('logs/' + name_logger)
+APP_DIR = os.getcwd()
+logger = create_log(APP_DIR + 'logs/' + name_logger)
 
 
 def main():
