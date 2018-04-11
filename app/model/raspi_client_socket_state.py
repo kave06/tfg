@@ -11,16 +11,25 @@ except ImportError:
     from modules.logger import create_log
     from modules.config import *
 
-APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/app/logs/prototype'
-try:
-    logger = create_log(logger_name)
-except:
-    logger_name = APP_DIR + '/logs/prototype'
-    logger = create_log(logger_name)
+# APP_DIR = os.getcwd()
+# logger_name = APP_DIR + '/app/logs/prototype'
+# try:
+#     logger = create_log(logger_name)
+# except:
+#     logger_name = APP_DIR + '/logs/prototype'
+#     logger = create_log(logger_name)
 
 HOST, PORT = webserver_ip, webserver_socket_port_relay_state_out
 
+# try:
+#     logger = create_log('app/logs/prototype')
+# except:
+#     logger = create_log('logs/prototype')
+
+try:
+    logger = create_log('app/logs/' + name_logger)
+except:
+    logger = create_log('logs/' + name_logger)
 
 def relay_state():
     while True:

@@ -11,10 +11,11 @@ except ImportError:
     from model.nano import send_signal
     from modules.config import *
 
-APP_DIR = os.getcwd()
-logger_name = APP_DIR + '/logs/prototype'
-logger = create_log(logger_name)
+# APP_DIR = os.getcwd()
+# logger_name = APP_DIR + '/logs/prototype'
+# logger = create_log(logger_name)
 
+logger = create_log('logs/' + name_logger)
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     """
