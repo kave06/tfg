@@ -12,7 +12,7 @@ from app.modules.logger import create_log
 from app.model.rabbitMQ import start_consumer_ambient
 from app.modules.flags import Var
 from app.model.webserver_server_socket_state import launch_socket_relay_state
-from app.modules.config import name_logger
+from app.modules.config import *
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
@@ -25,7 +25,10 @@ bootstrap = Bootstrap(app)
 # logger_name = '/home/kave/1tfg/prototipo/tfg/app/logs/prototype'
 # logger = create_log(logger_name)
 
-logger = create_log('app/logs/' + name_logger)
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
 # @app.route('/button')
 # def button():
