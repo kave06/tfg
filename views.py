@@ -1,4 +1,3 @@
-import os
 from threading import Thread
 
 from flask import Flask, render_template, request, jsonify
@@ -13,26 +12,16 @@ from app.model.rabbitMQ import start_consumer_ambient
 from app.modules.flags import Var
 from app.model.webserver_server_socket_state import launch_socket_relay_state
 from app.modules.config import *
+
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
 # moment = Moment(app)
 
-# APP_DIR = os.getcwd()
-# logger_name = APP_DIR + '/app/logs/prototype'
-# logger = create_log(logger_name)
-
-# logger_name = '/home/kave/1tfg/prototipo/tfg/app/logs/prototype'
-# logger = create_log(logger_name)
-
 try:
     logger = create_log(webserver_logger)
 except:
     logger = create_log(raspi_logger)
-
-# @app.route('/button')
-# def button():
-#     return render_template('app/basura/base_left_buttons.html')
 
 
 @app.route('/temperature')

@@ -1,5 +1,4 @@
 import socketserver
-import os
 
 try:
     from app.modules.logger import create_log
@@ -10,39 +9,6 @@ except ImportError:
     from modules.logger import create_log
     from modules.flags import Var
     from modules.config import *
-
-# APP_DIR = os.getcwd()
-# logger_name = APP_DIR + '/app/logs/prototype'
-# try:
-#     logger = create_log(logger_name)
-# except:
-#     logger_name = APP_DIR + '/logs/prototype'
-#     logger = create_log(logger_name)
-
-# logger_name = '/home/kave/1tfg/prototipo/tfg/app/logs/prototype'
-# logger = create_log(logger_name)
-
-# try:
-#     logger = create_log('app/logs/prototype')
-# except:
-#     logger = create_log('logs/prototype')
-
-# try:
-#     logger = create_log('app/logs/' + name_logger)
-# except:
-#     logger = create_log('logs/' + name_logger)
-
-APP_DIR = os.getcwd()
-# try:
-#     logger = create_log(APP_DIR + 'app/logs/' + name_logger)
-# except:
-#     logger = create_log(APP_DIR + 'logs/' + name_logger)
-# try:
-#     name = APP_DIR + 'app/logs/' + name_logger
-#     logger = create_log(name)
-# except:
-#     name = APP_DIR + 'logs/' + name_logger
-#     logger = create_log(name)
 
 try:
     logger = create_log(webserver_logger)

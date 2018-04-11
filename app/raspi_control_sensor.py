@@ -1,7 +1,5 @@
 from time import sleep
-import os
 from threading import Thread
-from datetime import datetime
 
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
@@ -24,22 +22,13 @@ db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
 port1 = bluetooth_port1
 
-# logger_name = APP_DIR + '/logs/prototype'
-# logger = create_log(logger_name)
-
-
-# APP_DIR = os.getcwd()
-# logger = create_log(APP_DIR + 'logs/' + name_logger)
-
 try:
     logger = create_log(webserver_logger)
 except:
     logger = create_log(raspi_logger)
 
-def main():
-    # path = os.getcwd()
-    # file = path + '/logs/ambient'
 
+def main():
     t1 = Thread(target=relay_state)
     t1.start()
     # relay_state()
@@ -77,7 +66,6 @@ def main():
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient2)
             # write_file(file, '{} {}\n'.format(datetime.now(), ambient2))
-
 
             if (Flag.sock_bluetooth1 == False or Flag.sock_bluetooth2 == False):
                 Flag.inner_while = False

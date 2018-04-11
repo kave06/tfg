@@ -1,6 +1,5 @@
 import socketserver
 from serial import Serial
-import os
 
 try:
     from app.modules.logger import create_log
@@ -11,17 +10,11 @@ except ImportError:
     from model.nano import send_signal
     from modules.config import *
 
-# APP_DIR = os.getcwd()
-# logger_name = APP_DIR + '/logs/prototype'
-# logger = create_log(logger_name)
-
-# logger = create_log('logs/' + name_logger)
-# APP_DIR = os.getcwd()
-# logger = create_log(APP_DIR + 'logs/' + name_logger)
 try:
     logger = create_log(webserver_logger)
 except:
     logger = create_log(raspi_logger)
+
 
 class MyTCPHandler(socketserver.BaseRequestHandler):
     """

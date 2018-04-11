@@ -1,5 +1,3 @@
-# from __future__ import print_function
-import os
 from pymysql import MySQLError
 from pymysql import connect
 from datetime import datetime, timedelta
@@ -12,20 +10,6 @@ except ImportError:
     from modules.logger import create_log
     from modules.flags import Flag
     from modules.config import *
-
-# logger_name = APP_DIR + '/app/logs/prototype'
-# logger_name = '/home/kave/1tfg/prototipo/tfg/app/logs/prototype'
-# logger = create_log(logger_name)
-
-# try:
-#     logger = create_log('app/logs/' + name_logger)
-# except:
-#     logger = create_log('logs/' + name_logger)
-
-# try:
-#     logger = create_log(APP_DIR + 'app/logs/' + name_logger)
-# except:
-#     logger = create_log(APP_DIR + 'logs/' + name_logger)
 
 try:
     logger = create_log(webserver_logger)
