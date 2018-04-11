@@ -1,4 +1,3 @@
-import os
 from threading import Thread
 
 from flask import Flask, render_template, request, jsonify
@@ -13,23 +12,14 @@ from app.model.rabbitMQ import start_consumer_ambient
 from app.modules.flags import Var
 from app.model.webserver_server_socket_state import launch_socket_relay_state
 from app.modules.config import name_logger
+
 app = Flask(__name__)
 manager = Manager(app)
 bootstrap = Bootstrap(app)
 # moment = Moment(app)
 
-# APP_DIR = os.getcwd()
-# logger_name = APP_DIR + '/app/logs/prototype'
-# logger = create_log(logger_name)
-
-# logger_name = '/home/kave/1tfg/prototipo/tfg/app/logs/prototype'
-# logger = create_log(logger_name)
 
 logger = create_log('app/logs/' + name_logger)
-
-# @app.route('/button')
-# def button():
-#     return render_template('app/basura/base_left_buttons.html')
 
 
 @app.route('/temperature')
@@ -92,11 +82,11 @@ def dashboard():
     data_list2 = ambient_days(1, 'sensor2_per_hour')
     list_temp1 = data_list1[0]
     list_temp2 = data_list2[0]
-    logger.info(list_temp1)
+    # logger.info(list_temp1)
     list_hour1 = data_list1[2]
-    logger.info(list_hour1)
+    # logger.info(list_hour1)
     list_hour2 = data_list2[2]
-    logger.info(list_hour2)
+    # logger.info(list_hour2)
     return render_template('temperature.html', list_temp1=list_temp1, list_hour1=list_hour1,
                            list_temp2=list_temp2, list_hour2=list_hour2)
 
