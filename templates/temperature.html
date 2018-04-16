@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+
+{% block title %} <title> Temperature </title> {% endblock title %}
+
+{% block content %}
+
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="header">
+{#                            <h4 class="title">Email Statistics</h4>#}
+{#                            <p class="category">Last Campaign Performance</p>#}
+                        </div>
+                        <div class="content">
+                            <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+                            <div>
+                                <script src="https://code.highcharts.com/highcharts.js"></script>
+                                <script src="https://code.highcharts.com/modules/exporting.js"></script>
+                                {#                                <script src="/static/js/temperature.js"></script>#}
+                                <script src="/static/js/temp_humidity.js"></script>
+                                {% block script_graph %}
+                                    <script>
+                                        {#                                    show_temperature_graph('Home', 'Office')#}
+                                        show_temperature_graph('Zona Cultivo - Temperatura', 'Horas','Temperatura ºC',
+                                            {
+                                                categories: {{ list_hour1 }}
+                                            },
+                                            [
+                                                {
+                                                    name: 'Sensor 1',
+                                                    data: {{ list_temp1 }}
+                                                },
+                                                {
+                                                    name: 'Sensor 2',
+                                                    data: {{ list_temp2 }}
+                                                }
+                                            ])
+                                    </script>
+                                {% endblock script_graph %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}

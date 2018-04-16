@@ -1,0 +1,20 @@
+{% extends 'temperature.html' %}
+
+{% block script_graph %}
+    <script>
+        show_temperature_graph('Zona Cultivo - Humedad', 'Horas', 'Humedad Relativa %',
+            {
+                categories: {{ list_hour1 }}
+            },
+            [
+                {
+                    name: 'Sensor 1',
+                    data: {{ list_humi1 }}
+                },
+                {
+                    name: 'Sensor 2',
+                    data: {{ list_humi2 }}
+                }
+            ])
+    </script>
+{% endblock script_graph %}
