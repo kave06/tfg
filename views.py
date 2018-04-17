@@ -101,6 +101,7 @@ def relay_state():
 
 if __name__ == '__main__':
     # app.run()
+    # TODO delete consumer ambient
 
     t1 = Thread(target=launch_socket_relay_state)
     t1.start()
