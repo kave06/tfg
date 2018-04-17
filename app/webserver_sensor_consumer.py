@@ -11,6 +11,6 @@ except ImportError:
 #     logger = create_log(webserver_logger)
 # except:
 #     logger = create_log(raspi_logger)
-
+# TODO change name of file database_server_consumer.py
 if __name__ == '__main__':
     start_consumer_ambient()
