@@ -5,16 +5,16 @@ from datetime import datetime
 
 try:
     from app.model.database import connect_db, send_data
-    from app.modules.logger import create_log
-    from app.modules.config import *
-    from app.modules.flags import *
-    # from app.modules.manage_file import write_file
+    from app.tools.logger import create_log
+    from app.tools.config import *
+    from app.tools.flags import *
+    # from app.tools.manage_file import write_file
 except ImportError:
     from model.database import connect_db, send_data
     from modules.logger import create_log
     from modules.config import *
     from modules.flags import *
-    # from modules.manage_file import write_file
+    # from tools.manage_file import write_file
 
 try:
     logger = create_log(webserver_logger)

@@ -5,9 +5,9 @@ from time import sleep
 from serial import Serial, SerialException
 
 try:
-    from app.modules.flags import Flag
-    from app.modules.logger import create_log
-    from app.modules.config import *
+    from app.tools.flags import Flag
+    from app.tools.logger import create_log
+    from app.tools.config import *
 except ImportError:
     from modules.flags import Flag
     from modules.logger import create_log

@@ -3,8 +3,8 @@ from time import sleep
 
 try:
     from app.model.nano import read_serial_state, connect_serial
-    from app.modules.logger import create_log
-    from app.modules.config import *
+    from app.tools.logger import create_log
+    from app.tools.config import *
 except ImportError:
     from model.nano import read_serial_state, connect_serial
     from modules.logger import create_log

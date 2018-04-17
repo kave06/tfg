@@ -1,9 +1,9 @@
 import socketserver
 
 try:
-    from app.modules.logger import create_log
-    from app.modules.flags import Var
-    from app.modules.config import *
+    from app.tools.logger import create_log
+    from app.tools.flags import Var
+    from app.tools.config import *
 
 except ImportError:
     from modules.logger import create_log

@@ -3,9 +3,9 @@ from pymysql import connect
 from datetime import datetime, timedelta
 
 try:
-    from app.modules.logger import create_log
-    from app.modules.flags import Flag
-    from app.modules.config import *
+    from app.tools.logger import create_log
+    from app.tools.flags import Flag
+    from app.tools.config import *
 except ImportError:
     from modules.logger import create_log
     from modules.flags import Flag
