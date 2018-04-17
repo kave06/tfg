@@ -102,6 +102,7 @@ def relay_state():
 if __name__ == '__main__':
     # app.run()
     # TODO delete consumer ambient
+    # TODO change the name of modules to tools
 
     t1 = Thread(target=launch_socket_relay_state)
     t1.start()
