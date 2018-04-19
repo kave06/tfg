@@ -13,7 +13,18 @@ from app.tools.flags import Var
 from app.model.webserver_server_socket_state import launch_socket_relay_state
 from app.tools.config import *
 
+# test timepicker
+from flask_wtf import FlaskForm, Form
+from wtforms import DateField
+from datetime import date
+
+
+class DateForm(Form):
+    dt = DateField('Pick a Date', format='%m/%d/%y')
+
+
 app = Flask(__name__)
+app.secret_key = 'your_mother'
 manager = Manager(app)
 bootstrap = Bootstrap(app)
 # moment = Moment(app)
@@ -99,6 +110,13 @@ def relay_state():
     return jsonify(state=Var.RELAY_STATE)
 
 
+@app.route('/date', methods=['post', 'get'])
+def date():
+    form = DateForm()
+    if form.validate_on_submit():
+        return form.dt.data.strftime('%x')
+    return render_template('pick_date.html', form=form)
+
 if __name__ == '__main__':
     # app.run()
     # TODO delete consumer ambient
@@ -106,7 +124,7 @@ if __name__ == '__main__':
     t1 = Thread(target=launch_socket_relay_state)
     t1.start()
 
-    t2 = Thread(target=start_consumer_ambient)
-    t2.start()
+    # t2 = Thread(target=start_consumer_ambient)
+    # t2.start()
 
     manager.run()

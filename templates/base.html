@@ -1,7 +1,6 @@
 {% extends "bootstrap/base.html" %}
-{#Esto es un comentario#}
 {% block html_attribs %}
-lang='es'
+    lang='es'
 {% endblock html_attribs %}
 
 {% block head %}
@@ -16,11 +15,14 @@ lang='es'
         <!-- Bootstrap -->
         <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
         <!-- Bootstrap core CSS-->
-        <link href="{{ url_for('static', filename='startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='startbootstrap-sb-admin-gh-pages/vendor/bootstrap/css/bootstrap.min.css') }}"
+              rel="stylesheet">
         <!-- Custom fonts for this template-->
-        <link href="{{ url_for ('static', filename='startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+        <link href="{{ url_for ('static', filename='startbootstrap-sb-admin-gh-pages/vendor/font-awesome/css/font-awesome.min.css') }}"
+              rel="stylesheet" type="text/css">
         <!-- Custom styles for this template-->
-        <link href="{{ url_for('static', filename='startbootstrap-sb-admin-gh-pages/css/sb-admin.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static', filename='startbootstrap-sb-admin-gh-pages/css/sb-admin.css') }}"
+              rel="stylesheet">
         <!-- Custom styles for Font Awesome Animations -->
         <link rel="stylesheet" href="/static/css/font-awesome-animation.min.css" type="text/css">
         <!-- Custom styles from base -->
@@ -36,46 +38,48 @@ lang='es'
 
 {% block body %}
     {% block navbar %}
-    <!-- Navigation-->
+        <!-- Navigation-->
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
-        {% block button_left %}
-            <a class="navbar-brand" href="{{ url_for('temperature') }}"><b>Mi Panel2</b></a>
-{#            <a class="navbar-brand"><b>Mi Panel2</b></a>#}
+            {% block button_left %}
+                <a class="navbar-brand" href="{{ url_for('temperature') }}"><b>Mi Panel2</b></a>
+                {#            <a class="navbar-brand"><b>Mi Panel2</b></a>#}
 
-            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
-                        <a class="nav-link" href="/temperature">
-                            <i class="fa fa-fw fa-dashboard"></i>
-                            <span class="nav-link-text">Mi panel</span>
-                        </a>
-                    </li>
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart temperature">
-                        <a class="nav-link" href="/temperature">
-                            <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
-                            <span class="nav-link-text">Temperatura</span>
-                        </a>
-                    </li>
+                <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse"
+                        data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Dashboard">
+                            <a class="nav-link" href="/temperature">
+                                <i class="fa fa-fw fa-dashboard"></i>
+                                <span class="nav-link-text">Mi panel</span>
+                            </a>
+                        </li>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart temperature">
+                            <a class="nav-link" href="/temperature">
+                                <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
+                                <span class="nav-link-text">Temperatura</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart humidity">
-                        <a class="nav-link" href="/humidity">
-                            <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
-                            <span class="nav-link-text">Humedad</span>
-                        </a>
-                    </li>
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart humidity">
+                            <a class="nav-link" href="/humidity">
+                                <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
+                                <span class="nav-link-text">Humedad</span>
+                            </a>
+                        </li>
 
-                    <li class="nav-item" data-toggle="tooltip" data-placement="right" title="irrigation">
-                        <a class="nav-link" href="/irrigation">
-                            <i class="fa fa-fw fa-table"></i>
-                            <span class="nav-link-text">Riego</span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        {% endblock button_left %}
+                        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="irrigation">
+                            <a class="nav-link" href="/irrigation">
+                                <i class="fa fa-fw fa-table"></i>
+                                <span class="nav-link-text">Riego</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            {% endblock button_left %}
         </nav>
     {% endblock navbar %}
 
@@ -93,17 +97,13 @@ lang='es'
     {% endblock footer %}
 
     {% block scripts %}
-<!-- Bootstrap core JavaScript-->
-        <script src="../static/startbootstrap-sb-admin-gh-pages/js/bootstrap.min.js"></script>
-{#        <script src="/static/js/bootstrap.min.js"></script>#}
-
         <!-- Bootstrap core JavaScript-->
         <script src="../static/startbootstrap-sb-admin-gh-pages/vendor/jquery/jquery.min.js"></script>
         <script src="../static/startbootstrap-sb-admin-gh-pages/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
         <!-- Core plugin JavaScript-->
         <script src="../static/startbootstrap-sb-admin-gh-pages/vendor/jquery-easing/jquery.easing.min.js"></script>
         <!-- Custom scripts for all pages-->
-        <script src="startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
+        <script src="../static/startbootstrap-sb-admin-gh-pages/js/sb-admin.min.js"></script>
 
         <!-- Loading JQuery -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
@@ -114,7 +114,7 @@ lang='es'
 
         <!-- Toggle between fixed and static navbar-->
         <script>
-            $('#toggleNavPosition').click(function() {
+            $('#toggleNavPosition').click(function () {
                 $('body').toggleClass('fixed-nav');
                 $('nav').toggleClass('fixed-top static-top');
             });
@@ -122,7 +122,7 @@ lang='es'
         </script>
         <!-- Toggle between dark and light navbar-->
         <script>
-            $('#toggleNavColor').click(function() {
+            $('#toggleNavColor').click(function () {
                 $('nav').toggleClass('navbar-dark navbar-light');
                 $('nav').toggleClass('bg-dark bg-light');
                 $('body').toggleClass('bg-dark bg-light');
@@ -132,44 +132,7 @@ lang='es'
         {#        script ajax google#}
         <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
 
-{#       no necesarias #}
-{#        <script>#}
-{#            $('#txtArea').keyup(function () {#}
-{#                var max = 500;#}
-{#                var len = $(this).val().length;#}
-{#                if (len > max+1) {#}
-{#                    var char = len - max;#}
-{#                    $('#charNum').text('Ha superado el límite de 500 caracteres, le sobran ' + char + ' caracteres.');#}
-{#                } else if (len == max+1) {#}
-{#                    $('#charNum').text('Ha superado el límite de 500 caracteres, le sobra 1 caracter.');#}
-{#                } else if (len == max) {#}
-{#                    $('#charNum').text('Ha superado el límite de 500 caracteres.');#}
-{#                } else if (len == max-1) {#}
-{#                    $('#charNum').text('Le queda 1 caracter.');#}
-{#                } else {#}
-{#                    var char = max - len;#}
-{#                    $('#charNum').text('Le quedan ' + char + ' caracteres.');#}
-{#                }#}
-{#            });#}
-{#        </script>#}
-{#        <script>#}
-{#            /* Para restringir la selección de la fecha al día actual */#}
-{#            var today = new Date();#}
-{#            var dd = today.getDate();#}
-{#            var mm = today.getMonth()+1; //January is 0!#}
-{#            var yyyy = today.getFullYear();#}
-{#            if(dd<10){#}
-{#                dd='0'+dd#}
-{#            }#}
-{#            if(mm<10){#}
-{#                mm='0'+mm#}
-{#            }#}
-{#            today = yyyy+'-'+mm+'-'+dd;#}
-{#            document.getElementById("incidencia-date-input").setAttribute("max", today);#}
-{#        </script>#}
 
-
-
-{% endblock scripts %}
+    {% endblock scripts %}
 {% endblock body %}
 

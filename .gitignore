@@ -7,4 +7,4 @@ app/web-server_client_socket_old.py
 app/config.ini
 app/tools/config.py
 app/basura/
-
+app/model/__pycache__/*
