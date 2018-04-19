@@ -59,14 +59,14 @@
                         </li>
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart temperature">
                             <a class="nav-link" href="/temperature">
-                                <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
+                                <i class="fa fa-fw fa-line-chart" aria-hidden="true"></i>
                                 <span class="nav-link-text">Temperatura</span>
                             </a>
                         </li>
 
                         <li class="nav-item" data-toggle="tooltip" data-placement="right" title="chart humidity">
                             <a class="nav-link" href="/humidity">
-                                <i class="fa fa-fw fa-area-chart" aria-hidden="true"></i>
+                                <i class="fa fa-fw fa-line-chart" aria-hidden="true"></i>
                                 <span class="nav-link-text">Humedad</span>
                             </a>
                         </li>
@@ -84,6 +84,12 @@
     {% endblock navbar %}
 
     {% block content %}
+        <div class="content-wrapper">
+            <div class="container-fluid">
+                {% block into_content %}
+                {% endblock into_content %}
+            </div>
+        </div>
     {% endblock content %}
 
     {% block footer %}

@@ -17,6 +17,7 @@ from app.tools.config import *
 from flask_wtf import FlaskForm, Form
 from wtforms import DateField
 from datetime import date
+from flask_datepicker import datepicker
 
 
 class DateForm(Form):
@@ -24,9 +25,16 @@ class DateForm(Form):
 
 
 app = Flask(__name__)
+
+# datepicker
 app.secret_key = 'your_mother'
+
 manager = Manager(app)
 bootstrap = Bootstrap(app)
+
+# datepicker
+datepicker(app)
+
 # moment = Moment(app)
 
 try:
@@ -116,6 +124,12 @@ def date():
     if form.validate_on_submit():
         return form.dt.data.strftime('%x')
     return render_template('pick_date.html', form=form)
+
+
+@app.route('/pis')
+def datepicker():
+    return render_template('datepicker.html')
+
 
 if __name__ == '__main__':
     # app.run()
