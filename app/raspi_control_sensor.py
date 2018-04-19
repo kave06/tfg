@@ -5,18 +5,18 @@ try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from app.model.rabbitMQ import connect_queue_sender, send_queue_ambient
     from app.model.raspi_client_socket_state import relay_state
-    from app.modules.logger import create_log
-    from app.modules.flags import Flag
-    from app.modules.config import *
-    # from app.modules.manage_file import write_file
+    from app.tools.logger import create_log
+    from app.tools.flags import Flag
+    from app.tools.config import *
+    # from app.tools.manage_file import write_file
 except ImportError:
     from model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
     from model.rabbitMQ import connect_queue_sender, send_queue_ambient
     from model.raspi_client_socket_state import relay_state
-    from modules.logger import create_log
-    from modules.flags import Flag
-    from modules.config import *
-    # from modules.manage_file import write_file
+    from tools.logger import create_log
+    from tools.flags import Flag
+    from tools.config import *
+    # from tools.manage_file import write_file
 
 db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2

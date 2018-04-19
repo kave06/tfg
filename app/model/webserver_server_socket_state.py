@@ -1,14 +1,14 @@
 import socketserver
 
 try:
-    from app.modules.logger import create_log
-    from app.modules.flags import Var
-    from app.modules.config import *
+    from app.tools.logger import create_log
+    from app.tools.flags import Var
+    from app.tools.config import *
 
 except ImportError:
-    from modules.logger import create_log
-    from modules.flags import Var
-    from modules.config import *
+    from tools.logger import create_log
+    from tools.flags import Var
+    from tools.config import *
 
 try:
     logger = create_log(webserver_logger)

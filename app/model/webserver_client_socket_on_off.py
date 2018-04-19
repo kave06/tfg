@@ -1,11 +1,11 @@
 import socket
 
 try:
-    from app.modules.logger import create_log
-    from app.modules.config import *
+    from app.tools.logger import create_log
+    from app.tools.config import *
 except ImportError:
-    from modules.logger import create_log
-    from modules.config import *
+    from tools.logger import create_log
+    from tools.config import *
 
 HOST, PORT = raspi_ip, raspi_socket_port_on_off
 

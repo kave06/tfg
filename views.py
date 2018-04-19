@@ -6,12 +6,12 @@ from flask_bootstrap import Bootstrap
 
 from app.model.database import ambient_days
 from app.model.webserver_client_socket_on_off import relay_on_off
-from app.modules.logger import create_log
+from app.tools.logger import create_log
 
 from app.model.rabbitMQ import start_consumer_ambient
-from app.modules.flags import Var
+from app.tools.flags import Var
 from app.model.webserver_server_socket_state import launch_socket_relay_state
-from app.modules.config import *
+from app.tools.config import *
 
 app = Flask(__name__)
 manager = Manager(app)
@@ -102,7 +102,6 @@ def relay_state():
 if __name__ == '__main__':
     # app.run()
     # TODO delete consumer ambient
-    # TODO change the name of modules to tools
 
     t1 = Thread(target=launch_socket_relay_state)
     t1.start()

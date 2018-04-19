@@ -2,13 +2,13 @@ import socketserver
 from serial import Serial
 
 try:
-    from app.modules.logger import create_log
+    from app.tools.logger import create_log
     from app.model.nano import send_signal
-    from app.modules.config import *
+    from app.tools.config import *
 except ImportError:
-    from modules.logger import create_log
+    from tools.logger import create_log
     from model.nano import send_signal
-    from modules.config import *
+    from tools.config import *
 
 try:
     logger = create_log(webserver_logger)
