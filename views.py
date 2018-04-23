@@ -128,7 +128,7 @@ def date():
 
 @app.route('/pis')
 def datepicker():
-    return render_template('datepicker.html')
+    return render_template('clock.html')
 
 
 if __name__ == '__main__':

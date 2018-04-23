@@ -2,14 +2,23 @@
 
 {% block title %}<title>Riego</title> {% endblock title %}
 
+{% block css %}
+    {{ super() }}
+    <link rel="stylesheet" href="/static/css/bootstrap-clockpicker.min.css" type="text/css">
+{#        <link href="{{ url_for('static', filename='css/bootstrap-clockpicker.min.css') }}" rel="stylesheet">#}
+{% endblock css %}
+
+
 {% block scripts %}
     {{ super() }}
     <script src="{{ url_for('static', filename='js/relay_state.js') }}"></script>
     <script type="text/javascript">
         var $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
     </script>
-
+    <script type="text/javascript" src="/static/js/bootstrap-clockpicker.min.js"></script>
+    <script type="text/javascript" src="/static/js/highlight.min.js"></script>
 {% endblock scripts %}
+
 
 {% block into_content %}
     <div class="row">
@@ -45,34 +54,37 @@
                                     </div>
                                 </div>
                             </div>
-                            {#                                    second part-----------------------------------------------------#}
+
                             <h2>Programción del riego</h2>
                             <div class="container">
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <div class="form-group">
-                                            <div class="input-group date" id="datetimepicker3"
-                                                 data-target-input="nearest">
-                                                <input type="text" class="form-control datetimepicker-input"
-                                                       data-target="#datetimepicker3"/>
-                                                <div class="input-group-append" data-target="#datetimepicker3"
-                                                     data-toggle="datetimepicker">
-                                                    <div class="input-group-text"><i class="fa fa-clock-o"></i>
-                                                    </div>
+                                            <div class="input-group mb-3 clockpicker-with-callbacks" data-autoclose="true">
+                                                <input type="text" class="form-control" placeholder="Hora"
+                                                       aria-label="Hora"
+                                                       aria-describedby="basic-addon2">
+                                                <div class="input-group-append">
+                                                    <button class="btn btn-outline-secondary" type="button"><i
+                                                            class="far fa-clock"></i></button>
                                                 </div>
                                             </div>
+                                            <script type="text/javascript">
+                                                var input = $('#single-input').clockpicker({
+                                                    placement: 'bottom',
+                                                    align: 'left',
+                                                    autoclose: true,
+                                                    'default': 'now'
+                                                });
+                                            </script>
+                                            <script type="text/javascript" src="/static/js/clockpicker.js"></script>
+
+
+
                                         </div>
                                     </div>
-                                    <script type="text/javascript">
-                                        $(function () {
-                                            $('#datetimepicker3').datetimepicker({
-                                                format: 'LT'
-                                            });
-                                        });
-                                    </script>
                                 </div>
                             </div>
-
 
                         </form>
                     </div>
@@ -81,8 +93,4 @@
         </div>
     </div>
 {% endblock into_content %}
-
-
-
-
 

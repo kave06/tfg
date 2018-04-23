@@ -8,3 +8,5 @@ app/config.ini
 app/tools/config.py
 app/basura/
 app/model/__pycache__/*
+static/clockpicker/
+basura/
