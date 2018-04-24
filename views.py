@@ -118,19 +118,6 @@ def relay_state():
     return jsonify(state=Var.RELAY_STATE)
 
 
-@app.route('/date', methods=['post', 'get'])
-def date():
-    form = DateForm()
-    if form.validate_on_submit():
-        return form.dt.data.strftime('%x')
-    return render_template('pick_date.html', form=form)
-
-
-@app.route('/pis')
-def datepicker():
-    return render_template('clock.html')
-
-
 @app.route('/irrigation_hour')
 def add_numbers():
     hour = request.args.get('hour')
@@ -145,11 +132,6 @@ def duration():
     # b = request.args.get('b', 0, type=int)
     print('duration: {}'.format(duration))
     return jsonify(result=duration)
-
-
-# @app.route('/index')
-# def index():
-#     return render_template('index.html')
 
 
 if __name__ == '__main__':
