@@ -21,7 +21,7 @@ try:
 except:
     logger = create_log(raspi_logger)
 
-
+# TODO if server fail keep data in the queue
 def connect_queue_sender() -> pika.BlockingConnection:
     connection = ''
     try:

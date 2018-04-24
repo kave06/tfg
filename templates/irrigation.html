@@ -55,60 +55,51 @@
                                     </div>
                                 </div>
                             </div>
+                            {#                            -------------------- Irrigation form ------------------------#}
                             <form>
-                                {#                                <div class="container">#}
-                                {#                                    <div class="row">#}
-                                {#                                        <div class="col-sm-6">#}
-                                {#                                            <div class="form-group">#}
                                 <div class="form-row">
-{#                                    <h4>Hora de riego</h4>#}
-                                    <div class="col-md-2">
-                                        <div class="input-group mb-3 clockpicker-with-callbacks"
-                                             data-autoclose="true">
+                                    <div class="col-md-3 mb-3">
+                                        <label for="inputHour">Hora de Riego</label>
+                                        <div class="input-group clockpicker-with-callbacks" data-autoclose="true">
                                             <input type="text" class="form-control" placeholder="Hora"
                                                    aria-label="Hora" aria-describedby="basic-addon2"
-                                                   name="hour">
+                                                   name="hour" id="inputHour">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="button"><i
-                                                        class="far fa-clock"></i></button>
+                                                <span class="input-group-text" id="inputHour"><i class="far fa-clock"></i></span>
                                             </div>
                                         </div>
-                                        <script type="text/javascript">
-                                            var input = $('#single-input').clockpicker({
-                                                placement: 'bottom',
-                                                align: 'left',
-                                                autoclose: true,
-                                                'default': 'now'
-                                            });
-                                        </script>
-                                        <script type="text/javascript" src="/static/js/clockpicker.js"></script>
                                     </div>
-{#                                    <h4>Duración del riego</h4>#}
-                                    <div class="col">
-                                        <div class="input-group mb-3 clockpicker-with-callbacks"
-                                             data-autoclose="true">
+                                    <script type="text/javascript">
+                                        var input = $('#single-input').clockpicker({
+                                            placement: 'bottom',
+                                            align: 'left',
+                                            autoclose: true,
+                                            'default': 'now'
+                                        });
+                                    </script>
+                                    <script type="text/javascript" src="/static/js/clockpicker_hour.js"></script>
+                                    {#                                -------------- segundo reloj --------------#}
+                                    <div class="col-md-3 mb-3">
+                                        <label for="inputHour">Duración de Riego</label>
+                                        <div class="input-group clockpicker-with-callbacks" data-autoclose="true">
                                             <input type="text" class="form-control" placeholder="Hora"
-                                                   aria-label="Duración" aria-describedby="basic-addon2"
-                                                   name="hour">
+                                                   aria-label="Hora" aria-describedby="basic-addon2"
+                                                   name="hour" id="inputDuration">
                                             <div class="input-group-append">
-                                                <button class="btn btn-outline-secondary" type="button"><i
-                                                        class="far fa-clock"></i></button>
+                                                <span class="input-group-text" id="inputHour"><i class="far fa-clock"></i></span>
                                             </div>
                                         </div>
-                                        <script type="text/javascript">
-                                            var input = $('#single-input').clockpicker({
-                                                placement: 'bottom',
-                                                align: 'left',
-                                                autoclose: true,
-                                                'default': 'now'
-                                            });
-                                        </script>
-                                        <script type="text/javascript" src="/static/js/clockpicker.js"></script>
                                     </div>
+                                    <script type="text/javascript">
+                                        var input = $('#single-input').clockpicker({
+                                            placement: 'bottom',
+                                            align: 'left',
+                                            autoclose: true,
+                                            'default': 'now',
+                                        });
+                                    </script>
+                                    <script type="text/javascript" src="/static/js/clockpicker_duration.js"></script>
                                 </div>
-                                {#                                        </div>#}
-                                {#                                    </div>#}
-                                {#                                </div>#}
                             </form>
 
                         </form>

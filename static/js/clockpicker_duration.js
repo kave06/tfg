@@ -30,8 +30,8 @@ $('.clockpicker-with-callbacks').clockpicker({
 })
     .find('input').change(function () {
     console.log(this.value);
-    $.getJSON($SCRIPT_ROOT2 + '/_add_numbers', {
-        a: this.value
+    $.getJSON($SCRIPT_ROOT2 + '/duration', {
+        duration: this.value
     })
     return false
 });

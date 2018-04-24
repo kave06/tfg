@@ -130,17 +130,26 @@ def date():
 def datepicker():
     return render_template('clock.html')
 
-@app.route('/_add_numbers')
+
+@app.route('/irrigation_hour')
 def add_numbers():
-    a = request.args.get('a')
+    hour = request.args.get('hour')
     # b = request.args.get('b', 0, type=int)
-    print(a)
-    return jsonify(result=a)
+    print('hour: {}'.format(hour))
+    return jsonify(result=hour)
 
-@app.route('/index')
-def index():
-    return  render_template('index.html')
 
+@app.route('/duration')
+def duration():
+    duration = request.args.get('duration')
+    # b = request.args.get('b', 0, type=int)
+    print('duration: {}'.format(duration))
+    return jsonify(result=duration)
+
+
+# @app.route('/index')
+# def index():
+#     return render_template('index.html')
 
 
 if __name__ == '__main__':
