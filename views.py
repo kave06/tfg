@@ -130,6 +130,18 @@ def date():
 def datepicker():
     return render_template('clock.html')
 
+@app.route('/_add_numbers')
+def add_numbers():
+    a = request.args.get('a')
+    # b = request.args.get('b', 0, type=int)
+    print(a)
+    return jsonify(result=a)
+
+@app.route('/index')
+def index():
+    return  render_template('index.html')
+
+
 
 if __name__ == '__main__':
     # app.run()

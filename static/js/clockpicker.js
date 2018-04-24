@@ -30,7 +30,12 @@ $('.clockpicker-with-callbacks').clockpicker({
 })
     .find('input').change(function () {
     console.log(this.value);
+    $.getJSON($SCRIPT_ROOT2 + '/_add_numbers', {
+        a: this.value
+    })
+    return false
 });
+
 
 // Manually toggle to the minutes view
 $('#check-minutes').click(function (e) {
@@ -45,3 +50,4 @@ if (/mobile/i.test(navigator.userAgent)) {
 
 hljs.configure({tabReplace: '    '});
 hljs.initHighlightingOnLoad();
+
