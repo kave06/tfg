@@ -1,4 +1,4 @@
-$('.clockpicker-with-callbacks').clockpicker({
+$('.clockpicker-duration').clockpicker({
     donetext: 'Done',
     init: function () {
         console.log("colorpicker initiated");

@@ -60,7 +60,7 @@
                                 <div class="form-row">
                                     <div class="col-md-3 mb-3">
                                         <label for="inputHour">Hora de Riego</label>
-                                        <div class="input-group clockpicker-with-callbacks" data-autoclose="true">
+                                        <div class="input-group clockpicker-hour" data-autoclose="true">
                                             <input type="text" class="form-control" placeholder="Hora"
                                                    aria-label="Hora" aria-describedby="basic-addon2"
                                                    name="hour" id="inputHour">
@@ -78,10 +78,11 @@
                                         });
                                     </script>
                                     <script type="text/javascript" src="/static/js/clockpicker_hour.js"></script>
-                                    {#                                -------------- segundo reloj --------------#}
+
+                                    {#-------------- segundo reloj --------------#}
                                     <div class="col-md-3 mb-3">
                                         <label for="inputHour">Duración de Riego</label>
-                                        <div class="input-group clockpicker-with-callbacks" data-autoclose="true">
+                                        <div class="input-group clockpicker-duration" data-autoclose="true">
                                             <input type="text" class="form-control" placeholder="Hora"
                                                    aria-label="Hora" aria-describedby="basic-addon2"
                                                    name="hour" id="inputDuration">

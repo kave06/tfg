@@ -14,14 +14,14 @@ from app.model.webserver_server_socket_state import launch_socket_relay_state
 from app.tools.config import *
 
 # test timepicker
-from flask_wtf import FlaskForm, Form
-from wtforms import DateField
-from datetime import date
-from flask_datepicker import datepicker
+# from flask_wtf import FlaskForm, Form
+# from wtforms import DateField
+# from datetime import date
+# from flask_datepicker import datepicker
 
 
-class DateForm(Form):
-    dt = DateField('Pick a Date', format='%m/%d/%y')
+# class DateForm(Form):
+#     dt = DateField('Pick a Date', format='%m/%d/%y')
 
 
 app = Flask(__name__)
@@ -33,7 +33,7 @@ manager = Manager(app)
 bootstrap = Bootstrap(app)
 
 # datepicker
-datepicker(app)
+# datepicker(app)
 
 # moment = Moment(app)
 

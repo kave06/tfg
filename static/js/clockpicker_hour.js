@@ -1,4 +1,4 @@
-$('.clockpicker-with-callbacks').clockpicker({
+$('.clockpicker-hour').clockpicker({
     donetext: 'Done',
     init: function () {
         console.log("colorpicker initiated");
@@ -29,10 +29,8 @@ $('.clockpicker-with-callbacks').clockpicker({
     }
 })
     .find('input').change(function () {
-    // .find('input').change(function (routexx) {
     console.log(this.value);
     $.getJSON($SCRIPT_ROOT2 + '/irrigation_hour', {
-    // $.getJSON($SCRIPT_ROOT2 + routexx, {
         hour: this.value
     })
     return false
