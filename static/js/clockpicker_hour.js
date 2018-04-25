@@ -1,5 +1,5 @@
 $('.clockpicker-hour').clockpicker({
-    donetext: 'Done',
+    placement: 'top',
     init: function () {
         console.log("colorpicker initiated");
     },
