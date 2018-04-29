@@ -68,7 +68,7 @@ def send_queue_ambient(connection: pika.BlockingConnection, body: Ambient):
         channel.queue_declare(queue=rabbit_queue_ambient)
         channel.basic_publish(exchange='', routing_key=rabbit_queue_ambient,
                               body=json.dumps(ambient, sort_keys=True, default=str))
-        connection.close()
+        # connection.close()
     except Exception as err:
         logger.error(err)
 

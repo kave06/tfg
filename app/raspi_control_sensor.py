@@ -84,8 +84,8 @@ def main():
 
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient1)
-            cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient2)
+            cnx.close()
             # write_file(file, '{} {}\n'.format(datetime.now(), ambient1))
             sleep(0.1)
 
