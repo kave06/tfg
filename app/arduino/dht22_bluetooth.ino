@@ -30,6 +30,6 @@ void loop(){
     bt.print(" ");
     bt.print(humidity);
     bt.print(" :H ");
-    // cada 10 seg
+    // ms
     delay(60000);
 }

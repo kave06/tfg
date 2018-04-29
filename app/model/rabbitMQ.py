@@ -8,6 +8,7 @@ try:
     from app.tools.logger import create_log
     from app.tools.config import *
     from app.tools.flags import *
+    from app.clases_varias.element import Ambient
     # from app.tools.manage_file import write_file
 except ImportError:
     from model.database import connect_db, send_data
@@ -20,6 +21,7 @@ try:
     logger = create_log(webserver_logger)
 except:
     logger = create_log(raspi_logger)
+
 
 # TODO if server fail keep data in the queue
 def connect_queue_sender() -> pika.BlockingConnection:
@@ -52,15 +54,19 @@ def connect_queue_receiver(queue, callback):
 
 
 # sender
-def send_queue_ambient(connection: pika.BlockingConnection, body):
-    body['date'] = datetime.now()
+def send_queue_ambient(connection: pika.BlockingConnection, body: Ambient):
+    # body['date'] = datetime.now()
     # logger.info(body)
+
+    # ambient = []
+    ambient = dict(sensor=body.sensor, date=body.date,
+                   temperature = body.temperature, humidity = body.humidity)
 
     try:
         channel = connection.channel()
         channel.queue_declare(queue=rabbit_queue_ambient)
         channel.basic_publish(exchange='', routing_key=rabbit_queue_ambient,
-                              body=json.dumps(body, sort_keys=True, default=str))
+                              body=json.dumps(ambient, sort_keys=True, default=str))
         connection.close()
     except Exception as err:
         logger.error(err)
