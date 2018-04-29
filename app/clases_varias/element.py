@@ -3,12 +3,19 @@ import re
 from bluetooth import BluetoothSocket, BluetoothError
 from datetime import datetime
 
-from app.clases_varias.connection import M_bluetooth
-from app.tools.logger import create_log
-from app.tools.config import *
-from app.tools.flags import *
+try:
+    from app.clases_varias.connection import M_bluetooth
+    from app.tools.logger import create_log
+    from app.tools.config import *
+    from app.tools.flags import *
+except ImportError:
+    from clases_varias.connection import M_bluetooth
+    from tools.logger import create_log
+    from tools.config import *
+    from tools.flags import *
 
-logger = create_log(webserver_logger)
+
+logger = create_log(raspi_logger)
 
 class Element:
 

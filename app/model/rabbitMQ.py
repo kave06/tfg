@@ -15,6 +15,7 @@ except ImportError:
     from tools.logger import create_log
     from tools.config import *
     from tools.flags import *
+    from clases_varias.element import Ambient
     # from tools.manage_file import write_file
 
 try:

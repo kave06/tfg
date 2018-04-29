@@ -1,10 +1,15 @@
 from serial import Serial, SerialException
 from bluetooth import BluetoothSocket, RFCOMM, BluetoothError
 
-from app.tools.config import *
-from app.tools.logger import create_log
+try:
+    from app.tools.config import *
+    from app.tools.logger import create_log
+except ImportError:
+    from tools.config import *
+    from tools.logger import create_log
 
-logger = create_log(webserver_logger)
+
+logger = create_log(raspi_logger)
 
 
 class Connection():

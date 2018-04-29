@@ -12,14 +12,15 @@ try:
     from app.clases_varias.element import *
     # from app.tools.manage_file import write_file
 except ImportError:
-    # from model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
-    # from model.rabbitMQ import connect_queue_sender, send_queue_ambient
-    # from model.raspi_client_socket_state import relay_state
-    # from tools.logger import create_log
-    # from tools.flags import Flag
-    # from tools.config import *
+    from model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
+    from model.rabbitMQ import connect_queue_sender, send_queue_ambient
+    from model.raspi_client_socket_state import relay_state
+    from tools.logger import create_log
+    from tools.flags import Flag
+    from tools.config import *
+    from clases_varias.connection import *
+    from clases_varias.element import *
     # from tools.manage_file import write_file
-    pass
 
 db_addr1 = bluetooth_module1
 db_addr2 = bluetooth_module2
@@ -83,6 +84,7 @@ def main():
 
             cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient1)
+            cnx = connect_queue_sender()
             send_queue_ambient(cnx, ambient2)
             # write_file(file, '{} {}\n'.format(datetime.now(), ambient1))
             sleep(0.1)
