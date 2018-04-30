@@ -10,6 +10,7 @@ except ImportError:
     from tools.logger import create_log
     from model.nano import send_signal
     from tools.config import *
+    from clases_varias.connection import *
 
 try:
     logger = create_log(webserver_logger)
@@ -50,7 +51,8 @@ if __name__ == "__main__":
     server = socketserver.TCPServer((HOST, PORT), MyTCPHandler)
     # logger.info('Socket is open')
 
-    arduino = Serial(serial_port, serial_bd)
+    relay = M_serial()
+    relay.connected()
     logger.info('Listening...')
 
     # Activate the server; this will keep running until you
