@@ -19,7 +19,7 @@ except:
 class Connection():
     'There are several types of connections'
 
-    def connected(self, port):
+    def connected(self):
         print('This is connect but need type of connection')
 
 
