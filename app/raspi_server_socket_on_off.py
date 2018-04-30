@@ -5,6 +5,7 @@ try:
     from app.tools.logger import create_log
     from app.model.nano import send_signal
     from app.tools.config import *
+    from app.clases_varias.connection import *
 except ImportError:
     from tools.logger import create_log
     from model.nano import send_signal
@@ -30,15 +31,16 @@ class MyTCPHandler(socketserver.BaseRequestHandler):
     def handle(self):
         # self.request.sendall(self.data)
 
+        serial = M_serial()
+
         # self.request is the TCP socket connected to the client
         self.data = self.request.recv(1024).strip()
         # logger.info(self.data)
 
         logger.info('{} send {}'.format(self.client_address[0], self.data.decode()))
-        # print("{} wrote:".format(self.client_address[0]))
-        # print(self.data)
+        serial.send_signal(self.data)
 
-        send_signal(self.data)
+        # send_signal(self.data)
 
 
 if __name__ == "__main__":

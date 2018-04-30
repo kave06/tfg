@@ -1,7 +1,6 @@
 from time import sleep
 from threading import Thread
 
-from app.clases_varias.rabbitMQ import Sender
 
 try:
     from app.model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
@@ -12,6 +11,7 @@ try:
     from app.tools.config import *
     from app.clases_varias.connection import *
     from app.clases_varias.element import *
+    from app.clases_varias.rabbitMQ import Sender
     # from app.tools.manage_file import write_file
 except ImportError:
     from model.nano import connect_bluetooth, read_nano_bluetooth, connect_serial, read_serial_state
@@ -23,6 +23,7 @@ except ImportError:
     from clases_varias.connection import *
     from clases_varias.element import *
     # from tools.manage_file import write_file
+    from clases_varias.rabbitMQ import Sender
 
 # db_addr1 = bluetooth_module1
 # db_addr2 = bluetooth_module2

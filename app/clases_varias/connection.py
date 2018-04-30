@@ -9,7 +9,6 @@ except ImportError:
     from tools.config import *
     from tools.logger import create_log
 
-
 try:
     logger = create_log(webserver_logger)
 except:
@@ -26,13 +25,28 @@ class Connection():
 class M_serial(Serial, Connection):
     def __init__(self):
         super(self.__class__, self).__init__()
-        self.connection = False
+        self.connection = Serial()
         # self.is_connected = False
 
     def connected(self, device=serial_port, baudrate=serial_bd):
         try:
             self.connection = Serial(port=serial_port, baudrate=serial_bd)
             logger.info('connect to serial to port: {}'.format(serial_port))
+        except SerialException as err:
+            logger.error(err)
+
+    def send_signal(self, signal: bytes):
+        self.connected()
+        sleep(0.5)
+
+        signal = signal.decode()
+
+        try:
+            if signal == 'ON':
+                self.connection.write('1'.encode())
+            elif signal == 'OFF':
+                self.connection.write('0'.encode())
+            self.connection.close()
         except SerialException as err:
             logger.error(err)
 

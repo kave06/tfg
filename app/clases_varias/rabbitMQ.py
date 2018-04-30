@@ -3,9 +3,17 @@ import pika
 import json
 from datetime import datetime
 import pika
-from app.tools.config import *
-from app.clases_varias.connection import *
-from app.clases_varias.element import *
+
+try:
+    from app.tools.config import *
+    from app.clases_varias.connection import *
+    from app.clases_varias.element import *
+except ImportError:
+    from tools.config import *
+    from clases_varias.connection import *
+    from clases_varias.element import *
+
+
 
 
 class RabbitMQ(Connection):

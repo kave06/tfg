@@ -10,3 +10,5 @@ app/basura/
 app/model/__pycache__/*
 static/clockpicker/
 basura/
+test*
+model/test*
