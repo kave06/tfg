@@ -34,12 +34,11 @@ except:
 
 def main():
     # init objects
-    sock3 = M_bluetooth(bluetooth_module1)
     sock1 = M_bluetooth(bluetooth_module1)
     sock2 = M_bluetooth(bluetooth_module2)
 
-    sensor1 = Dht_22()
-    sensor2 = Dht_22()
+    sensor1 = Dht_22(1)
+    sensor2 = Dht_22(2)
 
     # t1 = Thread(target=relay_state)
     # t1.start()
@@ -49,21 +48,23 @@ def main():
     sleep(0.1)
     sock2.connected()
 
-    # relay_state()
-    # sleep(0.1)
     # sock1 = connect_bluetooth(db_addr1, port1)
     # sleep(0.1)
     # sock2 = connect_bluetooth(db_addr2, port1)
 
     while True:
 
+        logger.debug('outer while')
         if sock1.get_state() == False:
             sleep(0.1)
-            logger.debug('sock1.get_state(): {}'.format(sock2.get_state()))
+            logger.debug('sock1.get_state(): {}'.format(sock1.get_state()))
+            sock1.sock.close()
+            sock1 = M_bluetooth(bluetooth_module1)
             sock1.connected()
         elif sock2.get_state() == False:
             sleep(0.1)
             logger.debug('sock2.get_state(): {}'.format(sock2.get_state()))
+            sock2.sock.close()
             sock2 = M_bluetooth(bluetooth_module2)
             sock2.connected()
 

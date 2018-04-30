@@ -14,8 +14,11 @@ except ImportError:
     from tools.config import *
     from tools.flags import *
 
+try:
+    logger = create_log(webserver_logger)
+except:
+    logger = create_log(raspi_logger)
 
-logger = create_log(raspi_logger)
 
 class Element:
 
@@ -39,6 +42,9 @@ class Ambient():
 
 class Dht_22(Element):
 
+    def __init__(self, sensor=1):
+        self.sensor = sensor
+
     def get_state(self) -> Ambient:
         'Return object ambient with temperature, humidity, date and sensor number'
 
@@ -49,7 +55,7 @@ class Dht_22(Element):
         ambient = Ambient()
         # sock.recv(1024)
 
-        logger.debug('reading arduino {}'.format(sock.mac_addr))
+        logger.debug('reading sensor {}'.format(self.sensor))
         regex = '(\d{1}\s\T:\s\d{1,2}\.\d{2}\s\d{2}\.\d{2}\s:H)'
         regex1 = 'nan'
         regex = re.compile(regex)
@@ -73,12 +79,12 @@ class Dht_22(Element):
         #     logger.debug('return ambient: {}'.format(ambient))
         #     return ambient
 
-        logger.debug('sock.get_state():{}'.format(sock.get_state()))
-        if sock.get_state() == False:
-            logger.debug('sock.get_state():{}'.format(sock.get_state()))
-            return ambient
+        # logger.debug('sock.get_state():{}'.format(sock.get_state()))
 
         while True:
+            if sock.get_state() == False:
+                logger.debug('sock.get_state():{}'.format(sock.get_state()))
+                return ambient
             try:
                 data = sock.my_recv(1024)
                 # logger.debug(data)
@@ -90,6 +96,7 @@ class Dht_22(Element):
                     return ambient
             except BluetoothError as err:
                 logger.error(err)
+                sock.state = False
                 # Flag.inner_while = False
                 # logger.debug('return ambient: {}'.format(ambient))
                 logger.debug('sensor:{} date:{} temperature:{} humidity:{}'
