@@ -35,7 +35,7 @@ class M_serial(Serial, Connection):
         try:
             self.connection = Serial(port=self.port, baudrate=self.bd)
             self.state = True
-            logger.info('connect to serial to port: {}'.format(serial_port))
+            logger.info('connected serial to port: {}'.format(serial_port))
         except SerialException as err:
             logger.error(err)
 

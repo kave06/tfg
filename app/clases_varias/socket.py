@@ -34,6 +34,7 @@ class M_socket(Connection):
         try:
             self.sock.getpeername()
             self.state = True
+            logger.debug(self.sock.getpeername())
             return True
         except OSError as err:
             self.state = False
