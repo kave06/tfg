@@ -2,14 +2,16 @@ from datetime import date
 import re
 from bluetooth import BluetoothSocket, BluetoothError
 from datetime import datetime
+from serial import SerialException
 
 try:
-    from app.clases_varias.connection import M_bluetooth
+    from app.clases_varias.connection import M_bluetooth, M_serial
     from app.tools.logger import create_log
     from app.tools.config import *
     from app.tools.flags import *
+    from app.clases_varias.ambient import Ambient
 except ImportError:
-    from clases_varias.connection import M_bluetooth
+    from clases_varias.connection import M_bluetooth, M_serial
     from tools.logger import create_log
     from tools.config import *
     from tools.flags import *
@@ -22,22 +24,8 @@ except:
 
 class Element:
 
-    def get_state(self):
+    def get_state(self, cnx):
         'Implement in after'
-
-
-class Ambient():
-    'Represent data from sensor with temperature and humidity'
-
-    def __init__(self, sensor_number=0, date=0, temperature=100, humidity=0):
-        self.sensor = sensor_number
-        self.date = date
-        self.temperature = temperature
-        self.humidity = humidity
-
-    def print(self):
-        print('sensor:{} date:{} temperature:{} humidity:{}'
-              .format(self.sensor, self.date, self.temperature, self.humidity))
 
 
 class Dht_22(Element):
@@ -123,7 +111,22 @@ class Dht_22(Element):
 
 class Relay(Element):
 
-    def get_state(self):
-        'Return state of relay'
+    def __init__(self, state=False):
+        self.state = state
 
-        return 'state is...'
+    def get_state(self, cnx_serial: M_serial):
+        self.state = ''
+
+        try:
+            state = cnx_serial.read_all()
+            state = state.decode('utf-8')
+
+            if (re.search('ON', state)):
+                p = re.search('ON', state)
+                self.state = p.group()
+            elif (re.search('OFF', state)):
+                p = re.search('OFF', state)
+                self.state = p.group()
+
+        except SerialException as err:
+            logger.error(err)

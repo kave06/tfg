@@ -26,11 +26,13 @@ class M_serial(Serial, Connection):
     def __init__(self):
         super(self.__class__, self).__init__()
         self.connection = Serial()
+        self.state = False
         # self.is_connected = False
 
     def connected(self, device=serial_port, baudrate=serial_bd):
         try:
             self.connection = Serial(port=serial_port, baudrate=serial_bd)
+            self.state = True
             logger.info('connect to serial to port: {}'.format(serial_port))
         except SerialException as err:
             logger.error(err)

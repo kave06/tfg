@@ -31,7 +31,7 @@ class RabbitMQ(Connection):
         self.channel = False
 
 
-class Sender(RabbitMQ, Connection):
+class Sender(RabbitMQ):
 
     def connected(self):
         'Connect to the queue'
@@ -63,6 +63,8 @@ class Sender(RabbitMQ, Connection):
 
 
 class Receiver(RabbitMQ):
+    def sapo(self):
+        pass
     pass
 
 
