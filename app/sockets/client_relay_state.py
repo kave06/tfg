@@ -41,23 +41,13 @@ def relay_state():
         sleep(0.2)
         while serial.connection.is_open and sock_client.state:
             # logger.debug(sock_client.get_state())
+            sock_client = Client(host=webserver_ip, port=port)
             relay.get_state(serial)
-            state = relay.state
-            logger.debug(state)
-            try:
-                sock_client = Client(host=webserver_ip, port=port)
-                sock_client.connected()
-                sock_client.sock.sendall(bytes((relay.state).encode()))
-                sock_client.sock.close()
-                # sock_client.sock.send(bytes((relay.state).encode()))
-                logger.debug(relay.state)
-                print(relay.state)
-            except OSError as err:
-                sock_client.state = False
-                logger.error(err)
+            # state = relay.state
+            # logger.debug(state)
+            sock_client.send_relay_state(relay, serial)
 
             sleep(time_relay_state)
 
 
-
-relay_state()
+# relay_state()

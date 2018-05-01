@@ -49,14 +49,16 @@ class Client(M_socket):
         try:
             self.sock.connect((self.host, self.port))
             self.state = True
-            logger.info('socket connected successfully')
+            # logger.info('socket connected successfully')
         except OSError as err:
             logger.error(err)
 
     def send_relay_state(self, relay: Relay, cnx: M_serial):
-        relay.get_state(cnx)
+        # relay.get_state(cnx)
         try:
-            self.sock.sendall(bytes(relay.state))
-            logger.debug(relay.state)
+            self.connected()
+            self.sock.sendall(bytes((relay.state).encode()))
+            self.sock.close()
         except OSError as err:
+            self.state = False
             logger.error(err)
