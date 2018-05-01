@@ -15,6 +15,7 @@ except ImportError:
     from tools.logger import create_log
     from tools.config import *
     from tools.flags import *
+    from clases_varias.ambient import Ambient
 
 try:
     logger = create_log(webserver_logger)
@@ -25,7 +26,7 @@ except:
 class Element:
 
     def get_state(self, cnx):
-        'Implement in after'
+        'Implement it after'
 
 
 class Dht_22(Element):
@@ -33,10 +34,10 @@ class Dht_22(Element):
     def __init__(self, sensor=1):
         self.sensor = sensor
 
-    def get_state(self) -> Ambient:
+    def get_state(self, cnx) -> Ambient:
         'Return object ambient with temperature, humidity, date and sensor number'
+        pass
 
-        return Ambient()
 
     # def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:
     def read_ambient(self, sock: M_bluetooth) -> Ambient:
@@ -118,7 +119,7 @@ class Relay(Element):
         self.state = ''
 
         try:
-            state = cnx_serial.read_all()
+            state = cnx_serial.connection.read_all()
             state = state.decode('utf-8')
 
             if (re.search('ON', state)):
