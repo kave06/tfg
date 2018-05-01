@@ -38,7 +38,6 @@ class Dht_22(Element):
         'Return object ambient with temperature, humidity, date and sensor number'
         pass
 
-
     # def read_nano_bluetooth(sock: BluetoothSocket, device: int) -> dict:
     def read_ambient(self, sock: M_bluetooth) -> Ambient:
         ambient = Ambient()
@@ -121,13 +120,15 @@ class Relay(Element):
         try:
             state = cnx_serial.connection.read_all()
             state = state.decode('utf-8')
+            # logger.debug('state:{}'.format(state))
 
             if (re.search('ON', state)):
                 p = re.search('ON', state)
                 self.state = p.group()
+                # logger.debug(self.state)
             elif (re.search('OFF', state)):
                 p = re.search('OFF', state)
                 self.state = p.group()
-
+                # logger.debug(self.state)
         except SerialException as err:
             logger.error(err)

@@ -10,39 +10,54 @@ except ImportError:
     from clases_varias.element import *
 
 
-def init_socket_send_relay_state():
+def relay_state():
+    logger.debug('---------------------------------------------------')
+    logger.debug('---------------------------------------------------')
     port = webserver_socket_port_relay_state_out
     relay = Relay()
     sock_client = Client(host=webserver_ip, port=port)
-    sock_client.connected()
+    # sock_client.connected()
+    sock_client.state = True
 
     serial = M_serial()
     serial.connected()
     logger.debug(serial.connection.is_open)
+
     while True:
         logger.debug('outer while')
-        if sock_client.get_state() == False:
+        # if sock_client.get_state() == False:
+        if sock_client.state == False:
             # Connect socket
-            # logger.debug('reconnect socket')
+            logger.debug('reconnect socket')
             sock_client.sock.close()
             sock_client = Client(host=webserver_ip, port=port)
             sock_client.connected()
         elif serial.connection.is_open == False:
             serial = M_serial()
             serial.connected()
-            # logger.debug('cnx_serial_state:{}'.format(serial.connection.is_open))
+            logger.debug('cnx_serial_state:{}'.format(serial.connection.is_open))
 
-        while serial.connection.is_open or sock_client.get_state() or sock_client.state:
+        # while serial.connection.is_open and sock_client.get_state() and sock_client.state:
+        sleep(0.2)
+        while serial.connection.is_open and sock_client.state:
             # logger.debug(sock_client.get_state())
             relay.get_state(serial)
+            state = relay.state
+            logger.debug(state)
             try:
+                sock_client = Client(host=webserver_ip, port=port)
+                sock_client.connected()
                 sock_client.sock.sendall(bytes((relay.state).encode()))
-                # logger.debug(relay.state)
+                sock_client.sock.close()
+                # sock_client.sock.send(bytes((relay.state).encode()))
+                logger.debug(relay.state)
+                print(relay.state)
             except OSError as err:
                 sock_client.state = False
                 logger.error(err)
 
-            sleep(1)
+            sleep(time_relay_state)
 
 
-init_socket_send_relay_state()
+
+relay_state()

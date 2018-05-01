@@ -3,17 +3,15 @@ from threading import Thread
 try:
     from app.clases_varias.element import *
     from app.clases_varias.connection import *
-    from app.clases_varias.element import *
     from app.clases_varias.rabbitMQ import Sender
-    from app.sockets.socket_client_relay_state import init_socket_send_relay_state
+    # from app.sockets.socket_client_relay_state import relay_state
     from app.tools.config import *
     from app.tools.logger import create_log
 except ImportError:
     from clases_varias.element import *
     from clases_varias.connection import *
-    from clases_varias.element import *
     from clases_varias.rabbitMQ import Sender
-    from sockets.socket_client_relay_state import init_socket_send_relay_state
+    # from sockets.socket_client_relay_state import relay_state
     from tools.config import *
     from tools.logger import create_log
 
@@ -34,11 +32,10 @@ def main():
     rabbit_sender = Sender()
 
     # init socket to send relay state
-    t1 = Thread(target=init_socket_send_relay_state)
-    t1.start()
+    # t1 = Thread(target=relay_state)
+    # t1.start()
 
     # Connect Bluetooth socks
-    sleep(0.1)
     bluetooth1.connected()
     sleep(0.1)
     bluetooth2.connected()
